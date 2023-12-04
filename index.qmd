@@ -14,7 +14,7 @@ J. Howard Creekmore Professor of Finance and Professor of Economics<br>
 
 #### Course Description
 
-The first half of the course will be devoted to quantitative equity investing.  Quantitative equity investing is using quantifiable signals to select stocks via algorithms.  We'll explore machine learning methods to predict returns, backtest trading strategies based on the signals.  And, we will analyze the results in the way that endowments and other institutions evaluate investment managers.  We'll do a real-world implementation of our algorithms using daily updated company financials and market data and with paper trading via the python API at Alpaca Brokerage.
+The first half of the course will be devoted to quantitative equity investing.  Quantitative equity investing is using quantifiable signals to select stocks via algorithms.  We'll explore machine learning methods to predict returns, and we will backtest trading strategies based on the signals.  We will analyze the results in the way that endowments and other institutions evaluate investment managers.  We'll do a real-world implementation of our models with paper trading via the python API at Alpaca Brokerage.
 
 The second half of the course will be spent on options and futures.  Options and futures are important instruments for risk management and also for investing.  We'll explain what the securities are and how they trade, how they are used in risk management and investments, and how to value them.  
 
