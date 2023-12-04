@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - slides.qmd
+    - assignments.qmd
+               
+website:
+  title: ""
+  search: false  
+  navbar:
+    search: false
+    title: BUSI 722
+    file: index.qmd
+    right:
+      - text: Slides
+        file: slides.qmd
+      - text: Assignments
+        file: assignments.qmd
+      - text: Solutions
+        href: https://github.com/kerryback/busi722/tree/main/solutions
+      - text: Notebooks
+        href: https://github.com/kerryback/busi722/tree/main/notebooks
+      - text: Learn Investments
+        href: https://learn-investments.rice-business.org
+      - text: Harvard Case
+        href: https://hbsp.harvard.edu/import/1121177
+      
+        
+format: 
+  html:
+    theme: cosmo
+    scss: styles.css
+    link-external-newwindow: true
+    
+   
+
+
+
