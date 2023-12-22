@@ -16,35 +16,32 @@ TTh 10:50 -- 12:05<br>
 
 #### Course Description
 
-The first half of the course will be devoted to quantitative equity investing.  Quantitative equity investing is using quantifiable signals to select stocks via algorithms.  We'll explore machine learning methods to predict returns, and we will backtest trading strategies based on the signals.  We will analyze the results in the way that endowments and other institutions evaluate investment managers.  We'll do a real-world implementation of our models with paper trading via the python API at Alpaca Brokerage.
-
-The second half of the course will be spent on options and futures.  Options and futures are important instruments for risk management and also for investing.  We'll explain what the securities are and how they trade, how they are used in risk management and investments, and how to value them.  
+The first half of the course will cover options and futures for risk management and investing.  We'll explain what the securities are and how they trade, how they are used in risk management and investments, and how to value them.  The second half of the course will be devoted to active portfolio management and specifically factor investing.  We will review the historical results of factor investing and study how to optimally combine factors using machine learning techniques.  We will analyze the results in the way that endowments and other institutions evaluate investment managers.  We'll do a real-world implementation of our models with paper trading via the python API at Alpaca Brokerage.
 
 #### Assignments and Grading
 
-Grades will be based on a group project, weekly assignments, and a final exam.  The group project will account for 20% of the course grade, the assignments for 40%, and the final exam for 40%.  Due dates for the assignments, exam, and project are as follows.  The final exam will cover only options and futures.  It will be distributed on Feb 22 and **due on Feb 27**.  The group project is **due April 23**.
+Grades will be based on a group project, weekly assignments, and a final exam.  The group project will account for 20% of the course grade, the assignments for 40%, and the final exam for 40%.  The final exam will cover only options and futures.  It will be distributed on Feb 22 and **due on Feb 27**.  The group project is **due April 23**.
 
 
 #### Group project
 
-Groups should consist of two or three students.  The project is to implement a 140/40 portfolio strategy at Alpaca brokerage, using their python API for paper trading.  The portfolio should be 100% long in SPY and 40% long-short with the longs and shorts based on return predictions from a machine learning model.  Each group should submit a pdf describing their investment strategy and an evaluation of their results.  The strategy should be **implemented by Friday, Feb 23**.  It should be rebalanced weekly, and results should be reported through **Friday, Apr 12**.  The write-up should include an analysis of the weekly returns relative to the weekly returns of SPY.  
+Groups should consist of two or three students.  The project is to implement a 140/40 portfolio strategy at Alpaca brokerage, using their python API for paper trading.  The portfolio should be 100% long in SPY and 40% long-short with the longs and shorts based on return predictions from a machine learning model.  Each group should submit a pdf describing their investment strategy and an evaluation of their results.  The strategy should be **implemented by Friday, Feb 23**.  It should be rebalanced weekly, and results should be **reported through Friday, Apr 12**.  The write-up should include an analysis of the weekly returns relative to the weekly returns of SPY.  
 
-#### Tentative Schedule
+#### Tentative Schedule by Day
 
-1. Factor investing
-2. Backtesting momentum and value
-3. Backtesting machine learning models
-4. Strategy evaluation
-5. Sector strategies
-6. Alpaca API
-7. Introduction to options
-8. Risk management with options
-9. Investing with options
-10. Option valuation
-11. Introduction to futures
-12. Risk management with futures
-13. Spot-futures parity
-14. [Risk-management case](https://hbsp.harvard.edu/import/1121177)
+1. Introduction to options
+2. Risk management and investing with options
+3. Option valuation
+4. Introduction to futures
+5. Spot-futures parity
+6. [Risk-management case](https://hbsp.harvard.edu/import/1121177)
+7. Factor investing
+8. Backtesting momentum and value
+9. Backtesting machine learning models
+10. Strategy evaluation
+11. Sector strategies
+12. Alpaca API
+13. Implement strategies
 
 #### Honor Code
 
