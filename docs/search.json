@@ -19,5 +19,54 @@
     "title": "",
     "section": "",
     "text": "1. Options and their Uses (pdf) 2. Option Spreads (pdf) 3. Option Valuation (pdf) 4. Futures (pdf) 5. Backwardation and Contango (pdf) 7. Factor Investing (pdf) 8. Backtesting (pdf) 9. Backtesting Machine Learning Models (pdf) 10. Strategy Evaluation (pdf) 11. Industries and Sectors (pdf) 12. Alpaca (pdf) 13. Rebalancing (pdf)"
+  },
+  {
+    "objectID": "assignment1.html",
+    "href": "assignment1.html",
+    "title": "",
+    "section": "",
+    "text": "Instructions\n\n\n\nThis assignment is due at midnight on Tuesday, Jan 16. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s)."
+  },
+  {
+    "objectID": "assignments.html",
+    "href": "assignments.html",
+    "title": "",
+    "section": "",
+    "text": "1. Options and Spreads (due Jan 16) 2. Option Valuation and Futures (due Jan 23) 3. Backwardation and Contango (due Jan 30) 4. Factors and Backtesting (due Feb 6) 5. Backtesting Machine Learning Models (due Feb 13) 6. Evaluation and Industry Strategies (due Feb 20)"
+  },
+  {
+    "objectID": "assignment2.html",
+    "href": "assignment2.html",
+    "title": "",
+    "section": "",
+    "text": "Instructions\n\n\n\nThis assignment is due at midnight on Tuesday, Jan 23. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s)."
+  },
+  {
+    "objectID": "assignment3.html",
+    "href": "assignment3.html",
+    "title": "",
+    "section": "",
+    "text": "Instructions\n\n\n\nThis assignment is due at midnight on Tuesday, Jan 30. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s)."
+  },
+  {
+    "objectID": "assignment4.html",
+    "href": "assignment4.html",
+    "title": "",
+    "section": "",
+    "text": "Instructions\n\n\n\nThis assignment is due at midnight on Tuesday, Feb 6. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s)."
+  },
+  {
+    "objectID": "assignment5.html",
+    "href": "assignment5.html",
+    "title": "",
+    "section": "",
+    "text": "Instructions\n\n\n\nThis assignment is due at midnight on Tuesday, Feb 13. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s)."
+  },
+  {
+    "objectID": "assignment6.html",
+    "href": "assignment6.html",
+    "title": "",
+    "section": "",
+    "text": "Instructions\n\n\n\nThis assignment is due at midnight on Tuesday, Feb 20. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s)."
   }
 ]

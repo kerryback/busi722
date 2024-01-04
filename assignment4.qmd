@@ -1,0 +1,11 @@
+## Assignment 4<br>Data-Driven Finance II<br>Rice University
+
+
+
+::: {.callout-note appearance="minimal"}
+## Instructions 
+
+This assignment is due at midnight on Tuesday, Feb 6.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
+:::
+
+### Coming Soon

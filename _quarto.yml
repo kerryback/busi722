@@ -5,6 +5,12 @@ project:
     - index.qmd
     - slides.qmd
     - assignments.qmd
+    - assignment1.qmd
+    - assignment2.qmd
+    - assignment3.qmd
+    - assignment4.qmd
+    - assignment5.qmd
+    - assignment6.qmd
                
 website:
   title: ""
