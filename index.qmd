@@ -29,19 +29,19 @@ Groups should consist of two or three students.  The project is to implement a 1
 
 #### Tentative Schedule by Day
 
-1. Introduction to options
-2. Risk management and investing with options
+1. Options and their uses
+2. Option spreads
 3. Option valuation
 4. Introduction to futures
 5. Spot-futures parity
 6. [Risk-management case](https://hbsp.harvard.edu/import/1121177)
 7. Factor investing
-8. Backtesting momentum and value
+8. Backtesting 
 9. Backtesting machine learning models
 10. Strategy evaluation
-11. Sector strategies
+11. Industries and sectors
 12. Alpaca API
-13. Implement strategies
+13. Rebalancing
 
 #### Honor Code
 
