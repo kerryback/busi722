@@ -14846,60 +14846,6 @@ $$\max(\text{underlying price}-\text{strike}, 0)$$
 </div>
 </div>
 </div>
-</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
-
-<span class="n">strike</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="n">underlying</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">call</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">underlying</span><span class="o">-</span><span class="n">strike</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">underlying</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">call</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
-    <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">&quot;Underlying = $%</span><span class="si">{x:.2f}</span><span class="s2">&lt;br&gt;Call = $%</span><span class="si">{y:.2f}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span>
-<span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-    <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Underlying Price&quot;</span><span class="p">,</span>
-    <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Call Option Value&quot;</span><span class="p">,</span>
-    <span class="n">xaxis_title_font</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">},</span>
-    <span class="n">yaxis_title_font</span> <span class="o">=</span>  <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">},</span>
-    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;plotly_white&quot;</span>
-<span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-
-
-
-</div>
-
-</div>
-
-</div>
-
 </div></section></section><section ><section >
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -14920,57 +14866,6 @@ $$\max(\text{strike}-\text{underlying price}, 0)$$
 </div>
 </div>
 </div>
-</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">strike</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="n">underlying</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">put</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">strike</span><span class="o">-</span><span class="n">underlying</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">underlying</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">put</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
-    <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">&quot;Underlying = $%</span><span class="si">{x:.2f}</span><span class="s2">&lt;br&gt;Put = $%</span><span class="si">{y:.2f}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span>
-<span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-    <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Underlying Price&quot;</span><span class="p">,</span>
-    <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Put Option Value&quot;</span><span class="p">,</span>
-    <span class="n">xaxis_title_font</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">},</span>
-    <span class="n">yaxis_title_font</span> <span class="o">=</span>  <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">},</span>
-    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;plotly_white&quot;</span>
-<span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-
-
-
-</div>
-
-</div>
-
-</div>
-
 </div></section></section><section ><section >
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
