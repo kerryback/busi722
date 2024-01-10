@@ -1,8 +1,8 @@
 ## Assignments<br>Data-Driven Finance II<br>Rice University
 
-[1. Options and Spreads (due Jan 16)](assignment1.html){target="_blank"}<br>
-[2. Option Valuation and Futures (due Jan 23)](assignment2.html){target="_blank"}<br>
-[3. Backwardation and Contango (due Jan 30)](assignment3.html){target="_blank"}<br>
-[4. Factors and Backtesting (due Feb 6)](assignment4.html){target="_blank"}<br>
-[5. Backtesting Machine Learning Models (due Feb 13)](assignment5.html){target="_blank"}<br>
-[6. Evaluation and Industry Strategies (due Feb 20)](assignment6.html){target="_blank"}<br>
+[1. Options and Spreads (due Jan 18)](assignment1.html){target="_blank"}<br>
+[2. Option Valuation and Futures (due Jan 25)](assignment2.html){target="_blank"}<br>
+[3. Backwardation and Contango (due Feb 1)](assignment3.html){target="_blank"}<br>
+[4. Factors and Backtesting (due Feb 8)](assignment4.html){target="_blank"}<br>
+[5. Backtesting Machine Learning Models (due Feb 15)](assignment5.html){target="_blank"}<br>
+[6. Evaluation and Industry Strategies (due Feb 22)](assignment6.html){target="_blank"}<br>
