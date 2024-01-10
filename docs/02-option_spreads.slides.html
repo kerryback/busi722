@@ -14670,6 +14670,17 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Hedging-Short-Positions">Hedging Short Positions<a class="anchor-link" href="#Hedging-Short-Positions">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Protective-call">Protective call<a class="anchor-link" href="#Protective-call">&#182;</a></h3><ul>
 <li>If you are short an asset, you can protect against the price spiking by buying a call.</li>
 <li>Your liability cannot exceed the call strike, because the call option can be exercised at the strike, and the asset you acquire can be used to cover the short.</li>
@@ -14689,7 +14700,7 @@ div.jp-OutputPrompt {
 <h3 id="Collaring-a-short-position">Collaring a short position<a class="anchor-link" href="#Collaring-a-short-position">&#182;</a></h3><ul>
 <li>Buy an out-of-the-money call for protection</li>
 <li>Sell an out-of-the-money put to help pay for it</li>
-<li>Example: short a $60 stock, buy a call at $80, sell a put at $40</li>
+<li>Example: short a stock trading at 60, buy an 80 call, sell a 40 put</li>
 <li>Giving up some potential gain to limit your maximum loss</li>
 </ul>
 
@@ -14703,7 +14714,18 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Speculating">Speculating<a class="anchor-link" href="#Speculating">&#182;</a></h3><ul>
+<h2 id="Spreads-for-investing/speculating">Spreads for investing/speculating<a class="anchor-link" href="#Spreads-for-investing/speculating">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Basics">Basics<a class="anchor-link" href="#Basics">&#182;</a></h3><ul>
 <li>Buy a call to speculate on price rising</li>
 <li>Buy a put to speculate on price falling</li>
 <li>Out-of-the-money options provide higher potential returns</li>
@@ -14792,8 +14814,19 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Put-Call-Parity">Put-Call Parity<a class="anchor-link" href="#Put-Call-Parity">&#182;</a></h3><ul>
-<li>Protective put portfolio is same as call with cash</li>
+<h2 id="Put-Call-Parity-and-its-Implications">Put-Call Parity and its Implications<a class="anchor-link" href="#Put-Call-Parity-and-its-Implications">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Underlying-+-Put-=-Cash-+-Call">Underlying + Put = Cash + Call<a class="anchor-link" href="#Underlying-+-Put-=-Cash-+-Call">&#182;</a></h3><ul>
+<li>Protective put portfolio is same as call with cash, for European options</li>
 <li>Cash = PV of strike</li>
 <li>Stock ends up $\Rightarrow$<ul>
 <li>With put, keep underlying</li>
@@ -14817,7 +14850,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Prices-of-puts-and-calls">Prices of puts and calls<a class="anchor-link" href="#Prices-of-puts-and-calls">&#182;</a></h3><ul>
+<h3 id="Implication-1:-Prices-of-puts-and-calls">Implication 1: Prices of puts and calls<a class="anchor-link" href="#Implication-1:-Prices-of-puts-and-calls">&#182;</a></h3><ul>
 <li>Put-call parity implies that underlying price + put premium should equal PV of strike plus call premium</li>
 <li>Equivalently, put premium = call premium + PV of strike - underlying price</li>
 <li>Equivalently, call premium = put premium - PV of strike + underlying price</li>
@@ -14834,12 +14867,15 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Calls-are-better-alive-than-dead">Calls are better alive than dead<a class="anchor-link" href="#Calls-are-better-alive-than-dead">&#182;</a></h3><ul>
+<h3 id="Implication-2:-Calls-are-better-alive-than-dead">Implication 2: Calls are better alive than dead<a class="anchor-link" href="#Implication-2:-Calls-are-better-alive-than-dead">&#182;</a></h3><ul>
 <li>Never optimal to exercise American calls on non-dividend paying stocks prior to maturity</li>
 <li>If you exercise, you get underlying price - strike</li>
-<li>Underlying price - strike &lt; underlying price - PV of strike</li>
-<li>Underlying price - PV of strike &lt; underlying price - PV of strike + put premium</li>
-<li>So, underlying price - strike &lt; call premium</li>
+<li>If you hold, value is<ul>
+<li>underlying price + put value - PV of strike</li>
+<li>$&gt;$ underlying price - PV of strike</li>
+<li>$&gt;$ underlying price - strike</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -14869,7 +14905,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Two-ways-to-make-bets">Two ways to make bets<a class="anchor-link" href="#Two-ways-to-make-bets">&#182;</a></h3><ul>
+<h3 id="Implication-3:-Two-ways-to-make-bets">Implication 3: Two ways to make bets<a class="anchor-link" href="#Implication-3:-Two-ways-to-make-bets">&#182;</a></h3><ul>
 <li>Anything you can do with a call, you can also do with a put and the underlying and cash</li>
 <li>And vice versa</li>
 <li>Example: bear spread with cash = collared long position</li>
