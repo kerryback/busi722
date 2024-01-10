@@ -5,7 +5,27 @@
 ::: {.callout-note appearance="minimal"}
 ## Instructions 
 
-This assignment is due at midnight on Tuesday, Jan 16.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
+This assignment is due at midnight on Thursday, Jan 18.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
 :::
 
-### Coming Soon
+A stock is trading at $147, and options are trading at the following prices.  Assume the options all have the same maturity and bid = ask = price.
+
+| Strike | Call | Put |
+| --- | --- | --- |
+|120|	31.55	|1.96|
+|125	|27.10	|2.76|
+|130	|24.40	|3.57|
+|135	|18.10	|4.75|
+|140	|14.93	|6.25|
+|145	|11.60	|8.25|
+|150	|8.89	|10.42|
+|155	|6.50	|13.25|
+|160	|4.70	|16.60|
+|165	|3.25	|20.25|
+
+1.  Suppose you own the stock and want to collar it.  Propose a costless (or, rather, near costless) collar. Plot the value of your collared stock, net of any income/expense for the collar, as a function of the stock price at the options maturity.
+2. Suppose you don't own the stock but want to make a bet on it.  Propose a bull spread.  Plot your profit or loss on the spread as a function of the stock price if you hold it to maturity.  The profit or loss should be as a percent of the cost of the spread.
+3. Assume you want to bet against the stock and repeat #2 for a bear spread.
+4. Repeat #2 for a straddle.  What are you betting on with a straddle?
+5. Repeat #2 for a butterfly spread.  What are you betting on with a butterfly spread?
+6. Consider the 140 call and put.  What is the "PV of strike" that is consistent with put-call parity?
