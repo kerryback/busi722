@@ -5,7 +5,29 @@
 ::: {.callout-note appearance="minimal"}
 ## Instructions 
 
-This assignment is due at midnight on Tuesday, Jan 23.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
+This assignment is due at midnight on Thursday, Jan 25.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
 :::
 
-### Coming Soon
+1.  I got the following information from Yahoo Finance for CVX options on 1/18/2024.  The options expire on 2/16/2024, and CVX was reported as trading at 141.62 at the time, but those facts are not directly relevant for this question.  
+
+| Strike | Call Bid | Call Ask | Put Bid | Put Ask|
+| --- | --- | --- | --- | --- |
+|135| 8.25 | 8.40 | 1.85 | 1.89 |
+|145 | 2.36 | 2.39 | 6.45 | 6.55 |
+
+Suppose you sell a 135 call, buy a 145 call, buy a 135 put and sell a 145 put.  You sell at the bid price and buy at the ask.  
+
+(a)  Plot the value of the portfolio at the options' maturity, ignoring the premiums paid and received.
+
+(b) Now adjust the plot for the net premium received or paid.
+
+To plot, you might find it easiest to first combine the 135 options and plot that portfolio, then combine the 145 options and plot that portfolio, and then combine the two portfolios.  You will get a counter-intuitive answer in (b).  I suspect that these quotes were not all valid at the same time.  As an aside, one way to think of the portfolio of four options is that you are putting on a long bull spread with puts and a short bull spread with calls.
+
+2. Consider the two-state example discussed in class.  A stock starts at 100 and will either go up 10% or down 10%.  The risk-free rate is 5%.  Price a call option with a strike of 100.
+
+3.  In the setting of #2, use the risk-neutral probability to price a put option with a strike of 100.  We didn't cover this in class, but use the same logic of discounting the expected value at the risk-free rate, using the risk-neutral probability to calculate the expected value.
+
+4.  Suppose a stock will either go up by $r_u=0.04$ or down by $r_d = 1/1.04 - 1$ in each period of a two-period model.  Suppose the risk-free rate  is 2% per period.  Suppose the stock starts at 100.  
+
+(a)  Calculate the value of a call option with a strike of 95.
+(b)  Calculate the value of a put option with a strike of 95.
