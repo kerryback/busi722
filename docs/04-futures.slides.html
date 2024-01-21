@@ -14659,7 +14659,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Futures">Futures<a class="anchor-link" href="#Futures">&#182;</a></h1><h3 id="BUSI-722:-Data-Driven-Finance-II">BUSI 722: Data-Driven Finance II<a class="anchor-link" href="#BUSI-722:-Data-Driven-Finance-II">&#182;</a></h3><h3 id="Kerry-Back,-Rice-University">Kerry Back, Rice University<a class="anchor-link" href="#Kerry-Back,-Rice-University">&#182;</a></h3>
+<h1 id="Introduction-to-Futures">Introduction to Futures<a class="anchor-link" href="#Introduction-to-Futures">&#182;</a></h1><h3 id="BUSI-722:-Data-Driven-Finance-II">BUSI 722: Data-Driven Finance II<a class="anchor-link" href="#BUSI-722:-Data-Driven-Finance-II">&#182;</a></h3><h3 id="Kerry-Back,-Rice-University">Kerry Back, Rice University<a class="anchor-link" href="#Kerry-Back,-Rice-University">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14670,7 +14670,274 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Coming-Soon">Coming Soon<a class="anchor-link" href="#Coming-Soon">&#182;</a></h2>
+<ul>
+<li>A forward contract is a contract to deliver something and to be paid at a later date.</li>
+<li>A futures contract is like a forward contract, but it is traded on an exchange. Main exchanges are the Chicago Mercantile Exchange (CME) and the Intercontinental Exchange (ICE).</li>
+<li>Like options, a clearinghouse steps between buyers and sellers and becomes the counterparty to both sides.</li>
+<li>Unlike options, the buyer does not pay the seller when a futures contract is traded.</li>
+<li>Both have to post collateral (margin) to ensure they can uphold their future obligations.  Generally less than 10% of the contract value.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Types-of-futures">Types of futures<a class="anchor-link" href="#Types-of-futures">&#182;</a></h3><ul>
+<li>Agricultural (corn, wheat, ...)</li>
+<li>Energy (crude, natural gas, ...)</li>
+<li>Metals (gold, silver, ...)</li>
+<li>Currencies (euro, yen, ...)</li>
+<li>Financials (S&amp;P 500, Treasury bonds, ...)</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Examples-of-contracts">Examples of contracts<a class="anchor-link" href="#Examples-of-contracts">&#182;</a></h3><ul>
+<li>CME gold: 100 troy ounces</li>
+<li>CME natural gas: 10,000 MMBtu delivered to Henry Hub, LA</li>
+<li>CME gasoline: 42,000 gallons delivered to NY harbor</li>
+<li>CME heating oil (ULSD) : 42,000 gallons delivered to NY harbor</li>
+<li><a href="https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.html">CME WTI Crude</a>: 1,000 barrels delivered to Cushing, OK</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Exiting-through-trade">Exiting through trade<a class="anchor-link" href="#Exiting-through-trade">&#182;</a></h3><ul>
+<li>Like options, positions are usually cancelled by making offsetting trades.</li>
+<li>Example: buy a contract at 70.  Later sell when price is at 80.<ul>
+<li>Deliver/receive obligations cancel.</li>
+<li>Buy at 70 and sell at 80 produces a cash gain of 10.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Daily-Settlement-(marking-to-market)">Daily Settlement (marking to market)<a class="anchor-link" href="#Daily-Settlement-(marking-to-market)">&#182;</a></h3><ul>
+<li>Gains and losses are realized daily.</li>
+<li>Why?  To protect the clearinghouse.</li>
+<li>Any default will be for no more than the loss on a single day, because cash was transferred to cover prior losses.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h3><ul>
+<li>Suppose you bought 1 CME WTI contract for Dec, 2022 delivery on Jan 2, 2020.</li>
+<li>You bought it at 51.80.</li>
+<li>The contract closed (settled) that day at 51.97.</li>
+<li>You made 1,000 barrels $\times$ 0.17/barrel = 170 on Jan 2.  You receive that money at the end of the day.</li>
+<li>You are now obligated to pay 51.97 upon delivery in December.</li>
+<li>Deducting the 0.17 cash you already received, the net price is still 51.80.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The settlement prices for subsequent days were</p>
+<table>
+    <tr>
+<td> Jan 3 </td> <td> 51.72 </td>
+</tr><tr>
+<td> Jan 6 </td> <td> 51.81 </td>
+</tr><tr>
+<td> Jan 7 </td> <td> 52.13 </td>
+</tr><tr>
+<td> Jan 8 </td> <td> 51.31 </td>
+</tr>
+</table>
+<p>Suppose you sold 1 contract on Jan 9 at 51.50.</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Here are the daily cash flows per barrel</p>
+<table>
+    <tr>
+    <tr><th>Day </th><th> Price </th><th> Gain/Loss </th>
+    </tr><tr>
+    <td> Jan 2 </td><td> 51.80 </td><td>  </td>
+    </tr><tr>
+    <td> Jan 2 </td><td> 51.97 </td><td>  + 0.17 </td>
+     </tr><tr>
+    <td>Jan 3</td> <td> 51.72 </td><td> - 0.25 </td>
+    </tr><tr>
+<td> Jan 6 </td> <td> 51.81 </td><td> + 0.09 </td>
+</tr><tr>
+<td> Jan 7 </td> <td> 52.13 </td><td> + 0.32 </td>
+</tr><tr>
+<td> Jan 8 </td> <td> 51.31 </td><td>- 0.82 </td>
+</tr><tr>
+<td> Jan 9 </td> <td> 51.50 </td><td> +0.19 </td>
+</tr><tr>
+<td> TOTAL </td> <td>  </td><td>- 0.30 </td>
+</tr>
+</table>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Cash-settled-contracts">Cash settled contracts<a class="anchor-link" href="#Cash-settled-contracts">&#182;</a></h3><ul>
+<li>Some contracts (mostly financials) do not have delivery provisions.  Instead, the gain/loss on the last day is calculated from the market price of the underlying.</li>
+<li>Example: S&amp;P 500 contract is cash settled based on the prices of the 500 stocks (i.e., the S&amp;P 500 index).</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Convergence-to-spot">Convergence to spot<a class="anchor-link" href="#Convergence-to-spot">&#182;</a></h3><ul>
+<li>Spot price means price for &quot;immediate&quot; delivery.</li>
+<li>Spot and futures are usually different.<ul>
+<li>Example: The price for a bushel of corn in six months is usually not quite the same as the price of a bushel of corn today.</li>
+</ul>
+</li>
+<li>However, as the maturity date of the futures approaches, the futures price and spot price must converge.<ul>
+<li>Because trading a futures near its maturity is the same as trading spot.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Hedging-with-futures">Hedging with futures<a class="anchor-link" href="#Hedging-with-futures">&#182;</a></h3><ul>
+<li>Example: grain processor will need to buy corn in December.</li>
+<li>Buys corn in January on futures market at 5.00 per bushel.</li>
+<li>If the spot price of corn is 4.00 per bushel in December,<ul>
+<li>Processor will probably sell the futures contract, taking a 1.00 loss</li>
+<li>Buy corn spot at 4.00</li>
+<li>Net cost is 5.00</li>
+</ul>
+</li>
+<li>If the spot price of corn is 6.00 per bushel in December, then ...</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Hedging-with-futures-vs-options">Hedging with futures vs options<a class="anchor-link" href="#Hedging-with-futures-vs-options">&#182;</a></h3><ul>
+<li>What option could the processor buy to cap the price of corn?</li>
+<li>Calculate the net cost, including the option premium. under various scenarios for the price of corn.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Options-on-futures">Options on futures<a class="anchor-link" href="#Options-on-futures">&#182;</a></h3><ul>
+<li>You can buy an option on corn over the counter (directly from a grain trader) but not on an exchange.  However, you can buy an option on corn futures on the CME.  Same for energy, metals, ...</li>
+<li>Exercising a call option on a futures rolls you into a long futures contract.  Exercising a put rolls you into a short futures contract.</li>
+<li>Example.  You are long a call option on crude with a <strong>strike of 70</strong>.  The crude <strong>futures is at 80</strong>.<ul>
+<li>You do not pay the strike to exercise.</li>
+<li>Exercising gives you a long futures contract as if you bought the contract at 70.</li>
+<li>It is immediately marked to market.  So <strong>you get 10 cash</strong> from the marking to market.  And, you have a contract to pay 80 for crude.</li>
+<li>You could sell a futures contract in the market at 80.  This will cancel the delivery/receipt obligations.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Hedging-with-futures-or-futures-options">Hedging with futures or futures options<a class="anchor-link" href="#Hedging-with-futures-or-futures-options">&#182;</a></h3><ul>
+<li>A farmer wants to insure against the price of wheat falling.</li>
+<li>The futures price is 6.00 per bushel.</li>
+<li>A put on the futures with a strike of 6.00 has a premium of 1.00.  The call expires at the same time as the futures.</li>
+<li>Compare the outcomes for (a) futures, (b) put on futures, and (c) no hedge if the spot price of wheat at the option/futures maturity is 4.00, 5.00, 6.00, 7.00, or 8.00 per bushel.</li>
+</ul>
+
 </div>
 </div>
 </div>
