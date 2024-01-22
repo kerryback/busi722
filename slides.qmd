@@ -4,9 +4,9 @@
 [1. Options and their Uses](01-options.slides.html){target="_blank"} [(pdf)](pdfs/01-options.slides.pdf){target="_blank"}<br>
 [2. Option Spreads](02-option_spreads.slides.html){target="_blank"} [(pdf)](pdfs/02-option_spreads.slides.pdf){target="_blank"}<br>
 [3. Option Valuation](03-option_valuation.slides.html){target="_blank"} [(pdf)](pdfs/03-option_valuation.slides.pdf){target="_blank"}<br>
-[4. Futures](04-futures.html){target="_blank"} [(pdf)](pdfs/04-futures.slides.pdf){target="_blank"}<br>
+[4. Futures](04-futures.slides.html){target="_blank"} [(pdf)](pdfs/04-futures.slides.pdf){target="_blank"}<br>
 [5. Backwardation and Contango](05-backwardation_contango.slides.html){target="_blank"} [(pdf)](pdfs/05-backwardation_contango.slides.pdf){target="_blank"}<br>
-[7. Factor Investing](07-factors.html){target="_blank"} [(pdf)](pdfs/07-factors.slides.pdf){target="_blank"}<br>
+[7. Factor Investing](07-factors.slides.html){target="_blank"} [(pdf)](pdfs/07-factors.slides.pdf){target="_blank"}<br>
 [8. Backtesting](08-backtesting.slides.html){target="_blank"} [(pdf)](pdfs/08-backtesting.slides.pdf){target="_blank"}<br>
 [9. Backtesting Machine Learning Models](09-backtesting_ml.slides.html){target="_blank"} [(pdf)](pdfs/09-backtesting_ml.slides.pdf){target="_blank"}<br>
 [10. Strategy Evaluation](10-strategy_evaluation.slides.html){target="_blank"} [(pdf)](pdfs/10-strategy_evaluation.slides.pdf){target="_blank"}<br>
