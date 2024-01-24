@@ -20,5 +20,5 @@ This assignment is due at midnight on Thursday, Feb 1.  Submit a Jupyter noteboo
 3.  Get adjusted closing prices for SPY, SPYXL, and SPYXS from Yahoo finance and compute daily returns.  Drop NaNs so that you have the same time period for all three.  SPYXL is a three-times levered version of SPY and SPYXS is a three-times levered *short* version of SPY.  Both are created using futures contracts on the S&P 500.
 
     (a) Create a scatter plot with SPYXL returns on the y-axis and SPY returns on the x-axis and do the same for SPYXS.  Run regressions of SPYXL returns on SPY returns and of SPYXS returns on SPY returns.  What are the slopes of the regression lines?
-    (b) Compute and plot the compound returns (accumulation starting from 1 dollar) for the three funds.  
-    (c) Do the total compound returns $(1+r_1)\cdots(1+r_T)-1$ of SPYXL compared to SPY and SPXS compared to SPY match the relationships you found in (a)?
+    (b) Do the total compound returns $(1+r_1)\cdots(1+r_T)-1$ of SPYXL compared to SPY and SPXS compared to SPY match the relationships you found in (a)?
+    (c) Plot the accumulations $(1+r_1)\cdots(1+r_T)$ for the three funds.  
