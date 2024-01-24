@@ -17,8 +17,8 @@ This assignment is due at midnight on Thursday, Feb 1.  Submit a Jupyter noteboo
 
 2.  Get CME gold futures settlement prices from the [CME's website](https://www.cmegroup.com/markets/metals/precious/gold.settlements.html).  How much higher is the Feb 2025 futures price than the Feb 2024 futures price in percentage terms?  It should be approximately the same as the one-year interest rate.  Get the one-year interest rate from the [U.S. Treasury's website](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value_month=202401) and check that they are roughly the same.
 
-3.  Get adjusted closing prices for SPY, SPYXL, and SPYXS from Yahoo finance and compute daily returns.  
+3.  Get adjusted closing prices for SPY, SPYXL, and SPYXS from Yahoo finance and compute daily returns.  Drop NaNs so that you have the same time period for all three.  SPYXL is a three-times levered version of SPY and SPYXS is a three-times levered *short* version of SPY.  Both are created using futures contracts on the S&P 500.
 
     (a) Create a scatter plot with SPYXL returns on the y-axis and SPY returns on the x-axis and do the same for SPYXS.  Run regressions of SPYXL returns on SPY returns and of SPYXS returns on SPY returns.  What are the slopes of the regression lines?
     (b) Compute and plot the compound returns (accumulation starting from 1 dollar) for the three funds.  
-    (c) Do the relative compound returns (SPYXL to SPY) and (SPYXS to SPY) match the relationship you found in (a)?
+    (c) Do the total compound returns $(1+r_1)\cdots(1+r_T)-1$ of SPYXL compared to SPY and SPXS compared to SPY match the relationships you found in (a)?
