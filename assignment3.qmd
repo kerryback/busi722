@@ -5,7 +5,20 @@
 ::: {.callout-note appearance="minimal"}
 ## Instructions 
 
-This assignment is due at midnight on Tuesday, Jan 30.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
+This assignment is due at midnight on Thursday, Feb 1.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
 :::
 
-### Coming Soon
+1.  Consider a three-month ($T=0.25$) call option with a strike of 45 on a stock that is now trading at 50.  Assume the annual continuously compounded risk-free rate $r_f = 0.04$ and the annual volatility of the stock is $\sigma=0.3$.  Assume the stock will not pay a dividend before the option matures ($q=0$).
+
+    (a) Price the option using a two-period binomial model calibratged to the data given.
+    (b) Compute the value of the option using the Black-Scholes formula.
+    (c) Using the Black-Scholes formula, plot the value of the option as a function of $\sigma$ for $\sigma$ varying between 0.1 and 0.6.
+    (d) Assume the market price (premium) of the option is 7.10.  For what value of $\sigma$ is the Black-Scholes formula equal to 7.10?  (This is the implied volatility).
+
+2.  Get CME gold futures settlement prices from the [CME's website](https://www.cmegroup.com/markets/metals/precious/gold.settlements.html).  How much higher is the Feb 2025 futures price than the Feb 2024 futures price in percentage terms?  It should be approximately the same as the one-year interest rate.  Get the one-year interest rate from the [U.S. Treasury's website](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value_month=202401) and check that they are roughly the same.
+
+3.  Get adjusted closing prices for SPY, SPYXL, and SPYXS from Yahoo finance and compute daily returns.  
+
+    (a) Create a scatter plot with SPYXL returns on the y-axis and SPY returns on the x-axis and do the same for SPYXS.  Run regressions of SPYXL returns on SPY returns and of SPYXS returns on SPY returns.  What are the slopes of the regression lines?
+    (b) Compute and plot the compound returns (accumulation starting from 1 dollar) for the three funds.  
+    (c) Do the relative compound returns (SPYXL to SPY) and (SPYXS to SPY) match the relationship you found in (a)?

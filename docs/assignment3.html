@@ -49,6 +49,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -113,14 +114,28 @@ Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This assignment is due at midnight on Tuesday, Jan 30. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s).</p>
+<p>This assignment is due at midnight on Thursday, Feb 1. Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s).</p>
 </div>
 </div>
-<section id="coming-soon" class="level3">
-<h3 class="anchored" data-anchor-id="coming-soon">Coming Soon</h3>
+<ol type="1">
+<li><p>Consider a three-month (<span class="math inline">\(T=0.25\)</span>) call option with a strike of 45 on a stock that is now trading at 50. Assume the annual continuously compounded risk-free rate <span class="math inline">\(r_f = 0.04\)</span> and the annual volatility of the stock is <span class="math inline">\(\sigma=0.3\)</span>. Assume the stock will not pay a dividend before the option matures (<span class="math inline">\(q=0\)</span>).</p>
+<ol type="a">
+<li>Price the option using a two-period binomial model calibratged to the data given.</li>
+<li>Compute the value of the option using the Black-Scholes formula.</li>
+<li>Using the Black-Scholes formula, plot the value of the option as a function of <span class="math inline">\(\sigma\)</span> for <span class="math inline">\(\sigma\)</span> varying between 0.1 and 0.6.</li>
+<li>Assume the market price (premium) of the option is 7.10. For what value of <span class="math inline">\(\sigma\)</span> is the Black-Scholes formula equal to 7.10? (This is the implied volatility).</li>
+</ol></li>
+<li><p>Get CME gold futures settlement prices from the <a href="https://www.cmegroup.com/markets/metals/precious/gold.settlements.html">CME’s website</a>. How much higher is the Feb 2025 futures price than the Feb 2024 futures price in percentage terms? It should be approximately the same as the one-year interest rate. Get the one-year interest rate from the <a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&amp;field_tdr_date_value_month=202401">U.S. Treasury’s website</a> and check that they are roughly the same.</p></li>
+<li><p>Get adjusted closing prices for SPY, SPYXL, and SPYXS from Yahoo finance and compute daily returns.</p>
+<ol type="a">
+<li>Create a scatter plot with SPYXL returns on the y-axis and SPY returns on the x-axis and do the same for SPYXS. Run regressions of SPYXL returns on SPY returns and of SPYXS returns on SPY returns. What are the slopes of the regression lines?</li>
+<li>Compute and plot the compound returns (accumulation starting from 1 dollar) for the three funds.<br>
+</li>
+<li>Do the relative compound returns (SPYXL to SPY) and (SPYXS to SPY) match the relationship you found in (a)?</li>
+</ol></li>
+</ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
