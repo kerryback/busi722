@@ -5,7 +5,7 @@
 [2. Option Spreads](02-option_spreads.slides.html){target="_blank"} [(pdf)](pdfs/02-option_spreads.slides.pdf){target="_blank"}<br>
 [3. Option Valuation](03-option_valuation.slides.html){target="_blank"} [(pdf)](pdfs/03-option_valuation.slides.pdf){target="_blank"}<br>
 [4. Futures](04-futures.slides.html){target="_blank"} [(pdf)](pdfs/04-futures.slides.pdf){target="_blank"}<br>
-[5. More Futures](05-more_futres.slides.html){target="_blank"} [(pdf)](pdfs/05-more_futures.slides.pdf){target="_blank"}<br>
+[5. More Futures](05-more_futures.slides.html){target="_blank"} [(pdf)](pdfs/05-more_futures.slides.pdf){target="_blank"}<br>
 [6. Factor Investing](06-factors.slides.html){target="_blank"} [(pdf)](pdfs/06-factors.slides.pdf){target="_blank"}<br>
 [7. Backtesting](07-backtesting.slides.html){target="_blank"} [(pdf)](pdfs/07-backtesting.slides.pdf){target="_blank"}<br>
 [8. Backtesting Machine Learning Models](08-backtesting_ml.slides.html){target="_blank"} [(pdf)](pdfs/08-backtesting_ml.slides.pdf){target="_blank"}<br>
