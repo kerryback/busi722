@@ -8,7 +8,7 @@
 This assignment is due at midnight on Thursday, Feb 1.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
 :::
 
-1.  Consider a three-month ($T=0.25$) call option with a strike of 45 on a stock that is now trading at 50.  Assume the annual continuously compounded risk-free rate $r_f = 0.04$ and the annual volatility of the stock is $\sigma=0.3$.  Assume the stock will not pay a dividend before the option matures ($q=0$).
+1.  Consider a three-month ($T=0.25$) call option with a strike of 45 on a stock that is now trading at 50.  Assume the annual continuously compounded risk-free rate is $r_f = 0.04$ and the annual volatility of the stock is $\sigma=0.3$.  Assume the stock will not pay a dividend before the option matures ($q=0$).
 
     (a) Price the option using a two-period binomial model calibratged to the data given.
     (b) Compute the value of the option using the Black-Scholes formula.
