@@ -126,10 +126,10 @@ Instructions
 <li>Assume the market price (premium) of the option is 7.10. For what value of <span class="math inline">\(\sigma\)</span> is the Black-Scholes formula equal to 7.10? (This is the implied volatility).</li>
 </ol></li>
 <li><p>Get CME gold futures settlement prices from the <a href="https://www.cmegroup.com/markets/metals/precious/gold.settlements.html">CME’s website</a>. How much higher is the Feb 2025 futures price than the Feb 2024 futures price in percentage terms? It should be approximately the same as the one-year interest rate. Get the one-year interest rate from the <a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&amp;field_tdr_date_value_month=202401">U.S. Treasury’s website</a> and check that they are roughly the same.</p></li>
-<li><p>Get adjusted closing prices for SPY, SPYXL, and SPYXS from Yahoo finance and compute daily returns. Drop NaNs so that you have the same time period for all three. SPYXL is a three-times levered version of SPY and SPYXS is a three-times levered <em>short</em> version of SPY. Both are created using futures contracts on the S&amp;P 500.</p>
+<li><p>Get adjusted closing prices for SPY, SPXL, and SPXS from Yahoo finance and compute daily returns. Drop NaNs so that you have the same time period for all three. SPXL is a three-times levered version of SPY and SPXS is a three-times levered <em>short</em> version of SPY. Both are created using futures contracts on the S&amp;P 500.</p>
 <ol type="a">
-<li>Create a scatter plot with SPYXL returns on the y-axis and SPY returns on the x-axis and do the same for SPYXS. Run regressions of SPYXL returns on SPY returns and of SPYXS returns on SPY returns. What are the slopes of the regression lines?</li>
-<li>Do the total compound returns <span class="math inline">\((1+r_1)\cdots(1+r_T)-1\)</span> of SPYXL compared to SPY and SPXS compared to SPY match the relationships you found in (a)?</li>
+<li>Create a scatter plot with SPXL returns on the y-axis and SPY returns on the x-axis and do the same for SPYXS. Run regressions of SPXL returns on SPY returns and of SPYXS returns on SPY returns. What are the slopes of the regression lines?</li>
+<li>Do the total compound returns <span class="math inline">\((1+r_1)\cdots(1+r_T)-1\)</span> of SPXL compared to SPY and SPXS compared to SPY match the relationships you found in (a)?</li>
 <li>Plot the accumulations <span class="math inline">\((1+r_1)\cdots(1+r_T)\)</span> for the three funds.</li>
 </ol></li>
 </ol>
