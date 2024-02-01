@@ -5,7 +5,8 @@
 ::: {.callout-note appearance="minimal"}
 ## Instructions 
 
-This assignment is due at midnight on Tuesday, Feb 13.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
+This assignment is due at midnight on Thursday, Feb 15.  Submit a Jupyter notebook to Canvas. Copy each question into a Markdown cell and perform the analysis in the following cell(s). 
 :::
 
-### Coming Soon
+1.  Using data from the SQL database since 2010, sort into deciles based on marketcap and compute equally weighted portfolio returns.  What were the mean returns of the decile portfolios?
+2.  Using data from the SQL database since 2010, sort into quintiles based on momentum and into quintiles based on market cap and compute equally weighted portfolio returns for the 25 groups.  What were the mean returns?
