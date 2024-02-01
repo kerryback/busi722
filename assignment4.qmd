@@ -9,4 +9,4 @@ This assignment is due at midnight on Thursday, Feb 8.  Submit a Jupyter noteboo
 :::
 
 1.  Find Japanese yen futures settlement prices on the CME website.  Are yen futures in backwardation or contango?  What does that tell us about Japanese interest rates?
-2.  Generate plots (using python) of the 1x2 and 2x1 (ratio writing) spreads that were discussed in the Maxum Petroleum case.  Suppose the price of crude is $80 and just choose option strikes to illustrate the idea.  We want to choose the strikes so that the option premia are in some relation to each other.   What is the desired relationship?
+2.  Generate plots (using python) of the 1x2 and 2x1 (ratio writing) spreads that were discussed in the Maxum Petroleum case.  Assume that you are short crude and include the short position in each of the plots as we did in class. Suppose the price of crude is $80 and just choose option strikes to illustrate the idea.  We want to choose the strikes so that the option premia are in some relation to each other.   What is the desired relationship?
