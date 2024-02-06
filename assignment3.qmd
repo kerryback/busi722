@@ -10,7 +10,7 @@ This assignment is due at midnight on Thursday, Feb 1.  Submit a Jupyter noteboo
 
 1.  Consider a three-month ($T=0.25$) call option with a strike of 45 on a stock that is now trading at 50.  Assume the annual continuously compounded risk-free rate is $r_f = 0.04$ and the annual volatility of the stock is $\sigma=0.3$.  Assume the stock will not pay a dividend before the option matures ($q=0$).
 
-    (a) Price the option using a two-period binomial model calibratged to the data given.
+    (a) Price the option using a two-period binomial model calibrated to the data given.
     (b) Compute the value of the option using the Black-Scholes formula.
     (c) Using the Black-Scholes formula, plot the value of the option as a function of $\sigma$ for $\sigma$ varying between 0.1 and 0.6.
     (d) Assume the market price (premium) of the option is 7.10.  For what value of $\sigma$ is the Black-Scholes formula equal to 7.10?  (This is the implied volatility).
