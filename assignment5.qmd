@@ -9,4 +9,5 @@ This assignment is due at midnight on Thursday, Feb 15.  Submit a Jupyter notebo
 :::
 
 1.  Using data from the SQL database since 2010, sort into deciles based on marketcap and compute equally weighted portfolio returns.  What were the mean returns of the decile portfolios?
-2.  Using data from the SQL database since 2010, sort into quintiles based on momentum and into quintiles based on market cap and compute equally weighted portfolio returns for the 25 groups.  What were the mean returns?
+2.  Using data from the SQL database since 2010, sort into quintiles based on momentum and into quintiles based on marketcap and compute equally weighted portfolio returns for the 25 groups.  What were the mean returns?
+3.  Compute volatility for each stock as the standard deviation of the past 52 weekly returns.  Remember to group by ticker when doing so.  Run a backtest of a random forest with max_depth=3, using target2 and including volatility as a feature with mom, pb, marketcap, roe, and assetgr.  Train every 3 years and use 3 years of data each time you train.  Compute portfolio returns for the 100 best stocks (highest predicted value of the target) and the 100 worst stocks (lowest predicted value of the target) each week.  Plot the cumulative compound returns over time.
