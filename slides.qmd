@@ -7,11 +7,13 @@
 [4. Futures](04-futures.slides.html){target="_blank"} [(pdf)](pdfs/04-futures.slides.pdf){target="_blank"}<br>
 [5. More Futures](05-more_futures.slides.html){target="_blank"} [(pdf)](pdfs/05-more_futures.slides.pdf){target="_blank"}<br>
 [6. Factor Investing](06-factors.slides.html){target="_blank"} [(pdf)](pdfs/06-factors.slides.pdf){target="_blank"}<br><br>
-[Gu-Kelley-Xiu Paper](pdfs/Gu-Kelley-Xiu.pdf){target="_blank"}<br>
+[Gu-Kelly-Xiu Paper](pdfs/Gu_Kelly_Xiu.pdf){target="_blank"}<br>
 [Green-Hand-Zhang features](pdfs/Green-Hand-Zhang.pdf){target="_blank"}
-<br><br>
+<br>
+[Jensen-Kelly-Pedersen Paper](pdfs/Jensen-Kelly-Pedersen.pdf){target="_blank"}<br><br>
 [7. Backtesting](07-backtesting.slides.html){target="_blank"} [(pdf)](pdfs/07-backtesting.slides.pdf){target="_blank"}<br>
-[8. Evaluation](08-evaluation.slides.html){target="_blank"} [(pdf)](pdfs/08-evaluation.slides.pdf){target="_blank"}<br>
-[9. Industries and Sectors](9-industries_sectors.slides.html){target="_blank"} [(pdf)](pdfs/9-industries_sectors.slides.pdf){target="_blank"}<br>
-[10. Alpaca](10-alpaca.slides.html){target="_blank"} [(pdf)](pdfs/10-alpaca.slides.pdf){target="_blank"}<br>
+[8. Preprocessing and Analysis](08-preprocessing_analysis.slides.html){target="_blank"} [(pdf)](pdfs/08-preprocessing_analysis.slides.pdf){target="_blank"}<br>
+[9. Alpaca](10-alpaca.slides.html){target="_blank"} [(pdf)](pdfs/10-alpaca.slides.pdf){target="_blank"}<br>
+[10. Industries and Sectors](9-industries_sectors.slides.html){target="_blank"} [(pdf)](pdfs/9-industries_sectors.slides.pdf){target="_blank"}<br>
+
 
