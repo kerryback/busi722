@@ -14,6 +14,6 @@
 [7. Backtesting](07-backtesting.slides.html){target="_blank"} [(pdf)](pdfs/07-backtesting.slides.pdf){target="_blank"}<br>
 [8. Preprocessing and Analysis](08-preprocessing_analysis.slides.html){target="_blank"} [(pdf)](pdfs/08-preprocessing_analysis.slides.pdf){target="_blank"}<br>
 [9. Alpaca](09-alpaca.slides.html){target="_blank"} [(pdf)](pdfs/09-alpaca.slides.pdf){target="_blank"}<br>
-[10. Industries](10-industries.slides.html){target="_blank"} [(pdf)](pdfs/10-industries.slides.pdf){target="_blank"}<br>
+
 
 
