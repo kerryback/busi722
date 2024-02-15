@@ -14670,10 +14670,703 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Coming-Soon">Coming Soon<a class="anchor-link" href="#Coming-Soon">&#182;</a></h2>
+<h2 id="Outline">Outline<a class="anchor-link" href="#Outline">&#182;</a></h2><ol>
+<li>Create connection</li>
+<li>View account information</li>
+<li>View market information</li>
+<li>Make trades</li>
+</ol>
+<p>Note: log on to alpaca at <a href="https://alpaca.markets/">https://alpaca.markets/</a> to get key and secret key</p>
+
 </div>
 </div>
 </div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">alpaca.trading.client</span> <span class="kn">import</span> <span class="n">TradingClient</span>
+<span class="kn">from</span> <span class="nn">alpaca.trading.requests</span> <span class="kn">import</span> <span class="n">MarketOrderRequest</span>
+<span class="kn">from</span> <span class="nn">alpaca.trading.enums</span> <span class="kn">import</span> <span class="n">OrderSide</span><span class="p">,</span> <span class="n">TimeInForce</span>
+<span class="kn">from</span> <span class="nn">alpaca.trading.requests</span> <span class="kn">import</span> <span class="n">GetAssetsRequest</span>
+<span class="kn">from</span> <span class="nn">alpaca.data</span> <span class="kn">import</span> <span class="n">StockHistoricalDataClient</span>
+<span class="kn">from</span> <span class="nn">alpaca.data.requests</span> <span class="kn">import</span> <span class="n">StockLatestQuoteRequest</span>
+<span class="kn">from</span> <span class="nn">alpaca.trading.enums</span> <span class="kn">import</span> <span class="n">AssetClass</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="1.-Create-Connection">1. Create Connection<a class="anchor-link" href="#1.-Create-Connection">&#182;</a></h2><ul>
+<li>Substitute your key and your secret key.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;keys.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">secret_key</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+    
+<span class="n">trading_client</span> <span class="o">=</span> <span class="n">TradingClient</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">,</span> <span class="n">paper</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="2.-Account-Information">2. Account Information<a class="anchor-link" href="#2.-Account-Information">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">account</span> <span class="o">=</span> <span class="n">trading_client</span><span class="o">.</span><span class="n">get_account</span><span class="p">()</span>
+<span class="n">account</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{   &#39;account_blocked&#39;: False,
+    &#39;account_number&#39;: &#39;PA3J0LUAM1VV&#39;,
+    &#39;accrued_fees&#39;: &#39;0&#39;,
+    &#39;buying_power&#39;: &#39;194450.95&#39;,
+    &#39;cash&#39;: &#39;95929.6&#39;,
+    &#39;created_at&#39;: datetime.datetime(2024, 2, 11, 16, 46, 29, 12993, tzinfo=datetime.timezone.utc),
+    &#39;crypto_status&#39;: &lt;AccountStatus.ACTIVE: &#39;ACTIVE&#39;&gt;,
+    &#39;currency&#39;: &#39;USD&#39;,
+    &#39;daytrade_count&#39;: 0,
+    &#39;daytrading_buying_power&#39;: &#39;0&#39;,
+    &#39;equity&#39;: &#39;99994.55&#39;,
+    &#39;id&#39;: UUID(&#39;8955151d-0998-4e09-bae8-6f8ed3979f47&#39;),
+    &#39;initial_margin&#39;: &#39;2953.23&#39;,
+    &#39;last_equity&#39;: &#39;99945.2&#39;,
+    &#39;last_maintenance_margin&#39;: &#39;1759.8&#39;,
+    &#39;long_market_value&#39;: &#39;4985.7&#39;,
+    &#39;maintenance_margin&#39;: &#39;1771.94&#39;,
+    &#39;multiplier&#39;: &#39;2&#39;,
+    &#39;non_marginable_buying_power&#39;: &#39;95041.32&#39;,
+    &#39;pattern_day_trader&#39;: False,
+    &#39;pending_transfer_in&#39;: &#39;0&#39;,
+    &#39;pending_transfer_out&#39;: None,
+    &#39;portfolio_value&#39;: &#39;99994.55&#39;,
+    &#39;regt_buying_power&#39;: &#39;194450.95&#39;,
+    &#39;short_market_value&#39;: &#39;-920.75&#39;,
+    &#39;shorting_enabled&#39;: True,
+    &#39;sma&#39;: &#39;100003.65&#39;,
+    &#39;status&#39;: &lt;AccountStatus.ACTIVE: &#39;ACTIVE&#39;&gt;,
+    &#39;trade_suspended_by_user&#39;: False,
+    &#39;trading_blocked&#39;: False,
+    &#39;transfers_blocked&#39;: False}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Examples-of-retrieving-account-details">Examples of retrieving account details<a class="anchor-link" href="#Examples-of-retrieving-account-details">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Account balance is&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">equity</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Yesterday&#39;s account balance was&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">last_equity</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Buying power is&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">buying_power</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cash balance is&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">cash</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Account balance is 99994.55
+Yesterday&#39;s account balance was 99945.2
+Buying power is 194450.95
+Cash balance is 95929.6
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Open-positions">Open positions<a class="anchor-link" href="#Open-positions">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">positions</span> <span class="o">=</span> <span class="n">trading_client</span><span class="o">.</span><span class="n">get_all_positions</span><span class="p">()</span>
+<span class="n">quantity</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">qty</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">}</span>
+<span class="n">mkt_value</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">market_value</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">}</span>
+<span class="n">cost_basis</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">cost_basis</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">}</span>
+
+<span class="n">positions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">quantity</span><span class="p">,</span> <span class="n">mkt_value</span><span class="p">,</span> <span class="n">cost_basis</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;quantity&quot;</span><span class="p">,</span> <span class="s2">&quot;mkt_value&quot;</span><span class="p">,</span> <span class="s2">&quot;cost_basis&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">positions</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>quantity</th>
+      <th>mkt_value</th>
+      <th>cost_basis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAPL</th>
+      <td>-5.0</td>
+      <td>-920.75</td>
+      <td>-942.39</td>
+    </tr>
+    <tr>
+      <th>SPY</th>
+      <td>10.0</td>
+      <td>4985.70</td>
+      <td>5012.77</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="3.-Market-Information">3. Market Information<a class="anchor-link" href="#3.-Market-Information">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Information-about-a-particular-asset">Information about a particular asset<a class="anchor-link" href="#Information-about-a-particular-asset">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;SPY&#39;</span>
+<span class="n">trading_client</span><span class="o">.</span><span class="n">get_asset</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{   &#39;asset_class&#39;: &lt;AssetClass.US_EQUITY: &#39;us_equity&#39;&gt;,
+    &#39;easy_to_borrow&#39;: True,
+    &#39;exchange&#39;: &lt;AssetExchange.ARCA: &#39;ARCA&#39;&gt;,
+    &#39;fractionable&#39;: True,
+    &#39;id&#39;: UUID(&#39;b28f4066-5c6d-479b-a2af-85dc1a8f16fb&#39;),
+    &#39;maintenance_margin_requirement&#39;: 30.0,
+    &#39;marginable&#39;: True,
+    &#39;min_order_size&#39;: None,
+    &#39;min_trade_increment&#39;: None,
+    &#39;name&#39;: &#39;SPDR S&amp;P 500 ETF Trust&#39;,
+    &#39;price_increment&#39;: None,
+    &#39;shortable&#39;: True,
+    &#39;status&#39;: &lt;AssetStatus.ACTIVE: &#39;active&#39;&gt;,
+    &#39;symbol&#39;: &#39;SPY&#39;,
+    &#39;tradable&#39;: True}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Quotes">Quotes<a class="anchor-link" href="#Quotes">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SPY&#39;</span><span class="p">,</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span><span class="s1">&#39;IBM&#39;</span><span class="p">]</span>
+
+<span class="n">data_client</span> <span class="o">=</span> <span class="n">StockHistoricalDataClient</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">StockLatestQuoteRequest</span><span class="p">(</span><span class="n">symbol_or_symbols</span><span class="o">=</span><span class="n">lst</span><span class="p">)</span>
+<span class="n">quotes</span> <span class="o">=</span> <span class="n">data_client</span><span class="o">.</span><span class="n">get_stock_latest_quote</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="n">quotes</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;AAPL&#39;: {   &#39;ask_exchange&#39;: &#39;V&#39;,
+     &#39;ask_price&#39;: 185.52,
+     &#39;ask_size&#39;: 1.0,
+     &#39;bid_exchange&#39;: &#39;V&#39;,
+     &#39;bid_price&#39;: 180.5,
+     &#39;bid_size&#39;: 1.0,
+     &#39;conditions&#39;: [&#39;R&#39;],
+     &#39;symbol&#39;: &#39;AAPL&#39;,
+     &#39;tape&#39;: &#39;C&#39;,
+     &#39;timestamp&#39;: datetime.datetime(2024, 2, 14, 20, 59, 59, 996783, tzinfo=datetime.timezone.utc)},
+ &#39;SPY&#39;: {   &#39;ask_exchange&#39;: &#39;V&#39;,
+     &#39;ask_price&#39;: 502.09,
+     &#39;ask_size&#39;: 10.0,
+     &#39;bid_exchange&#39;: &#39;V&#39;,
+     &#39;bid_price&#39;: 498.57,
+     &#39;bid_size&#39;: 1.0,
+     &#39;conditions&#39;: [&#39;R&#39;],
+     &#39;symbol&#39;: &#39;SPY&#39;,
+     &#39;tape&#39;: &#39;B&#39;,
+     &#39;timestamp&#39;: datetime.datetime(2024, 2, 14, 21, 59, 55, 17822, tzinfo=datetime.timezone.utc)},
+ &#39;IBM&#39;: {   &#39;ask_exchange&#39;: &#39; &#39;,
+     &#39;ask_price&#39;: 0.0,
+     &#39;ask_size&#39;: 0.0,
+     &#39;bid_exchange&#39;: &#39;V&#39;,
+     &#39;bid_price&#39;: 183.67,
+     &#39;bid_size&#39;: 1.0,
+     &#39;conditions&#39;: [&#39;R&#39;],
+     &#39;symbol&#39;: &#39;IBM&#39;,
+     &#39;tape&#39;: &#39;A&#39;,
+     &#39;timestamp&#39;: datetime.datetime(2024, 2, 14, 20, 59, 57, 191941, tzinfo=datetime.timezone.utc)}}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="List-of-all-US-equities-(including-OTC)">List of all US equities (including OTC)<a class="anchor-link" href="#List-of-all-US-equities-(including-OTC)">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">search_params</span> <span class="o">=</span> <span class="n">GetAssetsRequest</span><span class="p">(</span><span class="n">asset_class</span><span class="o">=</span><span class="n">AssetClass</span><span class="o">.</span><span class="n">US_EQUITY</span><span class="p">)</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="n">trading_client</span><span class="o">.</span><span class="n">get_all_assets</span><span class="p">(</span><span class="n">search_params</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> US equities.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First stock in list is&quot;</span><span class="p">)</span>
+<span class="n">assets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>There are 31,618 US equities.
+First stock in list is
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{   &#39;asset_class&#39;: &lt;AssetClass.US_EQUITY: &#39;us_equity&#39;&gt;,
+    &#39;easy_to_borrow&#39;: False,
+    &#39;exchange&#39;: &lt;AssetExchange.NASDAQ: &#39;NASDAQ&#39;&gt;,
+    &#39;fractionable&#39;: False,
+    &#39;id&#39;: UUID(&#39;345a9d38-1c90-4b33-806a-c5271ca795ea&#39;),
+    &#39;maintenance_margin_requirement&#39;: 100.0,
+    &#39;marginable&#39;: False,
+    &#39;min_order_size&#39;: None,
+    &#39;min_trade_increment&#39;: None,
+    &#39;name&#39;: &#39;LG Display Co. Rights (expiration 03/01/24)&#39;,
+    &#39;price_increment&#39;: None,
+    &#39;shortable&#39;: False,
+    &#39;status&#39;: &lt;AssetStatus.INACTIVE: &#39;inactive&#39;&gt;,
+    &#39;symbol&#39;: &#39;501RGT013&#39;,
+    &#39;tradable&#39;: False}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Tradable-and-shortable-stocks">Tradable and shortable stocks<a class="anchor-link" href="#Tradable-and-shortable-stocks">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tradable</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">assets</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">tradable</span><span class="p">]</span>
+<span class="n">shortable</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">assets</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shortable</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of tradable stocks is </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tradable</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of shortable stocks is </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">shortable</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Number of tradable stocks is 11,336
+Number of shortable stocks is 5,093
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Tradable-exchanges">Tradable exchanges<a class="anchor-link" href="#Tradable-exchanges">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">set</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">exchange</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">assets</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;AMEX&#39;, &#39;ARCA&#39;, &#39;BATS&#39;, &#39;NASDAQ&#39;, &#39;NYSE&#39;, &#39;OTC&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section></section><section ><section >
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="4.-Trading">4. Trading<a class="anchor-link" href="#4.-Trading">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="n">MarketOrderRequest</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;SPY&quot;</span><span class="p">,</span>
+    <span class="n">qty</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">side</span><span class="o">=</span><span class="n">OrderSide</span><span class="o">.</span><span class="n">BUY</span><span class="p">,</span>
+    <span class="n">time_in_force</span><span class="o">=</span><span class="n">TimeInForce</span><span class="o">.</span><span class="n">DAY</span>
+    <span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">trading_client</span><span class="o">.</span><span class="n">submit_order</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="n">MarketOrderRequest</span><span class="p">(</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;AAPL&quot;</span><span class="p">,</span>
+    <span class="n">qty</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">side</span><span class="o">=</span><span class="n">OrderSide</span><span class="o">.</span><span class="n">SELL</span><span class="p">,</span>
+    <span class="n">time_in_force</span><span class="o">=</span><span class="n">TimeInForce</span><span class="o">.</span><span class="n">DAY</span>
+    <span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">trading_client</span><span class="o">.</span><span class="n">submit_order</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div></section></section>
 </div>
 </div>
