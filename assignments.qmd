@@ -5,4 +5,3 @@
 [3. Backwardation and Contango (due Feb 1)](assignment3.html){target="_blank"}<br>
 [4. Factors and Backtesting (due Feb 8)](assignment4.html){target="_blank"}<br>
 [5. Backtesting Machine Learning Models (due Feb 15)](assignment5.html){target="_blank"}<br>
-[6. Evaluation and Industry Strategies (due Feb 22)](assignment6.html){target="_blank"}<br>
