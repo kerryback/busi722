@@ -5,14 +5,23 @@
 [2. Option Spreads](02-option_spreads.slides.html){target="_blank"} [(pdf)](pdfs/02-option_spreads.slides.pdf){target="_blank"}<br>
 [3. Option Valuation](03-option_valuation.slides.html){target="_blank"} [(pdf)](pdfs/03-option_valuation.slides.pdf){target="_blank"}<br>
 [4. Futures](04-futures.slides.html){target="_blank"} [(pdf)](pdfs/04-futures.slides.pdf){target="_blank"}<br>
-[5. More Futures](05-more_futures.slides.html){target="_blank"} [(pdf)](pdfs/05-more_futures.slides.pdf){target="_blank"}<br>
-[6. Factor Investing](06-factors.slides.html){target="_blank"} [(pdf)](pdfs/06-factors.slides.pdf){target="_blank"}<br><br>
+[5. More Futures](05-more_futures.slides.html){target="_blank"} [(pdf)](pdfs/05-more_futures.slides.pdf){target="_blank"}<br><br>
+Some recent papers<br>
 [Gu-Kelly-Xiu Paper](pdfs/Gu_Kelly_Xiu.pdf){target="_blank"}<br>
 [Green-Hand-Zhang features](pdfs/Green-Hand-Zhang.pdf){target="_blank"}
 <br>
 [Jensen-Kelly-Pedersen Paper](pdfs/Jensen-Kelly-Pedersen.pdf){target="_blank"}<br><br>
+[6. Factor Investing](06-factors.slides.html){target="_blank"} [(pdf)](pdfs/06-factors.slides.pdf){target="_blank"}<br>
 [7. Backtesting](07-backtesting.slides.html){target="_blank"} [(pdf)](pdfs/07-backtesting.slides.pdf){target="_blank"}<br>
 [8. Preprocessing and Analysis](08-preprocessing_analysis.slides.html){target="_blank"} [(pdf)](pdfs/08-preprocessing_analysis.slides.pdf){target="_blank"}<br>
+
+#### New version of 8 excluding stocks predicted to be not shortable
+
+[8a. Predicting Shortable Stocks](08a-shortable.slides.html){target="_blank"} [(pdf)](pdfs/08a-shortable.slides.pdf){target="_blank"}<br>
+[8b. Preprocessing and Analysis](08b-preprocessing_analysis.slides.html){target="_blank"} [(pdf)](pdfs/08b-preprocessing_analysis.slides.pdf){target="_blank"}<br>
+
+#### 9 is unchanged
+
 [9. Rank and Trade](09-rank_trade.slides.html){target="_blank"} [(pdf)](pdfs/09-rank_trade.slides.pdf){target="_blank"}<br>
 
 
