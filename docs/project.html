@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./project.html">Project Instructions</a>
+    <a class="nav-link active" href="./project.html" aria-current="page">Project Instructions</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./slides.html">Slides</a>
@@ -104,56 +104,21 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="data-driven-finance-ii-rice-university-spring-2024" class="level2">
-<h2 class="anchored" data-anchor-id="data-driven-finance-ii-rice-university-spring-2024">Data-Driven Finance II<br>Rice University <br>Spring 2024</h2>
-<section id="instructor" class="level4">
-<h4 class="anchored" data-anchor-id="instructor">Instructor</h4>
-<p><a href="http://kerryback.com">Kerry Back</a> <br> J. Howard Creekmore Professor of Finance and Professor of Economics<br> <a href="mailto:kerryback@gmail.com">kerryback@gmail.com</a></p>
-</section>
-<section id="meeting-schedule" class="level4">
-<h4 class="anchored" data-anchor-id="meeting-schedule">Meeting Schedule</h4>
-<p>Room 317, McNair Hall<br> TTh 10:50 – 12:05<br> 1/8/2024 – 2/23/2024</p>
-</section>
-<section id="course-description" class="level4">
-<h4 class="anchored" data-anchor-id="course-description">Course Description</h4>
-<p>The first half of the course will cover options and futures for risk management and investing. We’ll explain what the securities are and how they trade, how they are used in risk management and investments, and how to value them. The second half of the course will be devoted to active portfolio management and specifically factor investing. We will review the historical results of factor investing and study how to optimally combine factors using machine learning techniques. We will analyze the results in the way that endowments and other institutions evaluate investment managers. We’ll do a real-world implementation of our models with paper trading via the python API at Alpaca Brokerage.</p>
-</section>
-<section id="assignments-and-grading" class="level4">
-<h4 class="anchored" data-anchor-id="assignments-and-grading">Assignments and Grading</h4>
-<p>Grades will be based on a group project, weekly assignments, and a final exam. The group project will account for 20% of the course grade, the assignments for 40%, and the final exam for 40%. The final exam will cover only options and futures. It will be distributed on Feb 22 and <strong>due on Feb 27</strong>. The group project is <strong>due April 23</strong>.</p>
-</section>
-<section id="group-project" class="level4">
-<h4 class="anchored" data-anchor-id="group-project">Group project</h4>
-<p>Groups should consist of two or three students. The project is to implement a 140/40 portfolio strategy at Alpaca brokerage, using their python API for paper trading. The portfolio should be 100% long in SPY and 40% long-short with the longs and shorts based on return predictions from a machine learning model. Each group should submit a pdf describing their investment strategy and an evaluation of their results. The strategy should be <strong>implemented by Friday, Feb 23</strong>. It should be rebalanced weekly, and results should be <strong>reported through Friday, Apr 12</strong>. The write-up should include an analysis of the weekly returns relative to the weekly returns of SPY.</p>
-</section>
-<section id="tentative-schedule-by-day" class="level4">
-<h4 class="anchored" data-anchor-id="tentative-schedule-by-day">Tentative Schedule by Day</h4>
+<section id="final-project-instructions-data-driven-finance-ii-rice-university" class="level2">
+<h2 class="anchored" data-anchor-id="final-project-instructions-data-driven-finance-ii-rice-university">Final Project Instructions<br>Data-Driven Finance II<br>Rice University</h2>
 <ol type="1">
-<li>Options and their uses</li>
-<li>Option spreads</li>
-<li>Option valuation</li>
-<li>Introduction to futures</li>
-<li>Spot-futures parity</li>
-<li><a href="https://hbsp.harvard.edu/import/1121177">Risk-management case</a></li>
-<li>Factor investing</li>
-<li>Backtesting</li>
-<li>Backtesting machine learning models</li>
-<li>Strategy evaluation</li>
-<li>Industries and sectors</li>
-<li>Alpaca API</li>
-<li>Rebalancing</li>
+<li>Backtest and evaluate at least two strategies, involving at least one new characteristic. In the backtest loop, train every two years or every year.</li>
+<li>Explain why you like one of the strategies best and chose it to trade on.</li>
+<li>Retrain the best model using the most recent years of data. You will not need to backtest or train again.</li>
+<li>Interpret the strategy you are trading on: which characteristics does it like?<br>
+</li>
+<li>Implement the strategy as a 140/40 strategy at Alpaca: 100% long in SPY, 40% long your best stocks, and 40% short your worst stocks. The strategy should be implemented by Friday, Feb 23.</li>
+<li>Use your model to make new predictions weekly and trade to a new 140/40 portfolio. Save the positions and the account equity. Do this through Friday, April 12.</li>
+<li>Assess your results by comparing your portfolio returns to the returns of SPY. Get the adjusted closing price of SPY from Yahoo for each date that you saved your account equity and calculate SPY returns over the same periods that you calculate your portfolio returns.</li>
+<li>Submit a write-up by April 23.</li>
 </ol>
-</section>
-<section id="honor-code" class="level4">
-<h4 class="anchored" data-anchor-id="honor-code">Honor Code</h4>
-<p>The Rice University honor code applies to all work in this course. Each student must do his or her own assignments, but it is allowed and in fact encouraged for students to seek advice from each other.</p>
-</section>
-<section id="disability-accommodations" class="level4">
-<h4 class="anchored" data-anchor-id="disability-accommodations">Disability Accommodations</h4>
-<p>Any student with a documented disability requiring accommodations in this course is encouraged to contact me outside of class. All discussions will remain confidential. Any adjustments or accommodations regarding assignments or the final exam must be made in advance. Students with disabilities should also contact Disability Support Services in the Allen Center.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

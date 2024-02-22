@@ -11,6 +11,7 @@ project:
     - assignment4.qmd
     - assignment5.qmd
     - assignment6.qmd
+    - project.qmd
                
 website:
   title: ""
@@ -20,6 +21,8 @@ website:
     title: BUSI 722
     file: index.qmd
     right:
+      - text: Project Instructions
+        file: project.qmd
       - text: Slides
         file: slides.qmd
       - text: Assignments

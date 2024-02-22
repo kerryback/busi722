@@ -1,0 +1,12 @@
+## Final Project Instructions<br>Data-Driven Finance II<br>Rice University
+
+
+1.  Backtest and evaluate at least two strategies, involving at least one new characteristic.  In the backtest loop, train every two years or every year.
+2.  Explain why you like one of the strategies best and chose it to trade on.
+3.  Retrain the best model using the most recent years of data.  You will not need to backtest or train again.
+4.  Interpret the strategy you are trading on: which characteristics does it like?  
+5.  Implement the strategy as a 140/40 strategy at Alpaca: 100% long in SPY, 40% long your best stocks, and 40% short your worst stocks.  The strategy should be implemented by Friday, Feb 23.
+6.  Use your model to make new predictions  weekly and trade to a new 140/40 portfolio.  Save the positions and the account equity.  Do this through Friday, April 12.
+7.  Assess your results by comparing your portfolio returns to the returns of SPY.  Get the adjusted closing price of SPY from Yahoo for each date that you saved your account equity and calculate SPY returns over the same periods that you calculate your portfolio returns.
+8.  Submit a write-up by April 23.
+
