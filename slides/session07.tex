@@ -1,0 +1,210 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\input{busi722-style}
+
+\title{BUSI 722}
+\subtitle{Session 7: Direct Portfolio Construction}
+\author{Kerry Back}
+\institute{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+%%% PART 1: DIRECT PORTFOLIO CONSTRUCTION %%%
+
+\begin{frame}[c]
+\centering
+\Huge Direct Portfolio Construction from Signals
+\end{frame}
+
+\begin{frame}{The Problem with Predict-Then-Optimize}
+\textbf{Traditional approach:}
+\begin{barenumerate}
+\item Estimate expected returns $\hat\mu$ and covariance matrix $\hat\Sigma$
+\item Feed $\hat\mu$ and $\hat\Sigma$ into a portfolio optimizer
+\end{barenumerate}
+
+\vspace{0.3cm}
+
+\textbf{Why this fails in practice:}
+\begin{itemize}
+\item DeMiguel, Garlappi, Uppal (\textit{RFS}, 2009): none of 14 optimized portfolios consistently beats equal weighting out of sample
+\item Need ${\sim}$3,000 months of data for mean-variance to beat $1/N$ with 25 assets
+\item Estimation error in $\hat\mu$ and $\hat\Sigma$ is \alert{amplified} by the optimizer
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Alternative:} bypass moment estimation entirely and map signals directly to portfolio weights.
+\end{frame}
+
+\begin{frame}{Parametric Portfolio Policies}
+\textbf{Brandt, Santa-Clara, Valkanov} (\textit{RFS}, 2009)
+
+\vspace{0.2cm}
+
+Portfolio weights are a \alert{direct function of stock characteristics}:
+$$w_{i,t} = \bar w_{i,t} + \frac{1}{N_t}\,\theta'\hat x_{i,t}$$
+\begin{itemize}
+\item $\bar w_{i,t}$ = benchmark weight (e.g., value-weighted market)
+\item $\hat x_{i,t}$ = cross-sectionally standardized characteristics (zero mean, unit std each month)
+\item $\theta$ = policy parameters estimated by maximizing expected CRRA utility
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Key insight:} estimate $K$ parameters (one per characteristic) instead of $N$ means $+$ $N(N\!+\!1)/2$ covariances.  With $K=3$ (size, value, momentum), this is tractable for any number of stocks.
+
+\vspace{0.2cm}
+
+\textbf{Result:} ${\sim}$10\% annualized certainty-equivalent gain over the market portfolio.
+\end{frame}
+
+\begin{frame}{Principal Portfolios}
+\textbf{Kelly, Malamud, Pedersen} (\textit{J.\ Finance}, 2023)
+
+\vspace{0.2cm}
+
+\begin{itemize}
+\item Define a \textbf{prediction matrix} $M$ where $M_{ij}$ captures how signal $j$ predicts return $i$ --- including \alert{cross-asset predictability}.
+\item The optimal portfolio is the \textbf{eigenvector} of $M$ (by analogy to PCA on the covariance matrix).
+\item Decompose $M$ into symmetric and antisymmetric parts:
+\begin{itemize}
+\item Symmetric $\Rightarrow$ \textbf{beta portfolios} (factor risk premia)
+\item Antisymmetric $\Rightarrow$ \textbf{alpha portfolios} (market-neutral)
+\end{itemize}
+\item Provides the \alert{theoretical foundation} for why characteristic-based portfolios work.
+\item Brandt et al.\ is a special case (diagonal $M$, linear policy).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Virtue of Complexity}
+\textbf{Kelly, Malamud, Zhou} (\textit{J.\ Finance}, 2024)
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item Proves that \textbf{more complex models generically outperform simpler ones} for return prediction and portfolio construction.
+\item Out-of-sample $R^2$ and optimal Sharpe ratio \alert{increase with model parameterization}, even when parameters exceed observations.
+\item Holds in extremely data-scarce environments ($<20$ observations, tens of thousands of predictors).
+\item ML strategies learn to divest before recessions --- successful in 14 of 15 NBER recessions out of sample.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Practical implication:} use the largest model you can compute.
+\end{frame}
+
+\begin{frame}{Random Fourier Features + Ridge Regression}
+\textbf{Didisheim, Ke, Kelly, Malamud} (2024)
+
+\vspace{0.2cm}
+
+\textbf{The idea:} convert $d$ raw characteristics $X_t$ into $P$ nonlinear features via random projections:
+$$S_{i,t} = \bigl[\sin(\gamma\, X_t\omega_i),\;\cos(\gamma\, X_t\omega_i)\bigr]', \quad \omega_i \sim \text{i.i.d.}\ \mathcal{N}(0,I)$$
+\begin{itemize}
+\item Equivalent to a wide two-layer neural network with \alert{fixed random weights} in the first layer
+\item Only the second layer (portfolio weights $\lambda$) is estimated --- by \textbf{ridge regression}
+\item Can scale $P$ from 2 to 1,000,000 from the same raw data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RFF $\approx$ Neural Network with Frozen First Layer}
+\begin{center}
+\includegraphics[width=\textwidth]{rff_vs_nn.pdf}
+\end{center}
+
+\vspace{-0.2cm}
+
+\small
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Neural network:} both layers trained jointly via backpropagation.  Powerful but expensive and prone to local minima.
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Random Fourier features:} first-layer weights drawn randomly and \alert{never updated}.  Second layer solved in \alert{closed form} via ridge regression.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Random Fourier Features: Results}
+\textbf{Key findings} (Didisheim et al., 2024):
+\begin{itemize}
+\item Out-of-sample SDF Sharpe ratio rises from ${\sim}1$ (low complexity) to ${\sim}4$ (high complexity) --- far exceeding Fama-French 6-factor model (SR $\approx 1.1$)
+\item Out-of-sample pricing errors fall by a factor of six as $P$ grows
+\item Even using only the 5 Fama-French characteristics, adding nonlinear complexity \alert{doubles the Sharpe ratio} and cuts pricing errors by half
+\item Robust across market cap groups (mega, large, small, micro)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Why it matters:} achieves performance rivaling deep learning with \alert{no backpropagation} --- just random projections + ridge regression.
+\end{frame}
+
+\begin{frame}{Exercise: Parametric Portfolio Policies}
+\begin{barenumerate}
+\item Tell Claude to implement Brandt et al.\ with three characteristics: momentum, book-to-market, and profitability (gpa).
+\item Cross-sectionally standardize each characteristic each month (zero mean, unit standard deviation).
+\item Estimate $\theta$ by maximizing average portfolio return minus $\frac{\gamma}{2}$ times portfolio variance, with $\gamma = 5$.
+\item Compare the Sharpe ratio to the equal-weighted portfolio and to the LightGBM decile portfolio from Session 3.
+\end{barenumerate}
+\end{frame}
+
+%%% PART 2: DEEP LEARNING EXTENSIONS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Deep Learning Extensions
+\end{frame}
+
+\begin{frame}{Deep Parametric Portfolio Policies}
+
+\textbf{Simon, Weibels, Zimmermann} (2023):
+\begin{itemize}
+\item Replace Brandt et al.'s linear weight function with a \textbf{feed-forward neural network}
+\item Captures nonlinear interactions among characteristics
+\item 75--276 bps/month improvement in certainty equivalent returns
+\item Risk aversion $\gamma$ serves as an economically motivated regularization parameter
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{AI Asset Pricing Models} (Kelly, Kuznetsov, Malamud, Xu, 2025):
+\begin{itemize}
+\item Embeds a \textbf{transformer} in the stochastic discount factor
+\item \textbf{Cross-asset attention} captures interactions across the full stock universe
+\item Large reductions in pricing errors vs.\ previous ML models
+\item Current frontier of the field
+\end{itemize}
+\end{frame}
+
+\begin{frame}{References: Direct Portfolio Construction}
+\small
+\begin{itemize}
+\item DeMiguel, Garlappi, Uppal (2009), ``Optimal Versus Naive Diversification,'' \textit{RFS}
+\item Brandt, Santa-Clara, Valkanov (2009), ``Parametric Portfolio Policies,'' \textit{RFS}
+\item Kelly, Malamud, Pedersen (2023), ``Principal Portfolios,'' \textit{J.\ Finance}
+\item Kelly, Malamud, Zhou (2024), ``The Virtue of Complexity in Return Prediction,'' \textit{J.\ Finance}
+\item Didisheim, Ke, Kelly, Malamud (2024), ``Complexity in Factor Pricing Models,'' Working Paper
+\item Simon, Weibels, Zimmermann (2023), ``Deep Parametric Portfolio Policies,'' CFR Working Paper
+\item Kelly, Kuznetsov, Malamud, Xu (2025), ``Artificial Intelligence Asset Pricing Models,'' NBER WP 33351
+\item Gu, Kelly, Xiu (2020), ``Empirical Asset Pricing via Machine Learning,'' \textit{RFS}
+\end{itemize}
+\end{frame}
+
+%%% PART 3: WRAP-UP %%%
+
+\begin{frame}{Using Apps and Scripts with AI}
+\begin{itemize}
+\item Where possible, permanently fix the code used for tasks rather than asking AI to regenerate it each time.
+\item This ensures consistent behavior and reduces token usage.
+\item Save as a .py file and use in a Claude Code skill.
+\end{itemize}
+\end{frame}
+
+\end{document}

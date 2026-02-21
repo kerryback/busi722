@@ -1,0 +1,367 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\input{busi722-style}
+
+\title{Claude Skills, Fundamental Indicators}
+\subtitle{BUSI 722: Data-Driven Finance II}
+\author{Kerry Back}
+\institute{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+%%% PART 1: SETUP & DATABASE ACCESS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Database Access
+\end{frame}
+
+\begin{frame}{The Rice Data Portal}
+\begin{baritemize}
+\item We will use the \href{https://data-portal.rice-business.org}{Rice Data Portal} for stock market data.
+\item The portal provides daily prices, valuation metrics, and fundamental data from SEC filings.
+\item Four main tables:
+\begin{itemize}
+\item \textbf{SEP} -- daily stock prices (open, high, low, close, volume)
+\item \textbf{DAILY} -- daily valuation metrics (marketcap, pb, pe, ps)
+\item \textbf{SF1} -- fundamentals from 10-K/10-Q filings
+\item \textbf{TICKERS} -- company metadata (sector, industry)
+\end{itemize}
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Storing Your Access Token}
+Visit \href{https://data-portal.rice-business.org}{data-portal.rice-business.org} to get an access token.
+\vspace{0.3cm}
+
+\alert{Prompt:} ``Create a \texttt{.env} file with my Rice access token: \texttt{abc123...}''
+\vspace{0.3cm}
+
+Claude creates a \texttt{.env} file:
+\begin{shadedbox}
+\texttt{RICE\_ACCESS\_TOKEN=abc123...}
+\end{shadedbox}
+
+\begin{itemize}
+\item The \texttt{.env} file keeps your token out of your code.
+\item Python's \texttt{dotenv} library loads it automatically.
+\item Add \texttt{.env} to \texttt{.gitignore} to avoid sharing your token.
+\end{itemize}
+\end{frame}
+
+%%% PART 2: FETCH RETURNS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Step 1: Fetch Monthly Returns
+\end{frame}
+
+\begin{frame}{Fetching Returns}
+\alert{Prompt:} ``Get monthly returns for all stocks from 2010 onward and save as \texttt{monthly.parquet}.''
+\vspace{0.3cm}
+
+Claude uses the \texttt{fetch-returns} skill, which:
+\begin{barenumerate}
+\item Queries \textbf{SEP} for end-of-month prices (year by year to avoid timeouts)
+\item Queries \textbf{DAILY} for end-of-month market cap
+\item Queries \textbf{TICKERS} for sector and industry
+\item Calculates return, momentum, and lagged return
+\item Assigns size categories (Nano- through Mega-Cap)
+\end{barenumerate}
+
+\vspace{0.3cm}
+Includes \alert{delisted stocks} by default to avoid survivorship bias.
+\end{frame}
+
+\begin{frame}[fragile]{Returns Data: What You Get}
+\small
+\begin{verbatim}
+>>> df = pd.read_parquet("monthly.parquet")
+>>> df.shape
+(544262, 8)
+>>> df.columns
+['ticker', 'month', 'return', 'momentum', 'lagged_return',
+ 'close', 'marketcap', 'pb']
+\end{verbatim}
+\vspace{0.2cm}
+\begin{verbatim}
+>>> df[df.ticker=="AAPL"].head(5)
+ticker   month  return  momentum  lagged_return  close  marketcap   pb
+  AAPL 2010-02  0.0655       NaN            NaN  6.859   174151.7  4.9
+  AAPL 2010-03  0.1484       NaN         0.0655  7.308   185551.9  5.2
+  AAPL 2010-04  0.1110       NaN         0.1484  8.393   213100.4  6.0
+  AAPL 2010-05 -0.0161       NaN        -0.0161  9.325   237584.9  6.0
+  AAPL 2010-06 -0.0208       NaN        -0.0161  9.174   233737.7  5.9
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{How Momentum Is Calculated}
+Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
+\[
+\text{momentum}_t \;=\; \frac{\text{closeadj}_{t-2}}{\text{closeadj}_{t-13}} - 1
+\]
+
+\begin{baritemize}
+\item Skips the most recent month ($t{-}1$): short-term reversal contaminates the signal.
+\item Uses split- and dividend-adjusted prices (\texttt{closeadj}).
+\item Requires 13 months of price history, so the first 12 months are \texttt{NaN}.
+\item All calculations are \alert{grouped by ticker} --- never mixing prices across stocks.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Variables from the Returns Step}
+\begin{baritemize}
+\item \texttt{ticker}, \texttt{month} -- identifiers
+\item \texttt{return} -- monthly return (decimal: 0.05 = 5\%)
+\item \texttt{momentum} -- 12-month return skipping the most recent month
+\item \texttt{lagged\_return} -- prior month's return
+\item \texttt{close} -- split-adjusted closing price (end of month)
+\item \texttt{marketcap} -- market cap in thousands (\alert{shifted by 1 month})
+\item \texttt{size} -- Nano/Micro/Small/Mid/Large/Mega-Cap
+\item \texttt{sector}, \texttt{industry} -- classifications
+\end{baritemize}
+\end{frame}
+
+%%% PART 3: FETCH FUNDAMENTALS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Step 2: Fetch Fundamentals
+\end{frame}
+
+\begin{frame}{Precomputed vs.\ Calculated Variables}
+\alert{Rule:} Before calculating any ratio, check if it already exists in the database.
+\vspace{0.3cm}
+
+\textbf{Precomputed in DAILY:} \texttt{marketcap}, \texttt{pb}, \texttt{pe}, \texttt{ps}, \texttt{ev}, \texttt{evebit}, \texttt{evebitda}
+\vspace{0.2cm}
+
+\textbf{Precomputed in SF1:} \texttt{roe}, \texttt{roa}, \texttt{grossmargin}, \texttt{netmargin}, \texttt{de} (leverage), \texttt{assetturnover}, \texttt{currentratio}
+\vspace{0.3cm}
+
+\textbf{Must calculate:}
+\begin{itemize}
+\item Growth rates: asset growth, revenue growth
+\item Custom ratios: gross profit / assets, book-to-market
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Fetching Fundamental Data}
+\alert{Prompt:} ``Get annual fundamentals from SF1: equity, assets, gross profit, and the precomputed ratios roe, grossmargin, assetturnover, and de.  Calculate asset growth and gross-profit-to-assets.  Save as \texttt{fundamentals.parquet}.''
+\vspace{0.3cm}
+
+Claude uses the \texttt{fetch-fundamentals} skill, which:
+\begin{barenumerate}
+\item Checks which variables are precomputed (fetches, doesn't calculate)
+\item Queries SF1 for annual data (\texttt{dimension='ARY'})
+\item Calculates growth rates \alert{before} merging (critical!)
+\item Queries DAILY for valuation ratios (pb, pe) if requested
+\item Shifts DAILY variables by 1 month
+\end{barenumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Why Calculate Growth Rates Before Merging?}
+After merging, fundamentals are \alert{forward-filled}: each filing's values repeat every month until the next filing.
+\vspace{0.3cm}
+
+\begin{shadedbox}[title=The Problem]
+If you calculate \texttt{pct\_change()} after forward-fill, consecutive months with the same value produce \textbf{zero growth} --- which is wrong.
+\end{shadedbox}
+
+\vspace{0.3cm}
+\textbf{Solution:} Calculate growth from the raw SF1 data (one row per filing), where consecutive rows are consecutive filings.
+
+\begin{verbatim}
+  df_fund['asset_growth'] = df_fund.groupby('ticker')
+                              ['assets'].pct_change()
+\end{verbatim}
+\end{frame}
+
+%%% PART 4: MERGE DATA %%%
+
+\begin{frame}[c]
+\centering
+\Huge Step 3: Merge Returns \& Fundamentals
+\end{frame}
+
+\begin{frame}{Merging the Datasets}
+\alert{Prompt:} ``Merge \texttt{monthly.parquet} with \texttt{fundamentals.parquet} and save as \texttt{merged.parquet}.''
+\vspace{0.3cm}
+
+Claude uses the \texttt{merge-data} skill, which:
+\begin{barenumerate}
+\item Aligns fundamentals to the first month \alert{after} the SEC filing date
+\item Merges on (ticker, month)
+\item Forward-fills fundamentals within each ticker
+\item Shifts all SF1 variables by 1 month (look-ahead bias)
+\item Shifts \texttt{close} to represent the prior month's price
+\item Applies data quality filters
+\end{barenumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Merged Data: What You Get}
+\small
+\begin{verbatim}
+>>> df = pd.read_parquet("merged.parquet")
+>>> df.shape
+(886460, 20)
+>>> df[df.ticker=="AAPL"].dropna().head(5)
+ticker   month  return  momentum  close  marketcap   pb    roe  grossmargin
+  AAPL 2012-02  0.1883    0.1936 16.303   425612.0  4.7  0.396      0.405
+  AAPL 2012-03  0.1053    0.2924 19.373   505758.5  5.6  0.396      0.405
+  AAPL 2012-04 -0.0260    0.5564 21.413   559015.5  6.2  0.396      0.405
+  AAPL 2012-05 -0.0107    0.7123 20.857   546072.5  5.3  0.396      0.405
+  AAPL 2012-06  0.0109    0.6789 20.633   540207.8  5.3  0.396      0.405
+\end{verbatim}
+\vspace{0.2cm}
+Note: \texttt{roe} and \texttt{grossmargin} are constant across months --- they reflect the most recent annual filing, forward-filled and shifted.
+\end{frame}
+
+%%% PART 5: LOOK-AHEAD BIAS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Avoiding Look-Ahead Bias
+\end{frame}
+
+\begin{frame}{The Core Problem}
+We want each row to represent: \alert{what we knew at the start of the month} paired with \alert{what happened during the month}.
+\vspace{0.3cm}
+
+\begin{shadedbox}[title=Look-Ahead Bias]
+Using information that was \textbf{not yet available} at the time of the investment decision. Backtests that suffer from this overstate performance --- sometimes dramatically.
+\end{shadedbox}
+\end{frame}
+
+\begin{frame}{How the Skills Handle It}
+\begin{baritemize}
+\item \textbf{Market cap and DAILY ratios} (pb, pe, ps): shifted by 1 month after fetching.  The value for January is from end of December.
+\item \textbf{Close price}: shifted by 1 month after merging.  Represents prior month's closing price.
+\item \textbf{SF1 fundamentals} (roe, de, etc.): aligned to the first month \emph{after} the SEC filing date, then forward-filled, then shifted by 1 month.
+\item \textbf{Momentum}: uses prices through month $t{-}2$, so it is known at the start of month $t$.
+\item \textbf{Lagged return}: prior month's return, known at the start of the current month.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Summary of Shifts}
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Variable} & \textbf{Source} & \textbf{Shifted By} \\
+\hline
+marketcap, pb, pe, ps & DAILY & 1 month after fetching \\
+close & SEP & 1 month after merging \\
+roe, de, grossmargin, \ldots & SF1 & filing date $+$ 1 month after merge \\
+momentum & SEP & built-in (uses $t{-}13$ to $t{-}2$) \\
+lagged\_return & SEP & built-in (uses $t{-}1$) \\
+return & SEP & not shifted (target variable) \\
+\end{tabular}
+\end{center}
+\vspace{0.3cm}
+\texttt{return} is the \alert{only variable that is not known at the start of the month}.  It is what we are trying to predict.
+\end{frame}
+
+%%% PART 6: FILTERS AND STANDARDIZATION %%%
+
+\begin{frame}[c]
+\centering
+\Huge Filters \& Standardization
+\end{frame}
+
+\begin{frame}{Data Quality Filters}
+The \texttt{merge-data} skill applies two filters automatically:
+\begin{baritemize}
+\item \textbf{Price filter:} drop rows with \texttt{close} $< \$5.00$
+\item \textbf{Missing data:} drop rows with any \texttt{NaN} values
+\end{baritemize}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{lr}
+Before filters: & 886,460 rows \quad 9,375 tickers \\
+After filters: & 589,006 rows \quad 6,825 tickers \\
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Penny Stocks}
+\begin{itemize}
+\item Must filter out low-price stocks.  Infeasible for equally weighted portfolios and distort portfolio returns.
+\item Use CQA Competition filter: \$5.60?
+\item Example: Tell Claude to read the data and drop all rows with close $\le$ price threshold.  Sort into quintiles each month on momentum and lagret and compute average returns.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Market Cap Filters}
+\begin{itemize}
+\item If we were managing a fund, we would specify the universe of stocks in our prospectus.
+\item We would likely include some market cap filter: large cap = S\&P 500, large and midcap = Russell 1000, smallcap = Russell 2000, etc.
+\item It is hard for large funds to trade microcaps, so they will exclude them.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Standardizing Features}
+\begin{itemize}
+\item Many models are highly affected by outliers.
+\item Standardizing predictive variables is common.  For example, subtract mean and divide by standard deviation (z-score).
+\item Ranking 1 through $n$ is another way to standardize.  Can scale to 0 to 1 or compute z-scores of ranks.
+\item We should do this each month rather than for the full sample.
+\item For ``good'' features (like football scores), rank from low to high.  For ``bad'' features (like golf scores), rank from high to low.  Then a high rank is always good.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Composite Ranks}
+The Quality Minus Junk paper computes quality as follows:
+
+\begin{barenumerate}
+\item Compute z-scores of features each month.
+\item Group features into three categories: profitability, growth, and safety.
+\item Within each category, add z-scores and compute the z-score of the sum each month.
+\item Add the three category z-scores and compute the z-score of the sum each month.
+\end{barenumerate}
+\end{frame}
+
+%%% PART 7: THE COMPLETE WORKFLOW %%%
+
+\begin{frame}[c]
+\centering
+\Huge The Complete Workflow
+\end{frame}
+
+\begin{frame}{End-to-End Prompts}
+\begin{enumerate}
+\item ``Get monthly returns for all stocks from 2010 onward.  Save as \texttt{monthly.parquet}.''
+\item ``Get annual fundamentals from SF1: equity, assets, gp, and the precomputed ratios roe, grossmargin, assetturnover, de.  Calculate asset growth and gp/assets.  Save as \texttt{fundamentals.parquet}.''
+\item ``Merge monthly returns with fundamentals.  Save as \texttt{merged.parquet}.''
+\end{enumerate}
+
+\vspace{0.3cm}
+Three prompts produce a complete, bias-free panel dataset ready for portfolio analysis or machine learning.
+\end{frame}
+
+\begin{frame}[fragile]{The Final Dataset}
+\small
+\begin{verbatim}
+>>> df = pd.read_parquet("merged.parquet")
+>>> df.shape
+(589006, 17)
+>>> df.columns
+['ticker', 'month', 'return', 'momentum', 'lagged_return',
+ 'close', 'marketcap', 'pb', 'asset_growth', 'roe',
+ 'gp_to_assets', 'grossmargin', 'assetturnover', 'leverage',
+ 'sector', 'industry', 'size']
+>>> df.ticker.nunique()
+6825
+\end{verbatim}
+
+\vspace{0.2cm}
+589,006 stock-months $\times$ 17 variables, spanning 2011--2025, covering 6,825 stocks (including delisted).
+\end{frame}
+
+\end{document}

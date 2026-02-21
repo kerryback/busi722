@@ -1,0 +1,16 @@
+---
+title: Slides
+---
+
+## Course Slides
+
+Click on a topic to download the PDF slide deck.
+
+| # | Topic | |
+|--:|-------|:-:|
+| 1 | [Software, Rice Database, Technical Indicators](slides/session01.pdf) | [{{< fa file-pdf >}}](slides/session01.pdf) |
+| 2 | [Claude Skills, Fundamental Indicators](slides/session02.pdf) | [{{< fa file-pdf >}}](slides/session02.pdf) |
+| 3 | [Machine Learning for Return Prediction](slides/session03.pdf) | [{{< fa file-pdf >}}](slides/session03.pdf) |
+| 4 | [Rolling Windows for Train/Test](slides/session04.pdf) | [{{< fa file-pdf >}}](slides/session04.pdf) |
+| 5 | [Forming and Evaluating Portfolios](slides/session05.pdf) | [{{< fa file-pdf >}}](slides/session05.pdf) |
+| 6 | [Trading Costs, Risk Forecasts](slides/session06.pdf) | [{{< fa file-pdf >}}](slides/session06.pdf) |

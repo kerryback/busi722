@@ -1,0 +1,161 @@
+---
+title: "BUSI 722 -- Draft Exercises"
+subtitle: "More exercises than needed per week -- choose 2--3 per session"
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage{xcolor}
+        \PassOptionsToPackage{colorlinks=true,urlcolor=blue,linkcolor=blue}{hyperref}
+---
+
+\newpage
+
+# Session 1: Introduction & Setup
+
+**Exercise 1A: Setup Verification.**
+Install Claude Pro, Claude Code, Python 3.13, and VS Code following the instructions in the slides. Create a virtual environment and install the required packages. In VS Code, open Claude Code and ask it: "What is the sum of the first 1,000 integers? Verify by computing it in Python." Submit a screenshot showing Claude Code running inside VS Code with the answer displayed (`Exercise1A-Screenshot.png`).
+
+**Exercise 1B: Database Connection.**
+Visit [data-portal.rice-business.org](https://data-portal.rice-business.org) to obtain an access token. Create a `.env` file with your token. Install the rice-data-query and merge skills from `mgmt638.kerryback.com/skills/`. Using Claude Code, query the Rice database for monthly returns and market caps for AAPL, MSFT, and GOOG from January 2020 through December 2024. Save the result as a parquet file and convert it to Excel. Submit the Excel file (`Exercise1B-Data.xlsx`) and a screenshot of the Claude Code session (`Exercise1B-Screenshot.png`).
+
+**Exercise 1C: Factor Investing Summary.**
+Read the Quality Minus Junk paper (Asness, Frazzini, and Pedersen, 2019) and watch the accompanying video (links in slides). Write a one-page summary addressing: (a) How do the authors define "quality"? (b) What is the relationship between quality and price? (c) What is the QMJ factor and how does it perform? Submit `Exercise1C-Summary.pdf`.
+
+**Exercise 1D: Data Workflow.**
+Using Claude Code and the Rice database, download monthly returns, momentum, market cap, equity, assets, gross profit, and net income for all stocks from February 2011 through the most recent available month. Ask Claude to merge the fundamental data with returns (following the workflow in the slides so that all predictive variables are known at the beginning of each period). Save the merged dataset as a parquet file. Ask Claude to display the first 10 rows, the number of unique tickers, and the date range. Submit the parquet file (`Exercise1D-Data.parquet`) and a screenshot (`Exercise1D-Screenshot.png`).
+
+**Exercise 1E: Factor Returns Exploration.**
+Visit [learn-investments.rice-business.org/factor-investing/quintiles](https://learn-investments.rice-business.org/factor-investing/quintiles). Pick three factors. For each, describe (a) the sort variable, (b) which quintile performed best, and (c) the approximate spread between the top and bottom quintiles. Then ask Claude Code to replicate one of these sorts using data from the Rice database and compare your results to the website. Submit a one-page writeup (`Exercise1E-Report.pdf`) and a screenshot of the Claude Code replication (`Exercise1E-Screenshot.png`).
+
+\newpage
+
+# Session 2: Stock Characteristics & Sorting
+
+**Exercise 2A: Single-Characteristic Sorting.**
+Download [data1.parquet](https://www.dropbox.com/scl/fi/5l4woqke5cn6tuu8wwdta/data1.parquet?rlkey=j917tet66yfsxniqwi5ld8u7c&dl=1) and ask Claude to add book-to-market (bm), gross profits to assets (gpa), return on equity (roe), operating profit to equity (opr), and lagged return (lagret). Sort stocks into deciles each month on momentum and compute the average return of each decile each month. Compute the mean, standard deviation, and Sharpe ratio of each decile's return series. Repeat for book-to-market. Submit a table comparing the two sorts (`Exercise2A-Table.xlsx`) and a screenshot (`Exercise2A-Screenshot.png`). Which characteristic produces a stronger spread?
+
+**Exercise 2B: Multi-Characteristic Sort.**
+Using the same data, sort stocks into quintiles on momentum and quintiles on book-to-market each month. Compute the average return of each of the 25 groups each month. Ask Claude to create a heatmap showing the mean monthly return for each momentum-bm combination. Submit the heatmap (`Exercise2B-Heatmap.png`) and a brief interpretation of the interaction between value and momentum (`Exercise2B-Interpretation.pdf`, half page).
+
+**Exercise 2C: Streamlit Stock Recommender.**
+Using the most recent month in the data, sort stocks into quartiles on a characteristic of your choice. Label the best quartile as "Buy," the worst as "Sell," and the middle half as "Hold." Build a Streamlit app that prompts the user for a ticker and displays the recommendation along with the stock's rank and the characteristic value. Run the app and submit the Python code (`Exercise2C-App.py`) and a screenshot of the running app showing at least three different tickers (`Exercise2C-Screenshot.png`).
+
+**Exercise 2D: Filter Analysis.**
+Using the data, compare sorting results with and without filters. First, sort on lagret into deciles and compute mean returns with no filters. Then repeat after (a) dropping stocks with close $\le$ \$5.60 and (b) additionally dropping stocks with market cap below the 20th percentile each month. Submit a table showing the decile mean returns under each scenario (`Exercise2D-Table.xlsx`) and a half-page discussion of how filters affect the results (`Exercise2D-Discussion.pdf`).
+
+**Exercise 2E: Composite Ranks.**
+Following the Quality Minus Junk methodology, compute composite quality scores. Group the available characteristics into profitability (gpa, roe, opr) and other (momentum, bm, agr). For each group, compute z-scores each month, add them within each group, and compute the z-score of the sum. Then add the group z-scores and compute the final z-score. Sort on the composite into deciles and compute mean returns. Submit the results (`Exercise2E-Results.xlsx`) and a comparison with single-characteristic sorts (`Exercise2E-Comparison.pdf`, half page).
+
+**Exercise 2F: Profitability Paper.**
+Read Novy-Marx and Medhat (2025) and watch the video (links in slides). Summarize (a) how the authors measure profitability, (b) the main empirical finding, and (c) why profitability predicts returns. Submit `Exercise2F-Summary.pdf` (one page).
+
+\newpage
+
+# Session 3: Random Forests & QMJ Variables
+
+**Exercise 3A: Random Forest for Stock Returns.**
+Compute z-scores of ranks each month for momentum (ascending), lagret (descending), and book-to-market (ascending). Also compute z-scores of return ranks (ascending). Fit a random forest using data through 2015 (100 trees, max depth 4) to predict return z-scores from feature z-scores. Use the model to predict for 2016 onward. Sort predictions into deciles each month and compute average returns. Report the mean, standard deviation, and Sharpe ratio of each decile. Submit results (`Exercise3A-Results.xlsx`) and a screenshot (`Exercise3A-Screenshot.png`).
+
+**Exercise 3B: Hyperparameter Sensitivity.**
+Using the same setup as Exercise 3A, vary (a) the maximum depth (2, 4, 6, 8) and (b) the number of trees (50, 100, 200, 500). For each combination, report the mean return spread between deciles 10 and 1. Present results in a table. Submit the table (`Exercise3B-Table.xlsx`) and a half-page discussion of which parameters matter most (`Exercise3B-Discussion.pdf`).
+
+**Exercise 3C: Random Forest vs.\ Sorting.**
+Compare the random forest approach (Exercise 3A) to simple characteristic sorting (Session 2). Sort stocks into deciles on momentum alone and compute the D10 $-$ D1 spread. Then do the same for the random forest predictions. Repeat using book-to-market alone. Does the random forest improve on single-characteristic sorts? On the composite rank from Session 2? Submit a comparison table (`Exercise3C-Table.xlsx`) and a half-page discussion (`Exercise3C-Discussion.pdf`).
+
+**Exercise 3D: Create QMJ Variables.**
+Using the Rice database, download the variables needed to construct the Quality Minus Junk measure. Following the QMJ paper, you need variables for profitability (gross profit, ROE, ROA, cash flow), growth (5-year growth rates of profitability measures), and safety (market beta, volatility, leverage). Important: create all growth rates before merging with returns. Save the dataset (`Exercise3D-Data.parquet`) and submit a data dictionary listing each variable and how it was computed (`Exercise3D-Dictionary.pdf`).
+
+**Exercise 3E: Paper Review -- Safe Minus Risky.**
+Read Kapadia, Ostdiek, Weston, and Zekhnini (2019) and watch the video. Answer: (a) How do the authors measure safety? (b) What is the "safe minus risky" return spread? (c) How does this relate to the QMJ safety component? Submit `Exercise3E-Summary.pdf` (one page).
+
+**Exercise 3F: Adding Features to the Random Forest.**
+Start with the random forest from Exercise 3A (momentum, lagret, book-to-market). Add additional features from the data: gpa, roe, opr, and agr. Refit the random forest and compare the D10 $-$ D1 spread and decile Sharpe ratios to the original model. Does adding more features improve prediction? Ask Claude to display the feature importances. Submit results (`Exercise3F-Results.xlsx`), the feature importance chart (`Exercise3F-Importance.png`), and a half-page discussion (`Exercise3F-Discussion.pdf`).
+
+\newpage
+
+# Session 4: Valuation & LightGBM
+
+**Exercise 4A: Peer Comparison Valuation.**
+Pick a stock to analyze. Ask Claude to find stocks in the same industry with similar market caps from the Rice database and list their PE and PB ratios, ROE, and 5-year revenue growth. Assess whether your stock looks undervalued, overvalued, or correctly valued relative to peers. Submit a table of peer comparisons (`Exercise4A-Peers.xlsx`) and a one-page valuation assessment (`Exercise4A-Assessment.pdf`).
+
+**Exercise 4B: Research Report.**
+For the stock analyzed in Exercise 4A (or a different one), ask Claude to do online research to find information relevant to the company's valuation. Ask Claude to create a Word document containing an analysis based on peer data, other data gathered, and online research. The report should include (a) a business overview, (b) peer comparison, (c) key risks, and (d) a valuation conclusion. Submit the Word document (`Exercise4B-Report.docx`).
+
+**Exercise 4C: LightGBM PE Prediction.**
+Using data from the Rice database filtered for positive PE ratios, train a LightGBM model to predict PE ratios using profitability ratios (ROE, ROA, gross margin, net margin, GP/assets), asset turnover, equity multiplier, size category, sector, and industry. Use walk-forward monthly backtesting: train on month $t$, predict for month $t+1$, form decile portfolios based on percentage prediction error, and compute returns. Report the mean return for each decile. Submit results (`Exercise4C-Results.xlsx`) and a screenshot of the decile returns (`Exercise4C-Screenshot.png`).
+
+**Exercise 4D: Feature Importance for PE Prediction.**
+Using the LightGBM model from Exercise 4C, ask Claude to display (a) a feature importance bar chart (top 15 features), (b) an actual vs.\ predicted PE scatter plot, and (c) a distribution of percentage errors. Which features matter most for predicting PE ratios? Submit the three plots (`Exercise4D-Importance.png`, `Exercise4D-Scatter.png`, `Exercise4D-Errors.png`) and a half-page interpretation (`Exercise4D-Interpretation.pdf`).
+
+**Exercise 4E: Gordon Growth Model Analysis.**
+Ask Claude to compute the implied PE ratio for a set of stocks using the Gordon Growth Model. For each stock, estimate $g$ from ROE and the plowback ratio, and use the stock's CAPM expected return as $r$. Compare the Gordon Growth implied PE to the actual PE. Identify which stocks look most over- and undervalued by this measure. Submit the analysis (`Exercise4E-Analysis.xlsx`) and a half-page discussion of the model's limitations (`Exercise4E-Discussion.pdf`).
+
+**Exercise 4F: ML Model Comparison for Valuation.**
+Ask Claude what machine learning model it recommends for cross-sectional stock valuation and why. Then implement both LightGBM and a random forest to predict PE ratios using the same features and the same walk-forward methodology. Compare the two models on (a) mean absolute percentage error, (b) decile return spreads, and (c) feature importances. Submit results (`Exercise4F-Results.xlsx`) and a one-page comparison (`Exercise4F-Comparison.pdf`).
+
+\newpage
+
+# Session 5: ML Return Prediction Pipeline
+
+**Exercise 5A: Build the Dataset.**
+Using Claude Code and the Rice database, build a monthly return prediction dataset following the specifications in the slides. The dataset should include returns, momentum, lagged return, close, market cap, PB ratio, asset growth, ROE, GP/assets, gross margin, asset turnover, leverage, sector, industry, and size category. Apply a penny stock filter (close $\ge$ \$5.00). Ensure proper timing to avoid look-ahead bias. Submit the dataset (`Exercise5A-Data.parquet`) and a summary showing the number of observations, date range, and number of unique tickers (`Exercise5A-Summary.pdf`).
+
+**Exercise 5B: Rolling-Window Prediction.**
+Using the dataset from 5A (or a provided dataset), run a rolling-window LightGBM prediction pipeline. Convert all numeric features to percentile ranks (0--1) each month. Train on 12-month rolling windows with 100 trees, learning rate 0.05, and max depth 6. Form decile portfolios each month from out-of-sample predictions and compute returns. Report mean monthly returns and Sharpe ratios for each decile, and the D10 $-$ D1 spread. Submit results (`Exercise5B-Results.xlsx`) and a cumulative return chart for all deciles (`Exercise5B-Chart.png`).
+
+**Exercise 5C: Portfolio Analysis Notebook.**
+Create a Jupyter notebook that loads the decile portfolio results from 5B and produces: (a) a mean returns bar chart by decile, (b) an annualized Sharpe ratios bar chart, (c) cumulative returns on both linear and log scale, (d) a summary statistics table (mean, volatility, Sharpe, min, max), and (e) a long-short (D10 $-$ D1) performance chart with a horizontal line at zero. Submit the notebook (`Exercise5C-Notebook.ipynb`) and the five plots as PNG files.
+
+**Exercise 5D: Feature Analysis.**
+Using the most recently trained LightGBM model, produce: (a) a feature importances pie chart from split gain, (b) a linear regression of predictions on the percentile-ranked features, (c) a coefficient bar chart (positive in green, negative in red), and (d) a comparison table ranking features by LightGBM importance vs.\ regression coefficient magnitude. Identify features with large rank differences and explain what this reveals about non-linear effects. Submit the analysis (`Exercise5D-Analysis.pdf`) and the plots.
+
+**Exercise 5E: Parameter Sensitivity.**
+Rerun the rolling-window pipeline from 5B with the following variations: (a) training window of 6 months vs.\ 12 months vs.\ 24 months, (b) learning rate of 0.01 vs.\ 0.05 vs.\ 0.10, (c) max depth of 4 vs.\ 6 vs.\ 8. For each variation, report the D10 $-$ D1 spread and Sharpe ratio of the long-short portfolio. Submit a summary table (`Exercise5E-Table.xlsx`) and a one-page discussion of which parameters matter most (`Exercise5E-Discussion.pdf`).
+
+**Exercise 5F: Gu, Kelly, and Xiu Paper.**
+Read Gu, Kelly, and Xiu (2020, Review of Financial Studies) and watch the video (links in slides). Summarize: (a) What machine learning methods do the authors compare? (b) Which method performs best for return prediction? (c) What are the most important predictive variables? (d) How do the authors evaluate out-of-sample performance? Submit `Exercise5F-Summary.pdf` (one page).
+
+\newpage
+
+# Session 6: Portfolio Evaluation & Model Interpretation
+
+**Exercise 6A: Alpha Calculation.**
+The risk-free rate is 2\%. Your current portfolio has an expected return of 10\% and a standard deviation of 15\%. You are considering a new asset with a standard deviation of 30\%, a correlation with your portfolio of 60\%, and an alpha relative to your portfolio of 5\%. Ask Claude to compute how to combine the new asset and the risk-free asset with your current portfolio to improve performance while maintaining the standard deviation at 15\%. Put the analysis in a Jupyter notebook. Submit the notebook (`Exercise6A-Notebook.ipynb`).
+
+**Exercise 6B: Attribution Analysis.**
+Using the decile 10 (top) portfolio returns from Session 5's prediction pipeline, run a factor attribution analysis. Download Fama-French 5 factors (Mkt-RF, SMB, HML, CMA, RMW) plus the momentum factor from Ken French's website (or ask Claude to do it). Regress excess returns on the factors. Report (a) the alpha with its t-statistic, (b) all factor betas with t-statistics, and (c) the $R^2$. Which factors explain the portfolio's returns? Submit the regression results (`Exercise6B-Results.xlsx`) and a one-page interpretation (`Exercise6B-Interpretation.pdf`).
+
+**Exercise 6C: Weekly Prediction Pipeline.**
+Adapt the monthly pipeline from Session 5 to weekly data. Use weekly returns from the Rice database. Train on 52-week rolling windows and retrain every 8 weeks. Form decile portfolios and compute weekly returns. Report the average weekly D10 $-$ D1 spread. Compare the weekly spread to the monthly spread (after annualizing both). Submit results (`Exercise6C-Results.xlsx`) and a comparison (`Exercise6C-Comparison.pdf`, half page).
+
+**Exercise 6D: Trading Cost Analysis.**
+Read Frazzini, Israel, and Moskowitz (2012) and watch the video. For the long-short strategy from Exercise 5B or 6C, compute the monthly (or weekly) portfolio turnover. Using the paper's estimates of trading costs, compute the net-of-cost return for the long-short portfolio under three scenarios: (a) institutional costs, (b) retail costs, and (c) high-cost environment. Is the strategy profitable after costs? Submit the analysis (`Exercise6D-Analysis.xlsx`) and a one-page discussion (`Exercise6D-Discussion.pdf`).
+
+**Exercise 6E: SHAP Values and Model Interpretation.**
+Using a LightGBM model trained on all available monthly data, compute SHAP values for the current month's predictions. Ask Claude to produce (a) a SHAP summary plot, (b) a SHAP feature importance bar chart, and (c) partial dependence plots for the top 3 features. For the top-ranked and bottom-ranked stocks, show the SHAP waterfall plots. Explain why the model is predicting high (or low) returns for these stocks. Submit the plots and a one-page interpretation (`Exercise6E-Interpretation.pdf`).
+
+**Exercise 6F: Individual Stock Interpretability.**
+Pick three stocks from the current month's predictions -- one ranked in the top decile, one in the middle, and one in the bottom decile. For each stock, ask Claude to produce a SHAP waterfall plot showing which features are pushing the prediction up or down. Compare the three stocks: what features distinguish the top-ranked stock from the bottom-ranked stock? Submit the three waterfall plots and a one-page comparison (`Exercise6F-Comparison.pdf`).
+
+\newpage
+
+# Session 7: Risk Management & Course Wrap-Up
+
+**Exercise 7A: Risk Management Analysis.**
+Suppose you are managing a small-cap fund benchmarked to the Russell 2000. Using the top-decile portfolio from the return prediction pipeline, compute: (a) tracking error relative to IWM (Russell 2000 ETF), (b) the information ratio, (c) maximum drawdown, and (d) the portfolio beta relative to IWM. Discuss how you would manage risk if the tracking error were too high. Submit the analysis (`Exercise7A-Analysis.xlsx`) and a one-page risk management discussion (`Exercise7A-Discussion.pdf`).
+
+**Exercise 7B: Sector and Factor Exposure.**
+Using the top-decile portfolio from the return prediction pipeline, compute sector weights for each month and compare them to the sector weights in IWM. Ask Claude to produce (a) a stacked bar chart of sector weights over time, (b) a table showing average overweights and underweights by sector, and (c) a Fama-French 5-factor regression of the portfolio's excess returns. Discuss whether the portfolio's returns come from sector bets or stock selection within sectors. Submit the analysis (`Exercise7B-Analysis.xlsx`), the plots, and a one-page interpretation (`Exercise7B-Interpretation.pdf`).
+
+**Exercise 7C: Portfolio Turnover and Rebalancing.**
+Using the monthly decile assignments from the return prediction pipeline, compute (a) the fraction of stocks in the top decile that remain in the top decile the next month, (b) the average monthly turnover (fraction of portfolio that changes), and (c) the average number of stocks entering and exiting the top decile each month. Discuss implications for trading costs and practical implementation. Submit the analysis (`Exercise7C-Analysis.xlsx`) and a half-page discussion (`Exercise7C-Discussion.pdf`).
+
+**Exercise 7D: Drawdown and Tail Risk.**
+For the long-short (D10 $-$ D1) portfolio from the return prediction pipeline, compute: (a) the maximum drawdown and the dates it occurred, (b) the worst 5 monthly returns, (c) the 5th percentile monthly return (Value at Risk), and (d) the average return conditional on being below the 5th percentile (Expected Shortfall). Plot the drawdown over time. Submit the analysis (`Exercise7D-Analysis.xlsx`), the drawdown plot (`Exercise7D-Drawdown.png`), and a half-page discussion of tail risk (`Exercise7D-Discussion.pdf`).
+
+**Exercise 7E: Claude Code Skill Creation.**
+Take one of the scripts you built during the course (e.g., the data query workflow, the return prediction pipeline, or the Streamlit recommender) and convert it into a reusable Claude Code skill. Create a `SKILL.md` file that describes the skill's purpose, inputs, and outputs. Test the skill by invoking it via the `/` command in Claude Code. Submit the `SKILL.md` file (`Exercise7E-SKILL.md`), the associated code (`Exercise7E-Code.zip`), and a screenshot of Claude invoking the skill (`Exercise7E-Screenshot.png`).
+
+**Exercise 7F: End-to-End Strategy Report.**
+Write a comprehensive report on the quantitative strategy developed throughout the course. The report should include: (a) an executive summary, (b) data and methodology (features, model, training procedure), (c) backtest results (decile returns, Sharpe ratios, cumulative performance), (d) risk analysis (drawdowns, factor exposures, tracking error), (e) practical considerations (turnover, trading costs, capacity), and (f) a conclusion with recommendations for improvement. Ask Claude to produce the report as a Word document. Submit the report (`Exercise7F-Report.docx`).

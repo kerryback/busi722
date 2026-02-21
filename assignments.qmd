@@ -1,0 +1,18 @@
+---
+title: Assignments
+---
+
+## Course Assignments
+
+All assignments are group projects (up to five students per group). Each is due on Tuesday at 11:59 pm. Upload your zip file to Canvas.
+
+Click on an assignment to download the PDF.
+
+| # | Assignment | Due | |
+|--:|------------|-----|:-:|
+| 1 | [Exercises 1--3](assignment1.pdf) | March 24 | [{{< fa file-pdf >}}](assignment1.pdf) |
+| 2 | [Exercises 4--6](assignment2.pdf) | March 31 | [{{< fa file-pdf >}}](assignment2.pdf) |
+| 3 | [Exercises 7--9](assignment3.pdf) | April 7 | [{{< fa file-pdf >}}](assignment3.pdf) |
+| 4 | [Exercises 10--12](assignment4.pdf) | April 14 | [{{< fa file-pdf >}}](assignment4.pdf) |
+| 5 | [Exercises 13--15](assignment5.pdf) | April 21 | [{{< fa file-pdf >}}](assignment5.pdf) |
+| 6 | [Exercises 16--18](assignment6.pdf) | April 28 | [{{< fa file-pdf >}}](assignment6.pdf) |

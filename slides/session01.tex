@@ -1,0 +1,316 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\input{busi722-style}
+
+\title{Software, Rice Database, Technical Indicators}
+\subtitle{BUSI 722: Data-Driven Finance II}
+\author{Kerry Back}
+\institute{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+%%% PART 0: CAPM REVIEW & FAMA-FRENCH %%%
+
+\begin{frame}[c]
+\centering
+\Huge Review: CAPM \& Fama-French Factors
+\end{frame}
+
+\begin{frame}{The CAPM}
+The Capital Asset Pricing Model says that the expected excess return of any asset is proportional to the market's expected excess return:
+\[
+\mathbb{E}[r_i] - r_f \;=\; \beta_i \bigl(\mathbb{E}[r_m] - r_f\bigr)
+\]
+
+\begin{baritemize}
+\item $r_i$ = return on asset $i$
+\item $r_f$ = risk-free rate
+\item $r_m$ = return on the market portfolio
+\item $\beta_i = \dfrac{\text{Cov}(r_i, r_m)}{\text{Var}(r_m)}$
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{CAPM $\Leftrightarrow$ Zero Alphas}
+Run a time-series regression for each asset $i$:
+\[
+r_{it} - r_{ft} \;=\; \alpha_i + \beta_i(r_{mt} - r_{ft}) + \varepsilon_{it}
+\]
+
+\begin{baritemize}
+\item The CAPM is equivalent to saying $\alpha_i = 0$ for every asset.
+\item If $\alpha_i > 0$: the asset earns more than the CAPM predicts --- it is ``underpriced.''
+\item If $\alpha_i < 0$: the asset earns less than the CAPM predicts --- it is ``overpriced.''
+\end{baritemize}
+
+\vspace{0.3cm}
+Testing the CAPM $=$ testing whether alphas are jointly zero.
+\end{frame}
+
+\begin{frame}{The Size Effect}
+\alert{Small stocks have historically earned higher average returns than large stocks}, even after adjusting for beta.
+
+\begin{baritemize}
+\item Sort stocks into portfolios by market capitalization
+\item Small-stock portfolios earn positive CAPM alphas
+\item Large-stock portfolios earn negative CAPM alphas
+\item This is evidence against the CAPM
+\end{baritemize}
+
+\vspace{0.3cm}
+Size is measured by market capitalization $=$ price $\times$ shares outstanding.
+\end{frame}
+
+\begin{frame}{The Value Effect}
+\alert{Value stocks (high book-to-market) have historically outperformed growth stocks (low book-to-market)}, even after adjusting for beta.
+
+\begin{baritemize}
+\item Book-to-market $=$ book equity / market equity
+\item High B/M (``value'') stocks: positive CAPM alphas
+\item Low B/M (``growth'') stocks: negative CAPM alphas
+\item This is further evidence against the CAPM
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Fama-French Three-Factor Model (1993)}
+Fama and French proposed replacing the CAPM with a three-factor model:
+\[
+\mathbb{E}[r_i] - r_f \;=\; \beta_i^{\text{MKT}} \cdot \text{MKT} \;+\; \beta_i^{\text{SMB}} \cdot \text{SMB} \;+\; \beta_i^{\text{HML}} \cdot \text{HML}
+\]
+
+\begin{baritemize}
+\item \textbf{MKT} $= r_m - r_f$: market excess return
+\item \textbf{SMB} (Small Minus Big): return on small stocks minus return on large stocks
+\item \textbf{HML} (High Minus Low): return on high B/M stocks minus return on low B/M stocks
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Interpreting the Three-Factor Model}
+
+The three-factor model says that expected returns are explained by exposures to three sources of risk.
+
+\begin{baritemize}
+\item The model ``works'' if alphas are zero when we regress excess returns on the three factors:
+\[
+r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{SMB}} \text{SMB}_t + \beta_i^{\text{HML}} \text{HML}_t + \varepsilon_{it}
+\]
+\item The size and value effects that produced nonzero CAPM alphas are captured by SMB and HML.
+\item But \ldots{} other anomalies (momentum, profitability, investment) still produce nonzero alphas.
+\end{baritemize}
+\end{frame}
+
+%%% PART 1: SETUP %%%
+
+\begin{frame}[c]
+\centering
+\Huge Setup: Claude Pro \& Claude Code
+\end{frame}
+
+\begin{frame}{Initial Steps}
+
+\textbf{1. Sign up for Claude Pro:}
+
+\begin{barenumerate}
+\item Visit \href{https://claude.ai}{claude.ai}
+\item Click ``Sign Up'' or ``Get Started''
+\item Create account using email or Google/Apple sign-in
+\item After signing in, click ``Upgrade to Pro'' in the sidebar
+\item Choose the monthly payment plan
+\item Complete payment information
+\end{barenumerate}
+
+2. \href{https://www.youtube.com/watch?v=hpMrTabldEY}{YouTube Video}
+\end{frame}
+
+\begin{frame}{Mac -- Install Claude Code}
+
+\textbf{Step 1: Install Node.js}
+\begin{itemize}
+\item Using Homebrew: \texttt{brew install node}
+\item Or download installer from \href{https://nodejs.org}{nodejs.org}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Step 2: Install Claude Code}
+\begin{itemize}
+\item Run: \texttt{npm install -g @anthropic-ai/claude-code}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Step 3: Verify Installation}
+\begin{itemize}
+\item Run: \texttt{claude doctor}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Windows -- Install Claude Code}
+
+\textbf{Step 1: Install Node.js}
+\begin{itemize}
+\item Download and install from \href{https://nodejs.org}{nodejs.org}
+\item Choose the LTS (Long Term Support) version
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Step 2: Install Git for Windows}
+\begin{itemize}
+\item Download from \href{https://git-scm.com/download/win}{git-scm.com/download/win}
+\item During installation, select ``Git Bash'' (default option)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Step 3: Install Claude Code}
+\begin{itemize}
+\item In PowerShell, run: \texttt{npm install -g @anthropic-ai/claude-code}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Step 4: Verify Installation}
+\begin{itemize}
+\item In PowerShell, run: \texttt{claude doctor}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Install Python \& Create Virtual Environment}
+\textbf{Install Python:}
+\begin{itemize}
+\item Tell Claude Code: ``Install Python 3.13 and add it to the path.''
+\item Tell Claude Code: ``Upgrade pip''
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Create Virtual Environment:}
+\begin{itemize}
+\item Tell Claude Code: ``Create a virtual environment using Python 3.13 in my current directory.''
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Install packages in the virtual environment:}
+\begin{itemize}
+\item \texttt{numpy pandas scipy statsmodels scikit-learn}
+\item \texttt{openpyxl matplotlib seaborn ipykernel}
+\item \texttt{pandas-datareader streamlit requests python-dotenv}
+\end{itemize}
+\end{frame}
+
+%%% PART 2: VS CODE %%%
+
+\begin{frame}[c]
+\centering
+\Huge VS Code \& Database Setup
+\end{frame}
+
+\begin{frame}{Install and Open VS Code}
+\begin{baritemize}
+\item Install VS Code: \href{https://code.visualstudio.com}{code.visualstudio.com}
+\item Launch VS Code
+\item File $\rightarrow$ Open Folder $\rightarrow$ navigate to your course folder
+\item Install extensions: Python, Jupyter, Claude Code, Data Wrangler, Rainbow CSV
+\item View $\rightarrow$ Command Palette $\rightarrow$ ``Python: Select Interpreter'' $\rightarrow$ choose venv
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Launch Claude Code in VS Code}
+\begin{itemize}
+\item If you see the orange Claude icon in the top toolbar, click it.
+\item If not, create a new file (File $\rightarrow$ New Text File) and you should see it.
+\item Or View $\rightarrow$ Command Palette and enter ``Claude Code: Open in New Tab.''
+\end{itemize}
+\vspace{0.5cm}
+Test: Ask Claude Code: What is the sum of the first 1,000 integers?
+\end{frame}
+
+\begin{frame}{Stock Market Database}
+\begin{itemize}
+\item Database Guide: \url{https://portal-guide.rice-business.org}
+\item Visit \href{https://data-portal.rice-business.org}{data-portal.rice-business.org} to get an access token
+\item The data portal is an AI agent that uses ChatGPT to generate SQL and query the database
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Create .env File:}
+\begin{itemize}
+\item Tell Claude Code to create a \texttt{.env} file
+\item Add: \texttt{RICE\_ACCESS\_TOKEN=your\_token\_here}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Skills}
+Skills are text files that give Claude Code specialized knowledge.
+
+\vspace{0.3cm}
+
+The easiest way to install is to \alert{ask Claude Code to do it for you}: ``Download and install the rice-data-query and merge skills,
+plus CLAUDE.md from mgmt638.kerryback.com/skills/''
+\end{frame}
+
+\begin{frame}{Workflow}
+
+Visit the Data Guide to find variable names from the SF1 (Sharadar Fundamentals) table.
+
+\vspace{0.3cm}
+
+Tell Claude Code to:
+\begin{barenumerate}
+\item Get returns (monthly or weekly) from the Rice database.
+\item Get the variables you want from SF1.
+\item Calculate any ratios or growth rates you want.
+\item Merge the returns with the fundamental data.
+\end{barenumerate}
+
+\vspace{0.3cm}
+
+Save the merged data.  \alert{You do not need to repeat this process if you already have the data you want.}
+\end{frame}
+
+\begin{frame}{Timing of Data}
+During merging, Claude will align variables so that
+\begin{baritemize}
+\item Fundamental variables are all known at the beginning of the period
+\item Momentum is momentum as of the beginning of the period
+\item Close is the closing price at the end of the previous month or week
+\item Return is the return over the period (from beginning to end)
+\end{baritemize}
+
+\vspace{0.3cm}
+
+All variables other than return \alert{are known at the beginning of the period} and can be used to pick stocks.
+\end{frame}
+
+\begin{frame}{Avoiding Look-Ahead Bias}
+\begin{itemize}
+\item Price data (\texttt{close}, \texttt{marketcap}, \texttt{pb}) lagged by 1 month
+\item Fundamentals available in first full month \emph{after} filing date
+\item Forward-filled until next filing
+\item Include \textbf{all tickers} (including delisted) to avoid survivorship bias
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Formats}
+
+Claude should automatically save data as parquet files.  This is a compact, fast format.
+
+\vspace{0.3cm}
+To view the data, ask Claude to:
+\begin{baritemize}
+\item \alert{``Convert the file to Excel.''} Then open as usual.
+\item \alert{``Convert the file to csv.''} Then double-click in VS Code File Explorer.
+\item \alert{``Read the data in a Jupyter notebook.''} Then work with the data in Python.
+\end{baritemize}
+\end{frame}
+
+\end{document}

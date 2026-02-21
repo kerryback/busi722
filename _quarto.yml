@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - slides.qmd
+  
+  resources:
+    - CNAME
+    - .nojekyll
+    - slides/*.pdf
+  
+website:
+  title: ""
+  search: false
+  navbar:
+    search: false
+    title: MGMT 675
+    left:
+      - href: index.qmd
+        text: Home
+      - href: slides.qmd
+        text: Slides
+      
+format:
+  html:
+    theme:
+      light: flatly
+      dark: superhero
+    link-external-newwindow: true
+
+comments:
+  hypothesis: true
+    
+   
+
+
+

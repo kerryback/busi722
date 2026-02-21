@@ -1,0 +1,60 @@
+:::: {style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem;"}
+
+## BUSI 722: Data-Driven Finance II<br>Fall 2025
+
+![](images/RiceBusiness-transparent-logo-sm.png){width=40%}
+
+::::
+
+
+#### Instructor
+
+[Kerry Back](https://kerryback.com)<br> 
+[kerryback@gmail.com](mailto: kerryback@gmail.com)<br>
+J. Howard Creekmore Professor of Finance and Professor of Economics
+
+
+#### Overview
+
+The topic of this course is selecting stocks based on quantitative signals.    What we want to do is to predict  which stocks will do better than others.  In quantitative investing, this is often done using machine learning, which means fitting a model to predict returns from signals.  Signals can be technical or fundamental.  Even subjective things like the tone of the CEO in an earnings call are quantifiable today.  Thus, quantitative investing includes a large part of equity investing.
+
+Many different types of data are used for constructing trading signals.  In this course, we will  use past returns and data from corporate financial statements.  Textual analysis of corporate filings and news reports, social media activity, web traffic, insider trades, short sales, analyst forecasts, satellite imagery, and other types of data are also often used in practice.
+
+#### Weekly Schedule
+
+We will meet seven times on Mondays at 8:00 pm at [this Zoom link](https://jgsb.zoom.us/j/98206298721?pwd=zR2GeRUHKXB9qTgQXNKDVjEDfV5yNF.1).  Our first meeting is March 2, and our last meeting is April 20.  We will skip March 16 due to spring break.  The session topics are as follows.  
+
+1. Software setup, Rice database, technical indicators 
+2. Claude skills for Rice database, fundamental indicators
+3. Machine learning models for return prediction
+4. Rolling windows for train/test splits
+5. Forming and evaluating portfolios from return predictions
+6. Trading costs, estimating risks, using risk estimates in portfolio construction
+7. Catch-up and optional topics
+
+
+#### Claude Accounts
+
+We will work in Python with the help of Anthropic's Claude Code.  We need the Pro account ($20/month) to use Claude Code.  You will be reimbursed for two months usage at the end of the class.  .
+
+
+#### Assignments and Grading
+
+Grades will be based on six assignments, equally weighted.  The assignments are due on Thursdays by 11:59 pm.  The first assignment is due March 17, and the last assignment is due April 23.  We will skip March 24 due to spring break.  The assignments are posted on Canvas.
+
+
+#### Honor Code
+
+The Rice University honor code applies to all work in this course.  Use of generative AI is of course permitted.
+
+#### Disability Accommodations
+
+Any student with a documented disability requiring accommodations in this course is encouraged to
+contact me outside of class. All discussions will remain confidential. Any adjustments or accommodations
+regarding assignments or the final exam must be made in advance. Students with disabilities
+should also contact Disability Support Services in the Allen Center.
+
+
+
+
+

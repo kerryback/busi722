@@ -1,0 +1,331 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\input{busi722-style}
+
+\title{Machine Learning for Return Prediction}
+\subtitle{BUSI 722: Data-Driven Finance II}
+\author{Kerry Back}
+\institute{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+%%% PART 1: STANDARDIZING FEATURES %%%
+
+\begin{frame}[c]
+\centering
+\Huge Standardizing Features
+\end{frame}
+
+\begin{frame}{Why Standardize?}
+\begin{baritemize}
+\item Raw features have very different scales: marketcap is in thousands, roe is a fraction, momentum can be $\pm 100\%$.
+\item Many models (linear regression, neural networks) are sensitive to scale.
+\item Outliers in financial data can be extreme --- a single stock with roe $= 50$ can dominate the fit.
+\item Standardizing puts all features on a common scale and tames outliers.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Cross-Sectional Standardization}
+Standardize each feature \alert{within each month}, not over the full panel.
+\vspace{0.3cm}
+
+For feature $x$ in month $t$:
+\[
+z_{i,t} = \frac{x_{i,t} - \bar x_t}{\sigma_{x,t}}
+\]
+
+\begin{baritemize}
+\item Each month's cross section has mean 0 and standard deviation 1.
+\item Removes time-series level shifts (e.g., all P/E ratios rising over time).
+\item Ensures the model learns \alert{which stocks are cheap relative to their peers this month}, not which months had low valuations overall.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Ranks as an Alternative}
+Instead of z-scores, rank stocks 1 through $n$ each month, then scale to $[0, 1]$:
+\[
+\text{rank}_{i,t} = \frac{\text{rank of } x_{i,t} \text{ among all stocks in month } t}{n_t}
+\]
+
+\begin{baritemize}
+\item Completely eliminates outliers --- every stock gets a value in $[0,1]$.
+\item Preserves only the \alert{ordering} of stocks, not the magnitudes.
+\item Robust to skewed distributions (e.g., market cap, book-to-market).
+\item Can also compute z-scores of ranks for a hybrid approach.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Which Features Are ``Good''?}
+When using ranks, we want a \alert{high rank to always mean good}.
+\vspace{0.3cm}
+
+\begin{itemize}
+\item \textbf{Higher is better:} momentum, roe, grossmargin $\Rightarrow$ rank low to high.
+\item \textbf{Lower is better:} asset growth (conservatism effect) $\Rightarrow$ rank high to low.
+\end{itemize}
+
+\vspace{0.3cm}
+Alternatively, just rank all features the same way and let the model learn the sign. This is simpler and works well with flexible models (trees, neural nets).
+\end{frame}
+
+%%% PART 2: STANDARDIZING THE TARGET %%%
+
+\begin{frame}[c]
+\centering
+\Huge Standardizing the Target
+\end{frame}
+
+\begin{frame}{Predicting Relative Returns}
+We care more about \alert{which stocks will outperform} than about predicting exact return magnitudes.
+\vspace{0.3cm}
+
+\begin{shadedbox}[title=The Key Insight]
+If every stock's return rises by 2\% because the market rallies, that tells us nothing about which stocks to buy.  What matters is the \textbf{cross-sectional ranking} of returns.
+\end{shadedbox}
+
+\vspace{0.3cm}
+This suggests we should think carefully about what target variable we give the model.
+\end{frame}
+
+\begin{frame}{Ranks as the Target}
+Replace the raw return $r_{i,t}$ with its \alert{cross-sectional rank} each month:
+\[
+y_{i,t} = \frac{\text{rank of } r_{i,t} \text{ among all stocks in month } t}{n_t}
+\]
+
+\begin{baritemize}
+\item The model learns to predict \alert{relative performance}, not absolute returns.
+\item Removes the influence of market-wide shocks (bull/bear months).
+\item Reduces the impact of return outliers (e.g., a stock that doubles in a month).
+\item Scaled to $[0,1]$: top stock $\approx 1$, bottom stock $\approx 0$.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Comparison of Targets}
+\begin{center}
+\begin{tabular}{lcc}
+& \textbf{Raw Returns} & \textbf{Ranked Returns} \\
+\hline
+Scale & varies by month & always $[0,1]$ \\
+Outliers & can be extreme & bounded \\
+Market effect & included & removed \\
+Interpretation & absolute return & relative ranking \\
+Loss function & MSE on returns & MSE on ranks \\
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+Using ranked returns is common in quantitative equity research.  It focuses the model on what actually drives portfolio construction: \alert{selecting the right stocks relative to their peers}.
+\end{frame}
+
+%%% PART 3: MODEL REVIEW %%%
+
+\begin{frame}[c]
+\centering
+\Huge Models: A Review
+\end{frame}
+
+\begin{frame}{The Prediction Problem}
+We have a panel of stock-months.  For each stock $i$ in month $t$:
+\begin{itemize}
+\item Features: $\mathbf{x}_{i,t-1}$ (known at the start of month $t$)
+\item Target: $y_{i,t}$ (return or return rank during month $t$)
+\end{itemize}
+
+\vspace{0.3cm}
+We want to learn a function $f$ such that
+\[
+y_{i,t} \approx f(\mathbf{x}_{i,t-1})
+\]
+
+\vspace{0.3cm}
+\begin{baritemize}
+\item Train on past data, predict on future data (no look-ahead bias).
+\item The function $f$ can be linear, a tree ensemble, a neural network, etc.
+\end{baritemize}
+\end{frame}
+
+%%% LINEAR MODELS %%%
+
+\begin{frame}{Linear Models}
+\[
+f(\mathbf{x}) = \beta_0 + \beta_1 x_1 + \cdots + \beta_k x_k
+\]
+
+\begin{baritemize}
+\item Simple, interpretable, fast to estimate.
+\item Each coefficient $\beta_j$ measures the marginal effect of feature $j$.
+\item Assumes the effect of each feature is \alert{additive and linear} --- no interactions, no diminishing effects.
+\end{baritemize}
+
+\vspace{0.3cm}
+\textbf{Regularization:}
+\begin{itemize}
+\item \textbf{Ridge} ($L_2$): shrinks coefficients toward zero, keeps all features.
+\item \textbf{Lasso} ($L_1$): drives some coefficients to exactly zero (feature selection).
+\item \textbf{Elastic net}: combines $L_1$ and $L_2$ penalties.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Limitations of Linearity}
+\begin{itemize}
+\item A linear model says: ``if momentum goes up by 1, expected return goes up by $\beta$.''
+\item But the real relationship may be \alert{nonlinear}:
+\begin{itemize}
+\item Momentum may help only above a threshold.
+\item Value may matter more for small stocks than large stocks (interaction).
+\item The effect of leverage may reverse at high levels.
+\end{itemize}
+\item We need models that can capture these patterns automatically.
+\end{itemize}
+\end{frame}
+
+%%% TREE MODELS %%%
+
+\begin{frame}{Decision Trees}
+A decision tree partitions the feature space into rectangular regions using a sequence of binary splits.
+
+\vspace{0.3cm}
+\begin{baritemize}
+\item At each node, pick the feature and threshold that best reduces prediction error.
+\item Naturally captures \alert{nonlinearities} and \alert{interactions}.
+\item A single tree is interpretable but tends to overfit.
+\end{baritemize}
+
+\vspace{0.3cm}
+\textbf{Solution:} combine many trees into an \alert{ensemble}.
+\end{frame}
+
+\begin{frame}{Random Forest}
+\begin{baritemize}
+\item Grow $B$ trees, each on a \alert{bootstrap sample} of the training data.
+\item At each split, consider only a \alert{random subset} of features.
+\item Prediction = average of all $B$ trees.
+\end{baritemize}
+
+\vspace{0.3cm}
+\textbf{Key properties:}
+\begin{itemize}
+\item Reduces variance through averaging (bagging).
+\item Random feature selection decorrelates trees.
+\item Robust to outliers and requires little tuning.
+\item Hard to overfit by adding more trees.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Gradient Boosting (GBM)}
+Instead of averaging independent trees, build trees \alert{sequentially}, each correcting the errors of the previous ones.
+
+\vspace{0.3cm}
+\begin{barenumerate}
+\item Start with a constant prediction (e.g., the mean).
+\item Fit a shallow tree to the \alert{residuals} (prediction errors).
+\item Add the new tree's prediction (scaled by a learning rate $\eta$) to the running total.
+\item Repeat for $B$ rounds.
+\end{barenumerate}
+
+\vspace{0.3cm}
+\textbf{Key hyperparameters:} number of trees $B$, learning rate $\eta$, tree depth, minimum samples per leaf.
+\end{frame}
+
+\begin{frame}{LightGBM}
+\begin{baritemize}
+\item Microsoft's implementation of gradient boosting, optimized for speed and scale.
+\item Uses \alert{histogram-based} splitting: bins continuous features into discrete buckets for faster split finding.
+\item \alert{Leaf-wise} growth (vs.\ level-wise): grows the leaf with the largest loss reduction, producing deeper, more accurate trees.
+\item Handles categorical features natively.
+\item Widely used in quantitative finance and Kaggle competitions.
+\end{baritemize}
+
+\vspace{0.3cm}
+In practice, LightGBM often outperforms random forests on tabular financial data.
+\end{frame}
+
+%%% RANDOM FOURIER FEATURES %%%
+
+\begin{frame}{Random Fourier Features}
+A way to add nonlinearity to a linear model without the complexity of trees or neural networks.
+\vspace{0.3cm}
+
+\textbf{Idea:} transform the original $k$ features into a much larger set of $D$ random nonlinear features, then fit a linear model on the transformed features.
+
+\[
+\phi(\mathbf{x}) = \sqrt{\frac{2}{D}} \begin{pmatrix} \cos(\mathbf{w}_1'\mathbf{x} + b_1) \\ \vdots \\ \cos(\mathbf{w}_D'\mathbf{x} + b_D) \end{pmatrix}
+\]
+
+where $\mathbf{w}_j \sim N(0, \gamma^2 I)$ and $b_j \sim \text{Uniform}(0, 2\pi)$ are drawn \alert{randomly and fixed}.
+\end{frame}
+
+\begin{frame}{Why Random Fourier Features Work}
+\begin{baritemize}
+\item The cosine transformation creates \alert{nonlinear combinations} of the original features, capturing interactions and curved relationships.
+\item The random weights $\mathbf{w}_j$ are not learned --- only the final linear coefficients are estimated.
+\item This approximates a \alert{kernel} method (RBF kernel) but scales to large datasets.
+\item The bandwidth parameter $\gamma$ controls the ``wiggliness'' of the fit.
+\end{baritemize}
+
+\vspace{0.3cm}
+\textbf{Advantages:} fast to fit (just linear regression on transformed features), no neural network training, easy to regularize with ridge or lasso.
+\end{frame}
+
+%%% NEURAL NETWORKS %%%
+
+\begin{frame}{Neural Networks}
+A neural network is a sequence of linear transformations interleaved with nonlinear \alert{activation functions}.
+\vspace{0.3cm}
+
+For a network with one hidden layer of $h$ units:
+\[
+f(\mathbf{x}) = \mathbf{w}_2' \,\sigma\!\bigl(\mathbf{W}_1 \mathbf{x} + \mathbf{b}_1\bigr) + b_2
+\]
+
+\begin{baritemize}
+\item $\mathbf{W}_1$ is an $h \times k$ weight matrix, $\mathbf{b}_1$ is a bias vector.
+\item $\sigma(\cdot)$ is a nonlinear activation: ReLU, tanh, etc.
+\item The hidden layer learns \alert{nonlinear features} from the raw inputs.
+\item Adding more layers = deeper network = more complex representations.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Training Neural Networks}
+\begin{baritemize}
+\item Minimize a loss function (e.g., MSE) using \alert{stochastic gradient descent} (SGD) or variants like Adam.
+\item Process data in \alert{mini-batches}, updating weights after each batch.
+\item One pass through the full training set = one \alert{epoch}.
+\item Training continues for many epochs; monitor validation loss to detect overfitting.
+\end{baritemize}
+
+\vspace{0.3cm}
+\textbf{Regularization:}
+\begin{itemize}
+\item \textbf{Dropout:} randomly zero out a fraction of hidden units during training.
+\item \textbf{Early stopping:} stop training when validation loss stops improving.
+\item \textbf{Weight decay} ($L_2$ penalty on weights).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Neural Networks vs.\ Other Models}
+\begin{center}
+\begin{tabular}{lcccc}
+& \textbf{Linear} & \textbf{Trees} & \textbf{RFF} & \textbf{Neural Net} \\
+\hline
+Nonlinearity & no & yes & yes & yes \\
+Interactions & no & yes & yes & yes \\
+Interpretable & yes & moderate & no & no \\
+Tuning effort & low & moderate & low & high \\
+Training speed & fast & fast & fast & slow \\
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+No single model dominates.  In practice, \alert{ensembles} that combine predictions from multiple model types often perform best.
+\end{frame}
+
+\end{document}

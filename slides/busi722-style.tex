@@ -1,0 +1,136 @@
+% MGMT 675 Beamer Style
+% Include this file in your slide decks with: \input{mgmt675-style}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tikz}
+\usetikzlibrary{shadings}
+
+% Spacing adjustments
+\linespread{0.9}  % Tighter baseline skip
+\setlength{\parskip}{1.5\baselineskip plus 0.5ex}  % Extra space between paragraphs
+\setbeamertemplate{itemize items}[circle]
+\setlength{\leftmargini}{1.5em}
+
+% Extra space between bullet items
+\let\olditemize\itemize
+\renewcommand{\itemize}{%
+  \olditemize
+  \setlength{\itemsep}{0.7ex}%
+  \setlength{\parsep}{0.3ex}%
+}
+
+% Define accent color (matches title underline)
+\definecolor{accentblue}{RGB}{37,99,235}
+% Light blue/teal for shaded boxes
+\definecolor{excelinput}{RGB}{232, 244, 247} %{177,214,224}
+% Dark teal for titles
+\definecolor{titlegray}{RGB}{19,60,71}
+
+% Title slide highlight line color
+\definecolor{titlehighlight}{RGB}{9,112,140}
+\setbeamercolor{progress bar}{fg=titlehighlight}
+
+% Alert text styling - bold bright coral/orange for contrast
+\definecolor{alertorange}{RGB}{230,90,50}
+\setbeamercolor{alerted text}{fg=alertorange}
+\setbeamerfont{alerted text}{series=\bfseries}
+
+% Hyperlink colors
+\hypersetup{
+  colorlinks=true,
+  linkcolor=titlegray,
+  urlcolor=alertorange,
+  citecolor=accentblue
+}
+
+% Set frame title background
+\setbeamercolor{frametitle}{bg=titlegray, fg=white}
+
+% Style block environments with background shading
+\setbeamercolor{block title}{fg=white, bg=accentblue}
+\setbeamercolor{block body}{fg=black, bg=gray!10}
+
+\setbeamercolor{block title alerted}{fg=white, bg=red!70!black}
+\setbeamercolor{block body alerted}{fg=black, bg=red!10}
+
+\setbeamercolor{block title example}{fg=white, bg=green!50!black}
+\setbeamercolor{block body example}{fg=black, bg=green!10}
+
+% Theorem environments
+\setbeamercolor{theorem text}{fg=black}
+\setbeamercolor{theoremblock title}{fg=white, bg=accentblue!80}
+\setbeamercolor{theoremblock body}{fg=black, bg=accentblue!10}
+
+% Bulleted list in shaded box
+\newenvironment{baritemize}{%
+  \begin{tcolorbox}[
+    colback=excelinput,
+    colframe=accentblue,
+    boxrule=0.5pt,
+    arc=2mm,
+    auto outer arc,
+    left=3mm,
+    right=3mm,
+    top=2mm,
+    bottom=2mm
+  ]
+  \begin{itemize}
+}{%
+  \end{itemize}
+  \end{tcolorbox}
+}
+
+% Numbered list in shaded box
+\newenvironment{barenumerate}{%
+  \begin{tcolorbox}[
+    colback=excelinput,
+    colframe=accentblue,
+    boxrule=0.5pt,
+    arc=2mm,
+    auto outer arc,
+    left=3mm,
+    right=3mm,
+    top=2mm,
+    bottom=2mm
+  ]
+  \begin{enumerate}
+}{%
+  \end{enumerate}
+  \end{tcolorbox}
+}
+
+% Define shaded box environment with slightly rounded corners and dark title bar
+\newtcolorbox{shadedbox}[1][]{
+  colback=excelinput,
+  colframe=accentblue,
+  boxrule=0.5pt,
+  arc=2mm,
+  auto outer arc,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  after skip=\baselineskip,
+  coltitle=white,
+  colbacktitle=titlegray,
+  fonttitle=\bfseries,
+  toptitle=2mm,
+  bottomtitle=2mm,
+  #1
+}
+
+% Gradient background for title slide
+\let\oldmaketitle\maketitle
+\renewcommand{\maketitle}{%
+  {%
+    \setbeamertemplate{background}{%
+      \begin{tikzpicture}[remember picture,overlay]
+        \fill[white] (current page.north west) rectangle (current page.south east);
+        \shade[inner color=white, outer color=titlegray!40, shading=radial]
+          (current page.north west) circle (28cm);
+      \end{tikzpicture}%
+    }%
+    \oldmaketitle
+  }%
+}

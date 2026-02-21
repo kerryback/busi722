@@ -1,0 +1,206 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\input{busi722-style}
+
+\title{BUSI 722}
+\subtitle{Pre-Session Reading: Quantitative Signals for Stock Selection}
+\author{Kerry Back}
+\institute{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{The Goal}
+\begin{itemize}
+\item Use data to generate \alert{quantitative signals} that predict which stocks will outperform.
+\item Combine multiple signals using machine learning.
+\item Build portfolios, backtest, and evaluate performance.
+\item This course: use AI (Claude Code) to do all of the above.
+\end{itemize}
+\end{frame}
+
+%%% PART 1A: PREDICTORS FROM PAST RETURNS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Predictors from Past Returns
+\end{frame}
+
+\begin{frame}{Momentum}
+\begin{itemize}
+\item Jegadeesh \& Titman (1993): buy stocks with high past 3--12 month returns, sell stocks with low past returns.
+\item Skip the most recent month (short-term reversal contaminates the signal).
+\item One of the most robust anomalies in finance---documented across countries, asset classes, and time periods.
+\item Typical implementation: sort on cumulative return from $t{-}12$ to $t{-}2$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Time-Series Momentum}
+\begin{itemize}
+\item Moskowitz, Ooi \& Pedersen (2012): go long assets with positive past 12-month returns, short those with negative past returns.
+\item Differs from cross-sectional momentum: each asset is compared to \alert{its own past}, not to other assets.
+\item Works across equities, bonds, commodities, and currencies.
+\item Related to trend-following strategies used by managed futures funds.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Moving Averages}
+\begin{itemize}
+\item SMA (simple moving average) and EMA (exponential moving average) smooth price series over a window.
+\item \textbf{200-day rule} (Faber 2007): buy when price is above its 200-day MA, sell when below.
+\item Brock, Lakonishok \& LeBaron (1992) found strong support for MA trading rules in the DJIA.
+\item Zhu \& Zhou (2009) provided theoretical justification: MAs optimally combine momentum signals at different horizons.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Trend Factor}
+\begin{itemize}
+\item Han, Zhou \& Zhu (2016): construct a single factor from moving averages at multiple horizons.
+\item Combines short-, medium-, and long-term trend information into one signal.
+\item Earns large risk-adjusted returns that are not explained by standard factors.
+\item Performs well during crises when standard momentum crashes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reversals}
+\begin{itemize}
+\item \textbf{Short-term reversal:} last month's losers outperform next month (Lehmann 1990, Jegadeesh 1990). Driven by liquidity provision and overreaction.
+\item \textbf{Long-term reversal:} 3--5 year past winners underperform (DeBondt \& Thaler 1985). Consistent with investor overreaction and mean reversion.
+\item Together with momentum, these define the \alert{complete horizon structure} of return predictability:
+\begin{itemize}
+\item 1 month: reversal
+\item 2--12 months: momentum
+\item 3--5 years: reversal
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{52-Week High}
+\begin{itemize}
+\item George \& Hwang (2004): nearness to 52-week high predicts future returns.
+\item Signal: current price / 52-week high price.
+\item Outperforms standard momentum as a predictor and profits do not reverse.
+\item Behavioral explanation: \alert{anchoring bias}---investors use the 52-week high as a reference point and underreact when price approaches it.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Other Technical Indicators}
+\begin{itemize}
+\item \textbf{RSI} (Relative Strength Index): overbought above 70, oversold below 30. Mean-reversion signal.
+\item \textbf{MACD} (Moving Average Convergence Divergence): difference between short and long EMAs; signal line crossovers indicate trend changes.
+\item \textbf{Bollinger Bands:} price within a volatility envelope ($\pm 2$ standard deviations around 20-day MA). Profitability largely disappeared post-publication.
+\item Widely used by practitioners, but limited top-journal academic support for out-of-sample profitability.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Volatility}
+\begin{itemize}
+\item \textbf{Low-volatility anomaly:} stocks with low historical volatility earn higher \alert{risk-adjusted} returns than high-volatility stocks.
+\item Contradicts the basic risk--return tradeoff predicted by CAPM.
+\item Explanations: leverage constraints, lottery preferences, benchmarking by institutional investors.
+\item Ang, Hodrick, Xing \& Zhang (2006) documented the effect for idiosyncratic volatility.
+\end{itemize}
+\end{frame}
+
+%%% PART 1B: PREDICTORS FROM FINANCIAL STATEMENTS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Predictors from Financial Statements
+\end{frame}
+
+\begin{frame}{Value}
+\begin{itemize}
+\item \textbf{Book-to-market:} Fama \& French (1992) documented that high B/M stocks (``value'') outperform low B/M stocks (``growth'').
+\item \textbf{Earnings yield:} earnings / price. Basu (1977) showed high E/P stocks earn higher returns.
+\item \textbf{Cash flow yield:} cash flow / price. Lakonishok, Shleifer \& Vishny (1994).
+\item Common theme: stocks with high ratios of fundamental value to market price tend to outperform.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Profitability}
+\begin{itemize}
+\item Novy-Marx (2013): gross profit / assets is a strong predictor of returns.
+\item More profitable firms earn higher returns, especially when combined with value.
+\item ROE, operating margins, and other profitability measures also predict.
+\item Fama \& French (2015) added profitability and investment factors to their three-factor model.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Growth \& Investment}
+\begin{itemize}
+\item \textbf{Asset growth:} Cooper, Gulen \& Schill (2008) showed firms that grow assets aggressively tend to \alert{underperform}.
+\item \textbf{Investment / assets:} similar finding---high capital expenditure predicts lower returns.
+\item This is the \alert{investment anomaly}: empire-building firms destroy shareholder value.
+\item Consistent with overinvestment by managers or diminishing returns to capital.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Quality \& Accruals}
+\begin{itemize}
+\item \textbf{Accruals anomaly} (Sloan 1996): firms with high accruals (earnings far above cash flow) underperform. Cash-based earnings are more persistent.
+\item \textbf{Quality Minus Junk} (Asness, Frazzini \& Pedersen 2019): composite of profitability, growth, safety, and payout.
+\item Other quality signals: earnings stability, low leverage, high payout ratios.
+\item Quality stocks earn higher returns despite being ``safer''---another puzzle for standard asset pricing.
+\end{itemize}
+\end{frame}
+
+%%% PART 1C: OTHER PREDICTORS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Other Predictors
+\end{frame}
+
+\begin{frame}{Short Interest}
+\begin{itemize}
+\item Heavily shorted stocks tend to underperform (Desai et al.\ 2002, Rapach, Ringgenberg \& Zhou 2016).
+\item Short interest reflects \alert{informed pessimistic opinions}: short sellers face costs (borrowing fees, margin, unlimited loss potential), so they act only on strong convictions.
+\item Aggregate short interest also forecasts market-level returns.
+\item Constraints on short selling limit the speed of price adjustment to negative information.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Insider Trades}
+\begin{itemize}
+\item Insider purchases predict positive future returns (Lakonishok \& Lee 2001, Jeng, Metrick \& Zeckhauser 2003).
+\item Insider sales are less informative---insiders sell for many reasons (diversification, liquidity needs).
+\item Insiders have an \alert{informational advantage} about their own firms' prospects.
+\item SEC filings (Form 4) make insider trades public, typically within two business days.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Earnings Announcements}
+\begin{itemize}
+\item \textbf{Post-earnings announcement drift (PEAD):} one of the oldest documented anomalies (Ball \& Brown 1968, Bernard \& Thomas 1989).
+\item Prices drift in the direction of the earnings surprise for weeks or months after the announcement.
+\item \textbf{Standardized unexpected earnings (SUE):} (actual $-$ expected) / standard deviation. Higher SUE predicts higher future returns.
+\item Explanation: investors underreact to earnings news and update beliefs too slowly.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Analyst Revisions}
+\begin{itemize}
+\item Changes in analyst earnings estimates and price targets predict returns.
+\item Upward revisions are followed by positive returns; downward revisions by negative returns.
+\item Information from analyst revisions is incorporated into prices slowly, similar to PEAD.
+\item Analysts aggregate information from multiple sources, making revisions a useful summary signal.
+\end{itemize}
+\end{frame}
+
+%%% WHAT WE WILL USE %%%
+
+\begin{frame}{What We Will Use}
+\begin{itemize}
+\item This course focuses on signals from \textbf{past returns} and \textbf{financial statements}, available in the Rice Business stock market database.
+\item We will construct signals like momentum, moving averages, book-to-market, profitability ratios, and more directly from the database.
+\item The methods we develop (sorting, Fama-MacBeth regression, machine learning, backtesting) apply equally to any signal source.
+\end{itemize}
+\end{frame}
+
+\end{document}
