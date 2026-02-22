@@ -1,0 +1,26 @@
+---
+title: "Exercise 4C: Monthly Spearman Rank Correlation"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the predictions from the expanding-window and rolling-window backtests (Exercises 4A and 4B), evaluate prediction quality using Spearman rank correlations.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+For each prediction month in the expanding-window backtest:
+
+1. Compute the **Spearman rank correlation** between predicted ranks and actual return ranks.
+2. Plot the monthly Spearman correlations over time as a time-series chart.
+3. Report the mean, median, standard deviation, and fraction of months with positive correlation.
+4. Identify the 3 months with the highest and lowest Spearman correlations. In a markdown cell, discuss whether there are any patterns (e.g., market stress periods).
+5. Repeat for the rolling-window backtest and overlay both Spearman series on the same plot.

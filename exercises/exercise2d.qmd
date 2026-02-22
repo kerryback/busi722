@@ -1,0 +1,24 @@
+---
+title: "Exercise 2D: Size and Value Sorts"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using `merged.parquet` from Exercise 2C, explore the size and value effects in stock returns. In this dataset, `marketcap` measures size and `pb` (price-to-book from the DAILY table) measures valuation. Book-to-market is the inverse: $\text{B/M} = 1 / \text{pb}$.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. Each month, sort stocks into **quintiles** by `marketcap`. Compute the equal-weighted mean return for each quintile. Report the time-series average. In a markdown cell, discuss whether small stocks outperform large stocks.
+2. Each month, sort stocks into **quintiles** by book-to-market ($1/\text{pb}$). Compute the equal-weighted mean return for each quintile. Report the time-series average. In a markdown cell, discuss whether value stocks (high B/M) outperform growth stocks (low B/M).
+3. Perform a **double sort**: each month, independently sort stocks into **size terciles** (3 groups by `marketcap`) and **B/M terciles** (3 groups by $1/\text{pb}$). Form the $3 \times 3 = 9$ portfolios. Compute the equal-weighted mean return for each portfolio and display as a table (rows = size, columns = B/M).
+4. Create a bar chart showing the mean monthly return for each size quintile.
+5. In a markdown cell, discuss whether the value premium (high B/M minus low B/M) is stronger among small stocks or large stocks.

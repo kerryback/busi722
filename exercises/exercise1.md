@@ -1,0 +1,60 @@
+# Exercise 1: Rice Database and Technical Indicators
+
+**Session 1 topics:** CAPM review, Rice Data Portal, price data, momentum, moving averages, lagged returns.
+
+Use Claude Code to query the Rice Data Portal directly. The relevant tables are:
+
+- **SEP** (prices): `ticker`, `date`, `close` (split-adjusted), `closeadj` (adjusted for splits, dividends, and spinoffs), `volume`
+- **DAILY** (daily metrics): `ticker`, `date`, `marketcap` (in USD millions)
+- **TICKERS** (static info): `ticker`, `sector`, `industry`, `scalemarketcap`
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts for Parts (a) through (d). Use markdown cells for any written discussion. Include at least one **screenshot** of your Claude Code session showing a database query.
+
+---
+
+## Part (a): Build and Explore Price Data
+
+Using Claude Code and the Rice Data Portal, build a monthly dataset for **all stocks** from January 2022 through December 2024.
+
+1. From the **SEP** table, fetch end-of-month prices (`close` and `closeadj`). Compute monthly **returns** from `closeadj`: $r_t = \text{closeadj}_t / \text{closeadj}_{t-1} - 1$.
+2. From the **DAILY** table, fetch end-of-month `marketcap`.
+3. From the **TICKERS** table, fetch `sector` and `industry`.
+4. Compute **momentum** for each stock: the cumulative return from month $t-13$ to month $t-2$ (skipping the most recent month to avoid short-term reversal).
+5. Compute **lagged return**: the prior month's return.
+6. Apply a penny-stock filter: drop rows where `close` < $5. Drop rows with missing `return`, `momentum`, or `marketcap`.
+7. Report the number of rows, the number of unique tickers, and the date range. How many tickers have data in every month of the sample? Display summary statistics (mean, median, std, min, max) for `return`, `momentum`, and `marketcap`.
+
+---
+
+## Part (b): Moving Averages
+
+For each stock, compute the following moving averages of the monthly closing price (`close`):
+
+1. **Short MA:** 3-month simple moving average.
+2. **Long MA:** 12-month simple moving average.
+3. **MA Ratio:** `close / MA_12` -- the ratio of the current price to its 12-month moving average.
+
+Then:
+
+4. Each month, sort stocks into **deciles** by MA Ratio. Compute the equal-weighted mean return of each decile. Report the mean monthly return for each decile across all months.
+5. Define a **golden cross** signal: `MA_3 > MA_12` (short MA above long MA). Each month, compute the equal-weighted mean return of stocks with a golden cross vs. stocks without. Report the return spread.
+6. Create a bar chart of mean monthly returns by MA Ratio decile.
+
+---
+
+## Part (c): Momentum and Lagged Return
+
+1. For each month, sort stocks into momentum **deciles** (10 equal groups). Compute the equal-weighted average return of each decile. Report the mean monthly return across all months for each decile.
+2. In a markdown cell, discuss whether there is a monotone relationship between momentum decile and future return.
+3. Compute the cross-sectional correlation between `momentum` and `MA Ratio` each month. Report the time-series average. In a markdown cell, discuss whether these two technical indicators are measuring the same thing.
+
+---
+
+## Part (d): Momentum Decile Portfolios
+
+1. Using the momentum decile assignments from Part (c), compute the **cumulative return** of each decile portfolio from January 2022 through December 2024. Assume equal-weighted monthly rebalancing.
+2. Plot the cumulative returns of all 10 decile portfolios on a single chart (use a log scale for the y-axis).
+3. Compute and report the **annualized Sharpe ratio** of each decile portfolio (assume a risk-free rate of zero for simplicity).
+4. What is the annualized mean return and Sharpe ratio of the **long-short** portfolio (Decile 10 minus Decile 1)?

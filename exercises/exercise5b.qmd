@@ -1,0 +1,27 @@
+---
+title: "Exercise 5B: Smooth Weight Functions"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the same monthly out-of-sample predictions from Exercise 4A, implement smooth weight functions as an alternative to sort-based portfolios.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+Implement the following weight functions, mapping each stock's normalized rank $u_i = \text{rank}_i / n$ (from predicted scores) to portfolio weights:
+
+1. **Linear:** $w_i \propto u_i - 0.5$ (dollar-neutral, long-short).
+2. **Power:** $w_i \propto u_i^3 - c$ where $c$ is chosen so weights sum to zero.
+3. **Exponential:** $w_i \propto e^{2 u_i} - c$ where $c$ is chosen so weights sum to zero.
+4. **Softmax (long-only):** $w_i = e^{u_i / T} / \sum_j e^{u_j / T}$ with temperature $T = 0.5$.
+
+For each weight function, compute monthly portfolio returns. Report mean return, volatility, and Sharpe ratio. Plot all four cumulative return series.

@@ -1,0 +1,23 @@
+---
+title: "Exercise 6D: Ledoit-Wolf Shrinkage and Minimum-Variance Portfolios"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+The sample covariance matrix is noisy when the number of stocks is large relative to the number of time periods. Ledoit-Wolf shrinkage blends the sample covariance with a structured target to reduce estimation error. Load `merged.parquet` for this exercise.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. From the merged dataset, select all **Technology sector** stocks that have complete monthly return data from January 2023 through January 2026. Use 2023--2024 as the **estimation window** and Jan 2025 on as the **evaluation window**. Report how many stocks are in this universe.
+2. Using the estimation window, compute the **sample covariance matrix** and the **Ledoit-Wolf shrinkage covariance matrix** (use `sklearn.covariance.LedoitWolf`). Report the shrinkage intensity $\delta$.
+3. Using each covariance matrix, compute the **minimum-variance portfolio** (fully invested, long-only: $\mathbf{w}'\mathbf{1} = 1$, $w_i \ge 0$). Report the number of stocks with nonzero weight and the maximum weight for each.
+4. Evaluate both minimum-variance portfolios **out of sample** (Jan 2025 on). Report the annualized realized volatility and Sharpe ratio for each. Also report results for an equal-weighted portfolio of the same stocks as a benchmark. Plot the cumulative returns of all three portfolios over the evaluation window.

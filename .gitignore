@@ -1,3 +1,13 @@
 .env
 .quarto/
 nul
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+__pycache__/
+solutions/
+busi722_exercises.zip

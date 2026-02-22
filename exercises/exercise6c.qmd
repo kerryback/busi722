@@ -1,0 +1,32 @@
+---
+title: "Exercise 6C: Alternative Weighting Schemes"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the predictions from Exercise 4A and data from `merged.parquet`, compare alternative portfolio weighting approaches.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+Compare three long-only portfolio weighting approaches applied to the top-quintile predicted stocks:
+
+1. **Equal-weighted:** $w_i = 1/n$ for top-quintile stocks.
+2. **Market-cap weighted:** $w_i \propto \text{mcap}_i$ for top-quintile stocks.
+3. **Inverse-volatility weighted:** $w_i \propto 1 / \hat{\sigma}_i$ for top-quintile stocks, where $\hat{\sigma}_i$ is the trailing 12-month return standard deviation.
+
+For each weighting scheme, compute monthly portfolio returns and report:
+
+- Mean monthly return, annualized volatility, annualized Sharpe ratio
+- Maximum drawdown
+- Average number of stocks with weight > 2%
+
+Plot the cumulative returns of all three weighting schemes on a single chart. In a markdown cell, discuss which scheme offers the best risk-adjusted performance.

@@ -2,17 +2,60 @@
 title: Assignments
 ---
 
-## Course Assignments
-
-All assignments are group projects (up to five students per group). Each is due on Tuesday at 11:59 pm. Upload your zip file to Canvas.
+## Assignments
 
 Click on an assignment to download the PDF.
 
-| # | Assignment | Due | |
-|--:|------------|-----|:-:|
-| 1 | [Exercises 1--3](assignment1.pdf) | March 24 | [{{< fa file-pdf >}}](assignment1.pdf) |
-| 2 | [Exercises 4--6](assignment2.pdf) | March 31 | [{{< fa file-pdf >}}](assignment2.pdf) |
-| 3 | [Exercises 7--9](assignment3.pdf) | April 7 | [{{< fa file-pdf >}}](assignment3.pdf) |
-| 4 | [Exercises 10--12](assignment4.pdf) | April 14 | [{{< fa file-pdf >}}](assignment4.pdf) |
-| 5 | [Exercises 13--15](assignment5.pdf) | April 21 | [{{< fa file-pdf >}}](assignment5.pdf) |
-| 6 | [Exercises 16--18](assignment6.pdf) | April 28 | [{{< fa file-pdf >}}](assignment6.pdf) |
+### Assignment 1: Rice Database and Technical Indicators
+
+| | Exercise | |
+|--:|----------|:-:|
+| A | [Build and Explore Price Data](exercises/exercise1a.pdf) | [{{< fa file-pdf >}}](exercises/exercise1a.pdf) |
+| B | [Moving Averages](exercises/exercise1b.pdf) | [{{< fa file-pdf >}}](exercises/exercise1b.pdf) |
+| C | [Momentum and Lagged Return](exercises/exercise1c.pdf) | [{{< fa file-pdf >}}](exercises/exercise1c.pdf) |
+| D | [Momentum Decile Portfolios](exercises/exercise1d.pdf) | [{{< fa file-pdf >}}](exercises/exercise1d.pdf) |
+
+### Assignment 2: Fundamental Indicators and Merging
+
+| | Exercise | |
+|--:|----------|:-:|
+| A | [Build the Monthly Returns Dataset](exercises/exercise2a.pdf) | [{{< fa file-pdf >}}](exercises/exercise2a.pdf) |
+| B | [Fetch and Compute Fundamentals](exercises/exercise2b.pdf) | [{{< fa file-pdf >}}](exercises/exercise2b.pdf) |
+| C | [Data Quality Checks](exercises/exercise2c.pdf) | [{{< fa file-pdf >}}](exercises/exercise2c.pdf) |
+| D | [Size and Value Sorts](exercises/exercise2d.pdf) | [{{< fa file-pdf >}}](exercises/exercise2d.pdf) |
+
+### Assignment 3: Machine Learning for Return Prediction
+
+| | Exercise | |
+|--:|----------|:-:|
+| A | [Cross-Sectional Standardization](exercises/exercise3a.pdf) | [{{< fa file-pdf >}}](exercises/exercise3a.pdf) |
+| B | [Linear Models (Ridge and Lasso)](exercises/exercise3b.pdf) | [{{< fa file-pdf >}}](exercises/exercise3b.pdf) |
+| C | [Tree-Based Models](exercises/exercise3c.pdf) | [{{< fa file-pdf >}}](exercises/exercise3c.pdf) |
+| D | [Prediction Quality Over Time](exercises/exercise3d.pdf) | [{{< fa file-pdf >}}](exercises/exercise3d.pdf) |
+
+### Assignment 4: Rolling Windows for Train/Test
+
+| | Exercise | |
+|--:|----------|:-:|
+| A | [Expanding-Window Backtest](exercises/exercise4a.pdf) | [{{< fa file-pdf >}}](exercises/exercise4a.pdf) |
+| B | [Rolling-Window Backtest](exercises/exercise4b.pdf) | [{{< fa file-pdf >}}](exercises/exercise4b.pdf) |
+| C | [Monthly Spearman Rank Correlation](exercises/exercise4c.pdf) | [{{< fa file-pdf >}}](exercises/exercise4c.pdf) |
+| D | [Time-Series Cross-Validation](exercises/exercise4d.pdf) | [{{< fa file-pdf >}}](exercises/exercise4d.pdf) |
+
+### Assignment 5: Portfolio Construction and Evaluation
+
+| | Exercise | |
+|--:|----------|:-:|
+| A | [Sort-Based Portfolios](exercises/exercise5a.pdf) | [{{< fa file-pdf >}}](exercises/exercise5a.pdf) |
+| B | [Smooth Weight Functions](exercises/exercise5b.pdf) | [{{< fa file-pdf >}}](exercises/exercise5b.pdf) |
+| C | [Score-Tilted Market-Cap Weights](exercises/exercise5c.pdf) | [{{< fa file-pdf >}}](exercises/exercise5c.pdf) |
+| D | [CAPM Alpha and Information Ratio](exercises/exercise5d.pdf) | [{{< fa file-pdf >}}](exercises/exercise5d.pdf) |
+
+### Assignment 6: Costs, Risk, and Drawdowns
+
+| | Exercise | |
+|--:|----------|:-:|
+| A | [Turnover and Transaction Cost Analysis](exercises/exercise6a.pdf) | [{{< fa file-pdf >}}](exercises/exercise6a.pdf) |
+| B | [Drawdown Analysis](exercises/exercise6b.pdf) | [{{< fa file-pdf >}}](exercises/exercise6b.pdf) |
+| C | [Alternative Weighting Schemes](exercises/exercise6c.pdf) | [{{< fa file-pdf >}}](exercises/exercise6c.pdf) |
+| D | [Ledoit-Wolf Shrinkage and Minimum-Variance Portfolios](exercises/exercise6d.pdf) | [{{< fa file-pdf >}}](exercises/exercise6d.pdf) |

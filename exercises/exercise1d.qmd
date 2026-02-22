@@ -1,0 +1,23 @@
+---
+title: "Exercise 1D: Momentum Decile Portfolios"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the momentum decile assignments from Exercise 1C, construct and evaluate momentum portfolios.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. Using the momentum decile assignments from Exercise 1C, compute the **cumulative return** of each decile portfolio from January 2021 through January 2026. Assume equal-weighted monthly rebalancing.
+2. Plot the cumulative returns of all 10 decile portfolios on a single chart (use a log scale for the y-axis).
+3. Compute and report the **annualized Sharpe ratio** of each decile portfolio (assume a risk-free rate of zero for simplicity).
+4. What is the annualized mean return and Sharpe ratio of the **long-short** portfolio (Decile 10 minus Decile 1)?

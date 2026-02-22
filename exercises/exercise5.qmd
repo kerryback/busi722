@@ -1,0 +1,66 @@
+---
+title: "Assignment 5: Portfolio Construction and Evaluation"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+**Session 5 topics:** Sort-based portfolios, smooth weight functions (linear, power, exponential, softmax), score-tilted market-cap weights, Sharpe ratio, CAPM alpha, information ratio.
+
+Load `merged.parquet`. Use predictions from the expanding-window LightGBM backtest (Exercise 4, Part a) or re-run the backtest.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts for Parts (a) through (d). Use markdown cells for any written discussion. Also submit the **`factor_regressions.xlsx`** file produced in Part (d).
+
+---
+
+## Part (a): Sort-Based Portfolios
+
+Using the monthly out-of-sample predictions:
+
+1. **Long-only top decile:** Each month, equal-weight the stocks in the top predicted decile. Compute monthly portfolio returns.
+2. **Long-short D10 - D1:** Each month, go long the top decile (equal-weight) and short the bottom decile (equal-weight). Compute monthly returns.
+3. **Top quintile vs. top decile:** Compare the long-only top-quintile portfolio to the top-decile portfolio.
+4. For each portfolio, report: mean monthly return, annualized volatility, annualized Sharpe ratio, and maximum drawdown.
+5. Plot the cumulative returns of all three portfolios on a single chart.
+
+---
+
+## Part (b): Smooth Weight Functions
+
+Implement the following weight functions, mapping each stock's normalized rank $u_i = \text{rank}_i / n$ (from predicted scores) to portfolio weights:
+
+1. **Linear:** $w_i \propto u_i - 0.5$ (dollar-neutral, long-short).
+2. **Power:** $w_i \propto u_i^3 - c$ where $c$ is chosen so weights sum to zero.
+3. **Exponential:** $w_i \propto e^{2 u_i} - c$ where $c$ is chosen so weights sum to zero.
+4. **Softmax (long-only):** $w_i = e^{u_i / T} / \sum_j e^{u_j / T}$ with temperature $T = 0.5$.
+
+For each weight function, compute monthly portfolio returns. Report mean return, volatility, and Sharpe ratio. Plot all four cumulative return series.
+
+---
+
+## Part (c): Score-Tilted Market-Cap Weights
+
+1. Compute **score-tilted market-cap weights**: $w_i \propto \text{mcap}_i \times u_i^2$, normalized to sum to 1 (long-only).
+2. Compare this to:
+   - Pure market-cap weights (no tilt): $w_i \propto \text{mcap}_i$
+   - Pure equal-weight top decile (from Part a)
+3. For each approach, report mean return, volatility, Sharpe ratio, and the average number of stocks with weight > 1%.
+4. In a markdown cell, discuss the advantage of score-tilted weights compared to equal-weighted sorts.
+
+---
+
+## Part (d): CAPM Alpha and Information Ratio
+
+Download Fama-French factors (at minimum Mkt-RF and RF) from Kenneth French's data library.
+
+1. For the long-short linear-weight portfolio (Part b), run the **CAPM regression**: $r_{p,t} - r_{f,t} = \alpha + \beta (r_{m,t} - r_{f,t}) + \varepsilon_t$. Report $\alpha$, $\beta$, their t-statistics, and $R^2$.
+2. Compute the **information ratio**: $\text{IR} = \hat{\alpha} / \sigma(\varepsilon)$ and annualize it.
+3. Repeat the CAPM regression for the **Fama-French 5-factor model** (add SMB, HML, RMW, CMA). In a markdown cell, discuss whether the alpha survives.
+4. Create a table comparing: CAPM alpha, CAPM t-stat, FF5 alpha, FF5 t-stat, and annualized IR for each weight function from Part (b).
+5. Save the factor regression results as `factor_regressions.xlsx`.

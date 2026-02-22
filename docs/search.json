@@ -1,16 +1,30 @@
 [
   {
+    "objectID": "assignments.html",
+    "href": "assignments.html",
+    "title": "Assignments",
+    "section": "",
+    "text": "Click on an assignment to download the PDF.\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild and Explore Price Data\n\n\n\nB\nMoving Averages\n\n\n\nC\nMomentum and Lagged Return\n\n\n\nD\nMomentum Decile Portfolios\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild the Monthly Returns Dataset\n\n\n\nB\nFetch and Compute Fundamentals\n\n\n\nC\nData Quality Checks\n\n\n\nD\nSize and Value Sorts\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nCross-Sectional Standardization\n\n\n\nB\nLinear Models (Ridge and Lasso)\n\n\n\nC\nTree-Based Models\n\n\n\nD\nPrediction Quality Over Time\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nExpanding-Window Backtest\n\n\n\nB\nRolling-Window Backtest\n\n\n\nC\nMonthly Spearman Rank Correlation\n\n\n\nD\nTime-Series Cross-Validation\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nSort-Based Portfolios\n\n\n\nB\nSmooth Weight Functions\n\n\n\nC\nScore-Tilted Market-Cap Weights\n\n\n\nD\nCAPM Alpha and Information Ratio\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nTurnover and Transaction Cost Analysis\n\n\n\nB\nDrawdown Analysis\n\n\n\nC\nAlternative Weighting Schemes\n\n\n\nD\nLedoit-Wolf Shrinkage and Minimum-Variance Portfolios"
+  },
+  {
+    "objectID": "assignments.html#assignments",
+    "href": "assignments.html#assignments",
+    "title": "Assignments",
+    "section": "",
+    "text": "Click on an assignment to download the PDF.\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild and Explore Price Data\n\n\n\nB\nMoving Averages\n\n\n\nC\nMomentum and Lagged Return\n\n\n\nD\nMomentum Decile Portfolios\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild the Monthly Returns Dataset\n\n\n\nB\nFetch and Compute Fundamentals\n\n\n\nC\nData Quality Checks\n\n\n\nD\nSize and Value Sorts\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nCross-Sectional Standardization\n\n\n\nB\nLinear Models (Ridge and Lasso)\n\n\n\nC\nTree-Based Models\n\n\n\nD\nPrediction Quality Over Time\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nExpanding-Window Backtest\n\n\n\nB\nRolling-Window Backtest\n\n\n\nC\nMonthly Spearman Rank Correlation\n\n\n\nD\nTime-Series Cross-Validation\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nSort-Based Portfolios\n\n\n\nB\nSmooth Weight Functions\n\n\n\nC\nScore-Tilted Market-Cap Weights\n\n\n\nD\nCAPM Alpha and Information Ratio\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nTurnover and Transaction Cost Analysis\n\n\n\nB\nDrawdown Analysis\n\n\n\nC\nAlternative Weighting Schemes\n\n\n\nD\nLedoit-Wolf Shrinkage and Minimum-Variance Portfolios"
+  },
+  {
     "objectID": "slides.html",
     "href": "slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Click on a topic to download the PDF slide deck.\n\n\n\n#\nTopic\n\n\n\n\n\n1\nSoftware, Rice Database, Technical Indicators\n{{&lt; fa file-pdf &gt;}}\n\n\n2\nClaude Skills, Fundamental Indicators\n{{&lt; fa file-pdf &gt;}}\n\n\n3\nMachine Learning for Return Prediction\n{{&lt; fa file-pdf &gt;}}\n\n\n4\nRolling Windows for Train/Test\n{{&lt; fa file-pdf &gt;}}\n\n\n5\nForming and Evaluating Portfolios\n{{&lt; fa file-pdf &gt;}}\n\n\n6\nTrading Costs, Risk Forecasts\n{{&lt; fa file-pdf &gt;}}"
+    "text": "Click on a topic to download the PDF slide deck.\n\n\n\n#\nTopic\n\n\n\n\n\n1\nSoftware, Rice Database, Technical Indicators\n\n\n\n2\nClaude Skills, Fundamental Indicators\n\n\n\n3\nMachine Learning for Return Prediction\n\n\n\n4\nRolling Windows for Train/Test\n\n\n\n5\nForming and Evaluating Portfolios\n\n\n\n6\nTrading Costs, Risk Forecasts"
   },
   {
     "objectID": "slides.html#course-slides",
     "href": "slides.html#course-slides",
     "title": "Slides",
     "section": "",
-    "text": "Click on a topic to download the PDF slide deck.\n\n\n\n#\nTopic\n\n\n\n\n\n1\nSoftware, Rice Database, Technical Indicators\n{{&lt; fa file-pdf &gt;}}\n\n\n2\nClaude Skills, Fundamental Indicators\n{{&lt; fa file-pdf &gt;}}\n\n\n3\nMachine Learning for Return Prediction\n{{&lt; fa file-pdf &gt;}}\n\n\n4\nRolling Windows for Train/Test\n{{&lt; fa file-pdf &gt;}}\n\n\n5\nForming and Evaluating Portfolios\n{{&lt; fa file-pdf &gt;}}\n\n\n6\nTrading Costs, Risk Forecasts\n{{&lt; fa file-pdf &gt;}}"
+    "text": "Click on a topic to download the PDF slide deck.\n\n\n\n#\nTopic\n\n\n\n\n\n1\nSoftware, Rice Database, Technical Indicators\n\n\n\n2\nClaude Skills, Fundamental Indicators\n\n\n\n3\nMachine Learning for Return Prediction\n\n\n\n4\nRolling Windows for Train/Test\n\n\n\n5\nForming and Evaluating Portfolios\n\n\n\n6\nTrading Costs, Risk Forecasts"
   }
 ]

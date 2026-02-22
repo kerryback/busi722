@@ -173,42 +173,6 @@ Equal-weighted portfolios tilt heavily toward small stocks, which are:
 \end{baritemize}
 \end{frame}
 
-%%% PART 2: RISK ANALYSIS %%%
-
-\begin{frame}[c]
-\centering
-\Huge Risk Analysis
-\end{frame}
-
-\begin{frame}{Fama-French Factor Analysis}
-Extend the CAPM regression from Session 5 to the Fama-French five-factor model:
-\[
-r_{p,t} - r_{f,t} = \alpha + \beta_1 \text{MKT}_t + \beta_2 \text{SMB}_t + \beta_3 \text{HML}_t + \beta_4 \text{RMW}_t + \beta_5 \text{CMA}_t + \varepsilon_t
-\]
-
-\begin{baritemize}
-\item \textbf{SMB} (Small Minus Big): size factor
-\item \textbf{HML} (High Minus Low): value factor
-\item \textbf{RMW} (Robust Minus Weak): profitability factor
-\item \textbf{CMA} (Conservative Minus Aggressive): investment factor
-\end{baritemize}
-
-\vspace{0.3cm}
-The $\beta$ coefficients reveal \alert{which risks} the portfolio is taking on.  The $\alpha$ measures return not explained by these known risk factors.
-\end{frame}
-
-\begin{frame}{Interpreting Factor Loadings}
-\begin{baritemize}
-\item A large positive $\beta_{\text{SMB}}$ means the strategy tilts toward small stocks --- its returns are partly compensation for size risk.
-\item A large positive $\beta_{\text{HML}}$ means it loads on value --- part of the return comes from the value premium.
-\item If $\alpha$ shrinks when adding factors, the strategy is \alert{repackaging known risk premia}, not generating new alpha.
-\item If $\alpha$ remains large and significant, the strategy captures something beyond the five factors.
-\end{baritemize}
-
-\vspace{0.3cm}
-Can also add the \textbf{momentum factor} (UMD).  Download all factors from Kenneth French's website using \texttt{pandas-datareader}.
-\end{frame}
-
 %%% PORTFOLIO CONSTRUCTION ALTERNATIVES %%%
 
 \begin{frame}[c]
@@ -308,17 +272,101 @@ Out-of-sample Sharpe & often poor & competitive & competitive \\
 
 %%% PREDICTING RISK %%%
 
-\begin{frame}{Predicting Volatility and Correlations}
-All risk-based methods require a covariance matrix $\boldsymbol{\Sigma}$.  How do we estimate it?
+\begin{frame}[c]
+\centering
+\Huge Covariance Estimation
+\end{frame}
+
+\begin{frame}{Why Covariance Estimation Is Hard}
+All risk-based methods require a covariance matrix $\boldsymbol{\Sigma}$.
 
 \vspace{0.3cm}
 \begin{baritemize}
-\item \textbf{Sample covariance:} the default, but noisy with many assets.
-\item \textbf{Shrinkage} (Ledoit-Wolf): blend the sample covariance with a structured target.  Reduces estimation noise substantially.
-\item \textbf{Factor models} (Barra-style): $\boldsymbol{\Sigma} = \mathbf{B}\boldsymbol{\Lambda}\mathbf{B}' + \mathbf{D}$.  Reduces dimensionality by modeling common factors.
-\item \textbf{GARCH / DCC:} capture time-varying volatility and correlations.
-\item \textbf{Exponential weighting:} weight recent observations more heavily.  Simple and effective.
+\item With $n$ stocks, $\boldsymbol{\Sigma}$ has $n(n+1)/2$ unique entries.  For 500 stocks, that is \alert{125,250 parameters} to estimate.
+\item With $T$ months of data, the \textbf{sample covariance} $\mathbf{S} = \frac{1}{T-1}\sum_{t=1}^{T}(\mathbf{r}_t - \bar{\mathbf{r}})(\mathbf{r}_t - \bar{\mathbf{r}})'$ has far more parameters than observations.
+\item Result: the sample covariance \alert{overfits}.  Its eigenvalues are too spread out --- the largest are too large, the smallest are too small (some may be zero or negative).
+\item Portfolios optimized with a noisy $\boldsymbol{\Sigma}$ take extreme, unstable positions.
 \end{baritemize}
+\end{frame}
+
+\begin{frame}{Ledoit-Wolf Shrinkage: The Idea}
+\textbf{Insight:} the sample covariance is \alert{unbiased but high-variance}.  A structured target is \alert{biased but low-variance}.  Blending them reduces mean-squared error.
+
+\[
+\boldsymbol{\Sigma}_{\text{shrunk}} = \delta \,\mathbf{F} + (1 - \delta)\,\mathbf{S}
+\]
+
+\begin{baritemize}
+\item $\mathbf{S}$ = sample covariance matrix (complex, noisy)
+\item $\mathbf{F}$ = \textbf{shrinkage target} --- a simple, structured matrix
+\item $\delta \in [0,1]$ = \textbf{shrinkage intensity} --- how much to shrink toward the target
+\end{baritemize}
+
+\vspace{0.3cm}
+This is the \alert{bias-variance tradeoff} applied to covariance estimation:
+\begin{itemize}
+\item $\delta = 0$: pure sample covariance (low bias, high variance)
+\item $\delta = 1$: pure target (high bias, low variance)
+\item $\delta^*$: optimal blend that minimizes estimation error
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Choosing the Shrinkage Target}
+Common choices for the target $\mathbf{F}$:
+
+\vspace{0.3cm}
+\begin{baritemize}
+\item \textbf{Scaled identity:} $\mathbf{F} = \bar{\sigma}^2 \,\mathbf{I}$, where $\bar{\sigma}^2$ is the average diagonal of $\mathbf{S}$.  Assumes all stocks have the same variance and zero correlation.  Simple but aggressive.
+\item \textbf{Single-factor model:} $\mathbf{F} = \hat{\beta}\hat{\beta}'\sigma_m^2 + \mathbf{D}$, where $\hat{\beta}$ are market betas.  Preserves the market factor structure. This is the default in \texttt{sklearn.covariance.LedoitWolf}.
+\item \textbf{Constant-correlation:} all pairwise correlations equal the average sample correlation.  Preserves individual variances.
+\end{baritemize}
+
+\vspace{0.3cm}
+Ledoit and Wolf (2004) derive a \alert{closed-form formula} for the optimal $\delta^*$ that minimizes the expected squared Frobenius norm of the estimation error.
+\end{frame}
+
+\begin{frame}{Effect of Shrinkage}
+\begin{baritemize}
+\item \textbf{Eigenvalues compress:} the extreme eigenvalues of $\mathbf{S}$ are pulled toward the mean.  The largest shrink, the smallest grow.  The matrix becomes better-conditioned.
+\item \textbf{Extreme correlations moderate:} spuriously high or low correlations are pulled toward a more reasonable structure.
+\item \textbf{Portfolio weights stabilize:} minimum-variance portfolios computed with $\boldsymbol{\Sigma}_{\text{shrunk}}$ have less extreme, more diversified weights.
+\item \textbf{Out-of-sample risk improves:} the shrunk covariance produces portfolios with \alert{lower realized volatility} than the sample covariance.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}[fragile]{Ledoit-Wolf in Python}
+\texttt{scikit-learn} provides a one-line implementation:
+
+\vspace{0.3cm}
+\begin{shadedbox}
+\small
+\begin{verbatim}
+from sklearn.covariance import LedoitWolf
+
+returns = ...  # T x n array of stock returns
+lw = LedoitWolf().fit(returns)
+
+cov_shrunk = lw.covariance_    # shrunk covariance matrix
+delta = lw.shrinkage_          # optimal shrinkage intensity
+\end{verbatim}
+\end{shadedbox}
+
+\vspace{0.3cm}
+\begin{baritemize}
+\item The \texttt{shrinkage\_} attribute reports the optimal $\delta^*$ --- typically 0.5--0.9 for monthly stock returns, meaning heavy shrinkage is optimal.
+\item Use \texttt{cov\_shrunk} anywhere you would use a sample covariance: minimum-variance portfolio, risk parity, mean-variance optimization.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Other Approaches to Covariance Estimation}
+\begin{baritemize}
+\item \textbf{Factor models} (Barra-style): $\boldsymbol{\Sigma} = \mathbf{B}\boldsymbol{\Lambda}\mathbf{B}' + \mathbf{D}$.  Reduces dimensionality by modeling common factors.  Industry standard for large-scale risk models.
+\item \textbf{GARCH / DCC:} capture time-varying volatility and correlations.  Useful when risk regimes change.
+\item \textbf{Exponential weighting:} weight recent observations more heavily.  Simple, effective, and captures regime changes.
+\end{baritemize}
+
+\vspace{0.3cm}
+\textbf{Practical advice:} Ledoit-Wolf shrinkage is the easiest win.  It requires no modeling decisions beyond choosing a target, and the improvement over the sample covariance is reliable.  Start here, then consider factor models if you need more structure.
 \end{frame}
 
 %%% DRAWDOWNS %%%

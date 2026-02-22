@@ -249,55 +249,126 @@ Test: Ask Claude Code: What is the sum of the first 1,000 integers?
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Data Skills}
-Skills are text files that give Claude Code specialized knowledge.
+\begin{frame}{Database Tables}
+Three tables are relevant for price-based analysis:
 
 \vspace{0.3cm}
-
-The easiest way to install is to \alert{ask Claude Code to do it for you}: ``Download and install the rice-data-query and merge skills,
-plus CLAUDE.md from mgmt638.kerryback.com/skills/''
-\end{frame}
-
-\begin{frame}{Workflow}
-
-Visit the Data Guide to find variable names from the SF1 (Sharadar Fundamentals) table.
-
-\vspace{0.3cm}
-
-Tell Claude Code to:
-\begin{barenumerate}
-\item Get returns (monthly or weekly) from the Rice database.
-\item Get the variables you want from SF1.
-\item Calculate any ratios or growth rates you want.
-\item Merge the returns with the fundamental data.
-\end{barenumerate}
-
-\vspace{0.3cm}
-
-Save the merged data.  \alert{You do not need to repeat this process if you already have the data you want.}
-\end{frame}
-
-\begin{frame}{Timing of Data}
-During merging, Claude will align variables so that
 \begin{baritemize}
-\item Fundamental variables are all known at the beginning of the period
-\item Momentum is momentum as of the beginning of the period
-\item Close is the closing price at the end of the previous month or week
-\item Return is the return over the period (from beginning to end)
+\item \textbf{SEP} (prices): \texttt{ticker}, \texttt{date}, \texttt{close} (split-adjusted), \texttt{closeadj} (adjusted for splits, dividends, and spinoffs), \texttt{volume}
+\item \textbf{DAILY} (valuation metrics): \texttt{ticker}, \texttt{date}, \texttt{marketcap} (USD millions), \texttt{pb}, \texttt{pe}, \texttt{ps}
+\item \textbf{TICKERS} (company info): \texttt{ticker}, \texttt{sector}, \texttt{industry}, \texttt{scalemarketcap}
 \end{baritemize}
 
 \vspace{0.3cm}
-
-All variables other than return \alert{are known at the beginning of the period} and can be used to pick stocks.
+Full documentation at \url{https://portal-guide.rice-business.org}
 \end{frame}
 
-\begin{frame}{Avoiding Look-Ahead Bias}
-\begin{itemize}
-\item Price data (\texttt{close}, \texttt{marketcap}, \texttt{pb}) lagged by 1 month
-\item Fundamentals available in first full month \emph{after} filing date
-\item Forward-filled until next filing
-\item Include \textbf{all tickers} (including delisted) to avoid survivorship bias
-\end{itemize}
+\begin{frame}{Querying the Data Portal}
+Ask Claude Code to query the database directly.
+
+\vspace{0.3cm}
+\textbf{Example prompts:}
+\begin{baritemize}
+\item ``Query the SEP table for end-of-month close and closeadj for all stocks from 2018 through 2024.''
+\item ``Query the DAILY table for end-of-month marketcap for all stocks from 2018 through 2024.''
+\item ``Query the TICKERS table for sector and industry for all tickers.''
+\end{baritemize}
+
+\vspace{0.3cm}
+Claude writes Python code that sends HTTP requests to the API, using your access token from the \texttt{.env} file.
+\end{frame}
+
+\begin{frame}{Computing Returns}
+Monthly returns are computed from \texttt{closeadj} (the fully adjusted price):
+\[
+r_t = \frac{\texttt{closeadj}_t}{\texttt{closeadj}_{t-1}} - 1
+\]
+
+\begin{baritemize}
+\item Use \texttt{closeadj}, not \texttt{close}: it accounts for dividends and spinoffs, so the return includes total return.
+\item \texttt{close} (split-adjusted only) is useful for computing moving averages and chart prices.
+\item Group by ticker when computing returns --- never mix prices across stocks.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Computing Momentum}
+Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
+\[
+\text{momentum}_t = \frac{\texttt{closeadj}_{t-2}}{\texttt{closeadj}_{t-13}} - 1
+\]
+
+\begin{baritemize}
+\item Skips the most recent month ($t{-}1$): short-term reversal contaminates the signal.
+\item Requires 13 months of price history, so the first 12 months are \texttt{NaN}.
+\item \textbf{Lagged return} (the prior month's return) is a separate signal that captures short-term reversal.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}{Moving Averages}
+Moving averages smooth out price noise and reveal trends.
+
+\vspace{0.3cm}
+\begin{baritemize}
+\item \textbf{Short MA} (3-month): $\text{MA}_3 = \frac{1}{3}\sum_{j=0}^{2} \texttt{close}_{t-j}$. Tracks recent price action.
+\item \textbf{Long MA} (12-month): $\text{MA}_{12} = \frac{1}{12}\sum_{j=0}^{11} \texttt{close}_{t-j}$. Captures the longer-term trend.
+\item \textbf{MA Ratio}: $\texttt{close} / \text{MA}_{12}$. A stock trading above its long MA (ratio $> 1$) is in an uptrend.
+\item \textbf{Golden Cross}: $\text{MA}_3 > \text{MA}_{12}$. A classic trend-following signal.
+\end{baritemize}
+
+\vspace{0.3cm}
+Compute moving averages from \texttt{close} (split-adjusted), grouped by ticker.
+\end{frame}
+
+\begin{frame}[fragile]{Assigning Quantiles Each Month}
+Each month, sort stocks into groups (deciles, quintiles, etc.) by a signal:
+
+\vspace{0.3cm}
+\begin{shadedbox}
+\small
+\begin{verbatim}
+# Assign momentum deciles (1 = lowest, 10 = highest)
+df["mom_decile"] = df.groupby("month")["momentum"].transform(
+    lambda x: pd.qcut(x, 10, labels=False, duplicates="drop") + 1
+)
+
+# Assign size quintiles (1 = smallest, 5 = largest)
+df["size_q"] = df.groupby("month")["marketcap"].transform(
+    lambda x: pd.qcut(x, 5, labels=False, duplicates="drop") + 1
+)
+\end{verbatim}
+\end{shadedbox}
+
+\vspace{0.3cm}
+\begin{baritemize}
+\item \texttt{groupby("month")} ensures sorting is cross-sectional (within each month).
+\item \texttt{pd.qcut} assigns equal-count groups; \texttt{labels=False} gives integers starting at 0.
+\end{baritemize}
+\end{frame}
+
+\begin{frame}[fragile]{Computing Equal-Weighted Portfolio Returns}
+Compute the mean return of each group each month, then average across months:
+
+\vspace{0.3cm}
+\begin{shadedbox}
+\small
+\begin{verbatim}
+# Mean return by decile and month
+decile_monthly = df.groupby(["month", "mom_decile"])["return"] \
+                   .mean().reset_index()
+
+# Time-series average across all months
+decile_avg = decile_monthly.groupby("mom_decile")["return"].mean()
+
+print(decile_avg)
+\end{verbatim}
+\end{shadedbox}
+
+\vspace{0.3cm}
+\begin{baritemize}
+\item The first \texttt{groupby} computes the equal-weighted portfolio return each month.
+\item The second \texttt{groupby} averages across months to get the expected return of each portfolio.
+\item A monotone pattern (D1 low, D10 high) indicates the signal has predictive power.
+\end{baritemize}
 \end{frame}
 
 \begin{frame}{Data Formats}

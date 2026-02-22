@@ -1,0 +1,25 @@
+---
+title: "Exercise 5C: Score-Tilted Market-Cap Weights"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the same monthly out-of-sample predictions from Exercise 4A and market-cap data from `merged.parquet`, construct score-tilted portfolios.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. Compute **score-tilted market-cap weights**: $w_i \propto \text{mcap}_i \times u_i^2$, normalized to sum to 1 (long-only).
+2. Compare this to:
+   - Pure market-cap weights (no tilt): $w_i \propto \text{mcap}_i$
+   - Pure equal-weight top decile (from Exercise 5A)
+3. For each approach, report mean return, volatility, Sharpe ratio, and the average number of stocks with weight > 1%.
+4. In a markdown cell, discuss the advantage of score-tilted weights compared to equal-weighted sorts.

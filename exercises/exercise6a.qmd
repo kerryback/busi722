@@ -1,0 +1,27 @@
+---
+title: "Exercise 6A: Turnover and Transaction Cost Analysis"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Use the portfolio returns and weight series from Exercise 5. Load `merged.parquet` for any additional computations.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. For the **linear-weight long-short** portfolio (Exercise 5B), compute the monthly **turnover**: $\text{turnover}_t = \sum_i |w_{i,t} - w_{i,t-1}^+|$ where $w_{i,t-1}^+$ is the drift-adjusted weight from the prior month.
+2. Report the mean, median, and maximum monthly turnover.
+3. Estimate net-of-cost returns under three cost scenarios:
+   - **Low cost:** 5 bps per unit of turnover (institutional)
+   - **Medium cost:** 20 bps per unit of turnover
+   - **High cost:** 50 bps per unit of turnover
+4. For each scenario, report the net Sharpe ratio of the long-short portfolio. In a markdown cell, discuss at what cost level the strategy becomes unprofitable.
+5. Plot gross vs. net cumulative returns for all three cost scenarios.

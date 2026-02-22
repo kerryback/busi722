@@ -1,0 +1,25 @@
+---
+title: "Exercise 2B: Fetch and Compute Fundamentals"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Use Claude Code with the `fetch-fundamentals` skill. Fundamental data comes from the SF1 table.
+
+### Submission
+
+Submit a **zip file** containing your **Jupyter notebook** (`.ipynb`) with all code, output, and charts, and at least one **screenshot** of your Claude Code session showing Claude using the `fetch-fundamentals` skill. Use markdown cells for any written discussion.
+
+---
+
+Fetch annual fundamentals from the SF1 table for all stocks with `datekey` from January 2021 through January 2026. At minimum, retrieve: `assets`, `equity`, `gp` (gross profit), `roe`, `grossmargin`, `assetturnover`, and `de` (debt-to-equity).
+
+1. Compute `asset_growth` as the year-over-year percentage change in `assets`. **Important:** compute this *before* merging with returns. In a markdown cell, explain why this ordering matters.
+2. Compute `gp_to_assets` = `gp / assets`.
+3. Report the number of unique tickers and the date range in the fundamentals data.
+4. Display summary statistics for `roe`, `grossmargin`, `asset_growth`, and `gp_to_assets`.

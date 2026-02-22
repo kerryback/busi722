@@ -1,0 +1,22 @@
+---
+title: "Exercise 1C: Momentum and Lagged Return"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the monthly dataset built in Exercise 1A (with `momentum`, `return`, and `MA Ratio` computed), analyze the relationship between momentum, lagged return, and future returns.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. For each month, sort stocks into momentum **deciles** (10 equal groups). Compute the equal-weighted average return of each decile. Report the mean monthly return across all months for each decile.
+2. In a markdown cell, discuss whether there is a monotone relationship between momentum decile and future return.
+3. Compute the cross-sectional correlation between `momentum` and `MA Ratio` each month. Report the time-series average. In a markdown cell, discuss whether these two technical indicators are measuring the same thing.

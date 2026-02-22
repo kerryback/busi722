@@ -1,0 +1,25 @@
+---
+title: "Exercise 3B: Linear Models (Ridge and Lasso)"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the ranked features and ranked target from Exercise 3A, fit linear models and evaluate their predictions.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+Using a single train/test split (train: 2023-2024, test: 2025 onward):
+
+1. Fit a **Ridge regression** (alpha=1.0) on the training data. Report the coefficients. In a markdown cell, identify which features have the largest positive and negative coefficients.
+2. Fit a **Lasso regression** (alpha=0.001) on the training data. Report the coefficients. In a markdown cell, identify which features are zeroed out.
+3. For each model, predict on the test set. Each month, compute the **Spearman rank correlation** between predicted ranks and actual return ranks.
+4. Report the mean and median monthly Spearman correlation for each model.

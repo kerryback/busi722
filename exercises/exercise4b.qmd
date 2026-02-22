@@ -1,0 +1,27 @@
+---
+title: "Exercise 4B: Rolling-Window Backtest"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the same setup as Exercise 4A, compare a rolling-window approach to the expanding-window backtest.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. Repeat the backtest from Exercise 4A using a **rolling window** of 12 months  instead of an expanding window.
+   - Each month, train only on the most recent 12 months of data.
+2. Report the same statistics: decile mean returns, Sharpe ratios, and cumulative return chart.
+3. Compare expanding vs. rolling window. In a markdown cell, discuss:
+   - Which produces a better D10 - D1 spread?
+   - Which has a higher Sharpe ratio for the long-short portfolio?
+
+   Plot both long-short cumulative return series on a single chart.

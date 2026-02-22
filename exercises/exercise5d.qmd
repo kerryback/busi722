@@ -1,0 +1,23 @@
+---
+title: "Exercise 5D: CAPM Alpha and Information Ratio"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the portfolio return series from Exercises 5A--5C, evaluate risk-adjusted performance using the CAPM. Download the market return and risk-free rate (Mkt-RF and RF) from Kenneth French's data library.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. For each long-short portfolio from Exercise 5B (linear, power, exponential), run the **CAPM regression**: $r_{p,t} - r_{f,t} = \alpha + \beta (r_{m,t} - r_{f,t}) + \varepsilon_t$. Report $\alpha$, $\beta$, their t-statistics, and $R^2$.
+2. Compute the **information ratio** for each: $\text{IR} = \hat{\alpha} / \sigma(\varepsilon)$ and annualize it.
+3. Also run the CAPM regression and compute the information ratio for the long-short D10 $-$ D1 sort-based portfolio from Exercise 5A and the score-tilted portfolio from Exercise 5C.
+4. Create a summary table comparing CAPM alpha, alpha t-stat, and annualized IR across all portfolios. In a markdown cell, discuss which portfolio construction method produces the best risk-adjusted performance.

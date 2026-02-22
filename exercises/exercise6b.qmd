@@ -1,0 +1,26 @@
+---
+title: "Exercise 6B: Drawdown Analysis"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the portfolio return series from Exercise 5, analyze drawdowns for the long-short and long-only portfolios.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+For the long-short linear-weight portfolio (Exercise 5B):
+
+1. Compute the **drawdown** series: $\text{dd}_t = (V_t - V_{\max,t}) / V_{\max,t}$ where $V_t$ is the cumulative portfolio value.
+2. Report the **maximum drawdown**, its start date, trough date, and recovery date (if recovered).
+3. Report the 5 worst monthly returns and the 5 largest drawdowns.
+4. Plot the **underwater chart** (drawdown over time).
+5. Repeat for the long-only top-decile portfolio (Exercise 5A). In a markdown cell, discuss which portfolio has deeper drawdowns and why.

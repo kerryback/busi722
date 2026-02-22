@@ -1,0 +1,24 @@
+---
+title: "Exercise 2A: Build the Monthly Returns Dataset"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Use Claude Code with the `fetch-returns` skill to build a monthly returns dataset from the Rice Data Portal.
+
+### Submission
+
+Submit a **zip file** containing your **Jupyter notebook** (`.ipynb`) with all code, output, and charts, and at least one **screenshot** of your Claude Code session showing Claude using the `fetch-returns` skill. Use markdown cells for any written discussion.
+
+---
+
+Using Claude Code and the `fetch-returns` skill, fetch monthly returns data for all stocks from January 2021 through January 2026. The skill will query the SEP and DAILY tables, compute returns and momentum, and assign size categories.
+
+1. Report the total number of rows, unique tickers, and date range.
+2. How many rows are lost when you apply the penny-stock filter (drop rows with `close` < \$5)?
+3. What fraction of stock-months have missing `momentum`? In a markdown cell, explain why momentum is missing for early observations.

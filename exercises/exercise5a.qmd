@@ -1,0 +1,26 @@
+---
+title: "Exercise 5A: Sort-Based Portfolios"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Load `merged.parquet`. Use predictions from the expanding-window LightGBM backtest (Exercise 4A) or re-run the backtest.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+Using the monthly out-of-sample predictions:
+
+1. **Long-only top decile:** Each month, equal-weight the stocks in the top predicted decile. Compute monthly portfolio returns.
+2. **Long-short D10 - D1:** Each month, go long the top decile (equal-weight) and short the bottom decile (equal-weight). Compute monthly returns.
+3. **Top quintile vs. top decile:** Compare the long-only top-quintile portfolio to the top-decile portfolio.
+4. For each portfolio, report: mean monthly return, annualized volatility, annualized Sharpe ratio, and maximum drawdown.
+5. Plot the cumulative returns of all three portfolios on a single chart.

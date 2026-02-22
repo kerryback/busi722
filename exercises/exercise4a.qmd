@@ -1,0 +1,26 @@
+---
+title: "Exercise 4A: Expanding-Window Backtest"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Load `merged.parquet`. Use the same ranked features and ranked target from Exercise 3.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+1. Implement an **expanding-window** backtest with LightGBM (100 trees, learning rate 0.05, max depth 6).
+   - Start training on the 12 months Jan-Dec 2023 and predicting from January 2024.
+   - Each month: train on all months Jan 2023 through the prior month, predict the current month, record predictions.
+2. For each month with predictions,  sort predictions into deciles and compute equal-weighted mean returns.
+3. Report the time-series average of each decile's monthly return.
+4. Compute and report the annualized Sharpe ratio for each decile and for the D10 - D1 long-short portfolio.
+5. Plot the cumulative return of each decile portfolio.

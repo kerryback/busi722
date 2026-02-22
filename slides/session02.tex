@@ -267,11 +267,11 @@ return & SEP & not shifted (target variable) \\
 \texttt{return} is the \alert{only variable that is not known at the start of the month}.  It is what we are trying to predict.
 \end{frame}
 
-%%% PART 6: FILTERS AND STANDARDIZATION %%%
+%%% PART 6: FILTERS %%%
 
 \begin{frame}[c]
 \centering
-\Huge Filters \& Standardization
+\Huge Data Filters
 \end{frame}
 
 \begin{frame}{Data Quality Filters}
@@ -304,27 +304,6 @@ After filters: & 589,006 rows \quad 6,825 tickers \\
 \item We would likely include some market cap filter: large cap = S\&P 500, large and midcap = Russell 1000, smallcap = Russell 2000, etc.
 \item It is hard for large funds to trade microcaps, so they will exclude them.
 \end{itemize}
-\end{frame}
-
-\begin{frame}{Standardizing Features}
-\begin{itemize}
-\item Many models are highly affected by outliers.
-\item Standardizing predictive variables is common.  For example, subtract mean and divide by standard deviation (z-score).
-\item Ranking 1 through $n$ is another way to standardize.  Can scale to 0 to 1 or compute z-scores of ranks.
-\item We should do this each month rather than for the full sample.
-\item For ``good'' features (like football scores), rank from low to high.  For ``bad'' features (like golf scores), rank from high to low.  Then a high rank is always good.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Composite Ranks}
-The Quality Minus Junk paper computes quality as follows:
-
-\begin{barenumerate}
-\item Compute z-scores of features each month.
-\item Group features into three categories: profitability, growth, and safety.
-\item Within each category, add z-scores and compute the z-score of the sum each month.
-\item Add the three category z-scores and compute the z-score of the sum each month.
-\end{barenumerate}
 \end{frame}
 
 %%% PART 7: THE COMPLETE WORKFLOW %%%

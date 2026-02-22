@@ -1,0 +1,30 @@
+---
+title: "Exercise 1B: Moving Averages"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+Using the monthly dataset built in Exercise 1A, compute moving averages and evaluate their predictive power.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts. Use markdown cells for any written discussion.
+
+---
+
+For each stock, compute the following moving averages of the monthly closing price (`close`):
+
+1. **Short MA:** 3-month simple moving average.
+2. **Long MA:** 12-month simple moving average.
+3. **MA Ratio:** `close / MA_12` -- the ratio of the current price to its 12-month moving average.
+
+Then:
+
+4. Each month, sort stocks into **deciles** by MA Ratio. Compute the equal-weighted mean return of each decile. Report the mean monthly return for each decile across all months.
+5. Define a **golden cross** signal: `MA_3 > MA_12` (short MA above long MA). Each month, compute the equal-weighted mean return of stocks with a golden cross vs. stocks without. Report the return spread.
+6. Create a bar chart of mean monthly returns by MA Ratio decile.

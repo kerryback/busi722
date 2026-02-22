@@ -1,0 +1,63 @@
+---
+title: "Assignment 3: Machine Learning for Return Prediction"
+subtitle: "BUSI 722: Data-Driven Finance II"
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    colorlinks: true
+---
+
+**Session 3 topics:** Cross-sectional standardization, ranked returns as target, Ridge, Lasso, Random Forest, LightGBM.
+
+Load `merged.parquet` (produced by the data pipeline from Sessions 1--2). All features and targets should be standardized cross-sectionally each month.
+
+### Submission
+
+Submit a **Jupyter notebook** (`.ipynb`) containing all code, output, and charts for Parts (a) through (d). Use markdown cells for any written discussion. Also submit the **`predictions.parquet`** file produced in Part (d).
+
+---
+
+## Part (a): Cross-Sectional Standardization
+
+Load `merged.parquet`. Before building ML models, we need to standardize features cross-sectionally (within each month).
+
+1. Using `momentum`, `roe`, and `gp_to_assets`, demonstrate two standardization approaches:
+   - **Z-scores:** For each month, subtract the cross-sectional mean and divide by the standard deviation. Report the mean and standard deviation of each variable for 3 sample months to verify they are approximately 0 and 1.
+   - **Ranks:** For each month, rank stocks and scale ranks to [0, 1]. Verify that the mean rank is approximately 0.5 for each month.
+2. Plot the distribution of raw `roe` vs. z-scored `roe` vs. ranked `roe` for a single month. In a markdown cell, discuss which transformation best handles outliers.
+3. Define the full feature set: `momentum`, `lag_month`, `pb`, `roe`, `grossmargin`, `assetturnover`, `leverage`, `asset_growth`, `gp_to_assets`. Each month, convert all features to **percentile ranks** scaled to [0, 1].
+4. Each month, convert the target `return` to **percentile ranks** scaled to [0, 1].
+5. Report the number of stock-months available for training (months through December 2019) and testing (January 2020 onward).
+
+---
+
+## Part (b): Linear Models (Ridge and Lasso)
+
+Using a single train/test split (train: through 2019, test: 2020 onward):
+
+1. Fit a **Ridge regression** (alpha=1.0) on the training data. Report the coefficients. In a markdown cell, identify which features have the largest positive and negative coefficients.
+2. Fit a **Lasso regression** (alpha=0.001) on the training data. Report the coefficients. In a markdown cell, identify which features are zeroed out.
+3. For each model, predict on the test set. Each month, compute the **Spearman rank correlation** between predicted ranks and actual return ranks.
+4. Report the mean and median monthly Spearman correlation for each model.
+
+---
+
+## Part (c): Tree-Based Models (Random Forest and LightGBM)
+
+Using the same train/test split:
+
+1. Fit a **Random Forest** (100 trees, max depth 4, `random_state=42`). Predict on the test set and compute the monthly Spearman rank correlation.
+2. Fit a **LightGBM** model (100 trees, learning rate 0.05, max depth 6, `random_state=42`). Predict on the test set and compute the monthly Spearman rank correlation.
+3. For LightGBM, display the **feature importances** (by split gain) as a bar chart. In a markdown cell, discuss which features matter most.
+4. Compare mean Spearman correlations across all four models (Ridge, Lasso, Random Forest, LightGBM). In a markdown cell, state which model produces the best predictions and why.
+
+---
+
+## Part (d): Prediction Quality Over Time
+
+1. For each of the four models, plot the **monthly Spearman correlation** over time on a single chart. In a markdown cell, discuss whether there are periods where all models perform poorly.
+2. Compute the fraction of months with positive Spearman correlation for each model.
+3. Create a summary table with: model name, mean Spearman correlation, median Spearman correlation, fraction of months positive, and standard deviation.
+4. Save the predictions from the best-performing model as `predictions.parquet` (columns: `ticker`, `month`, `return`, `pred`) for use in later exercises.
