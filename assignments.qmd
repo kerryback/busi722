@@ -2,11 +2,7 @@
 title: Assignments
 ---
 
-## Assignments
-
-Click on an assignment to download the PDF.
-
-### Assignment 1: Rice Database and Technical Indicators
+## Week 1: Rice Database and Technical Indicators
 
 | | Exercise | |
 |--:|----------|:-:|
@@ -15,7 +11,7 @@ Click on an assignment to download the PDF.
 | C | [Momentum and Lagged Return](exercises/exercise1c.pdf) | [{{< fa file-pdf >}}](exercises/exercise1c.pdf) |
 | D | [Momentum Decile Portfolios](exercises/exercise1d.pdf) | [{{< fa file-pdf >}}](exercises/exercise1d.pdf) |
 
-### Assignment 2: Fundamental Indicators and Merging
+## Week 2: Fundamental Indicators and Merging
 
 | | Exercise | |
 |--:|----------|:-:|
@@ -24,7 +20,7 @@ Click on an assignment to download the PDF.
 | C | [Data Quality Checks](exercises/exercise2c.pdf) | [{{< fa file-pdf >}}](exercises/exercise2c.pdf) |
 | D | [Size and Value Sorts](exercises/exercise2d.pdf) | [{{< fa file-pdf >}}](exercises/exercise2d.pdf) |
 
-### Assignment 3: Machine Learning for Return Prediction
+## Week 3: Machine Learning for Return Prediction
 
 | | Exercise | |
 |--:|----------|:-:|
@@ -33,7 +29,7 @@ Click on an assignment to download the PDF.
 | C | [Tree-Based Models](exercises/exercise3c.pdf) | [{{< fa file-pdf >}}](exercises/exercise3c.pdf) |
 | D | [Prediction Quality Over Time](exercises/exercise3d.pdf) | [{{< fa file-pdf >}}](exercises/exercise3d.pdf) |
 
-### Assignment 4: Rolling Windows for Train/Test
+## Week 4: Rolling Windows for Train/Test
 
 | | Exercise | |
 |--:|----------|:-:|
@@ -42,7 +38,7 @@ Click on an assignment to download the PDF.
 | C | [Monthly Spearman Rank Correlation](exercises/exercise4c.pdf) | [{{< fa file-pdf >}}](exercises/exercise4c.pdf) |
 | D | [Time-Series Cross-Validation](exercises/exercise4d.pdf) | [{{< fa file-pdf >}}](exercises/exercise4d.pdf) |
 
-### Assignment 5: Portfolio Construction and Evaluation
+## Week 5: Portfolio Construction and Evaluation
 
 | | Exercise | |
 |--:|----------|:-:|
@@ -51,7 +47,7 @@ Click on an assignment to download the PDF.
 | C | [Score-Tilted Market-Cap Weights](exercises/exercise5c.pdf) | [{{< fa file-pdf >}}](exercises/exercise5c.pdf) |
 | D | [CAPM Alpha and Information Ratio](exercises/exercise5d.pdf) | [{{< fa file-pdf >}}](exercises/exercise5d.pdf) |
 
-### Assignment 6: Costs, Risk, and Drawdowns
+## Week 6: Costs, Risk, and Drawdowns
 
 | | Exercise | |
 |--:|----------|:-:|

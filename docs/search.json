@@ -4,14 +4,49 @@
     "href": "assignments.html",
     "title": "Assignments",
     "section": "",
-    "text": "Click on an assignment to download the PDF.\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild and Explore Price Data\n\n\n\nB\nMoving Averages\n\n\n\nC\nMomentum and Lagged Return\n\n\n\nD\nMomentum Decile Portfolios\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild the Monthly Returns Dataset\n\n\n\nB\nFetch and Compute Fundamentals\n\n\n\nC\nData Quality Checks\n\n\n\nD\nSize and Value Sorts\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nCross-Sectional Standardization\n\n\n\nB\nLinear Models (Ridge and Lasso)\n\n\n\nC\nTree-Based Models\n\n\n\nD\nPrediction Quality Over Time\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nExpanding-Window Backtest\n\n\n\nB\nRolling-Window Backtest\n\n\n\nC\nMonthly Spearman Rank Correlation\n\n\n\nD\nTime-Series Cross-Validation\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nSort-Based Portfolios\n\n\n\nB\nSmooth Weight Functions\n\n\n\nC\nScore-Tilted Market-Cap Weights\n\n\n\nD\nCAPM Alpha and Information Ratio\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nTurnover and Transaction Cost Analysis\n\n\n\nB\nDrawdown Analysis\n\n\n\nC\nAlternative Weighting Schemes\n\n\n\nD\nLedoit-Wolf Shrinkage and Minimum-Variance Portfolios"
+    "text": "Exercise\n\n\n\n\n\nA\nBuild and Explore Price Data\n\n\n\nB\nMoving Averages\n\n\n\nC\nMomentum and Lagged Return\n\n\n\nD\nMomentum Decile Portfolios"
   },
   {
-    "objectID": "assignments.html#assignments",
-    "href": "assignments.html#assignments",
+    "objectID": "assignments.html#week-1-rice-database-and-technical-indicators",
+    "href": "assignments.html#week-1-rice-database-and-technical-indicators",
     "title": "Assignments",
     "section": "",
-    "text": "Click on an assignment to download the PDF.\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild and Explore Price Data\n\n\n\nB\nMoving Averages\n\n\n\nC\nMomentum and Lagged Return\n\n\n\nD\nMomentum Decile Portfolios\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild the Monthly Returns Dataset\n\n\n\nB\nFetch and Compute Fundamentals\n\n\n\nC\nData Quality Checks\n\n\n\nD\nSize and Value Sorts\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nCross-Sectional Standardization\n\n\n\nB\nLinear Models (Ridge and Lasso)\n\n\n\nC\nTree-Based Models\n\n\n\nD\nPrediction Quality Over Time\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nExpanding-Window Backtest\n\n\n\nB\nRolling-Window Backtest\n\n\n\nC\nMonthly Spearman Rank Correlation\n\n\n\nD\nTime-Series Cross-Validation\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nSort-Based Portfolios\n\n\n\nB\nSmooth Weight Functions\n\n\n\nC\nScore-Tilted Market-Cap Weights\n\n\n\nD\nCAPM Alpha and Information Ratio\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nA\nTurnover and Transaction Cost Analysis\n\n\n\nB\nDrawdown Analysis\n\n\n\nC\nAlternative Weighting Schemes\n\n\n\nD\nLedoit-Wolf Shrinkage and Minimum-Variance Portfolios"
+    "text": "Exercise\n\n\n\n\n\nA\nBuild and Explore Price Data\n\n\n\nB\nMoving Averages\n\n\n\nC\nMomentum and Lagged Return\n\n\n\nD\nMomentum Decile Portfolios"
+  },
+  {
+    "objectID": "assignments.html#week-2-fundamental-indicators-and-merging",
+    "href": "assignments.html#week-2-fundamental-indicators-and-merging",
+    "title": "Assignments",
+    "section": "Week 2: Fundamental Indicators and Merging",
+    "text": "Week 2: Fundamental Indicators and Merging\n\n\n\n\nExercise\n\n\n\n\n\nA\nBuild the Monthly Returns Dataset\n\n\n\nB\nFetch and Compute Fundamentals\n\n\n\nC\nData Quality Checks\n\n\n\nD\nSize and Value Sorts"
+  },
+  {
+    "objectID": "assignments.html#week-3-machine-learning-for-return-prediction",
+    "href": "assignments.html#week-3-machine-learning-for-return-prediction",
+    "title": "Assignments",
+    "section": "Week 3: Machine Learning for Return Prediction",
+    "text": "Week 3: Machine Learning for Return Prediction\n\n\n\n\nExercise\n\n\n\n\n\nA\nCross-Sectional Standardization\n\n\n\nB\nLinear Models (Ridge and Lasso)\n\n\n\nC\nTree-Based Models\n\n\n\nD\nPrediction Quality Over Time"
+  },
+  {
+    "objectID": "assignments.html#week-4-rolling-windows-for-traintest",
+    "href": "assignments.html#week-4-rolling-windows-for-traintest",
+    "title": "Assignments",
+    "section": "Week 4: Rolling Windows for Train/Test",
+    "text": "Week 4: Rolling Windows for Train/Test\n\n\n\n\nExercise\n\n\n\n\n\nA\nExpanding-Window Backtest\n\n\n\nB\nRolling-Window Backtest\n\n\n\nC\nMonthly Spearman Rank Correlation\n\n\n\nD\nTime-Series Cross-Validation"
+  },
+  {
+    "objectID": "assignments.html#week-5-portfolio-construction-and-evaluation",
+    "href": "assignments.html#week-5-portfolio-construction-and-evaluation",
+    "title": "Assignments",
+    "section": "Week 5: Portfolio Construction and Evaluation",
+    "text": "Week 5: Portfolio Construction and Evaluation\n\n\n\n\nExercise\n\n\n\n\n\nA\nSort-Based Portfolios\n\n\n\nB\nSmooth Weight Functions\n\n\n\nC\nScore-Tilted Market-Cap Weights\n\n\n\nD\nCAPM Alpha and Information Ratio"
+  },
+  {
+    "objectID": "assignments.html#week-6-costs-risk-and-drawdowns",
+    "href": "assignments.html#week-6-costs-risk-and-drawdowns",
+    "title": "Assignments",
+    "section": "Week 6: Costs, Risk, and Drawdowns",
+    "text": "Week 6: Costs, Risk, and Drawdowns\n\n\n\n\nExercise\n\n\n\n\n\nA\nTurnover and Transaction Cost Analysis\n\n\n\nB\nDrawdown Analysis\n\n\n\nC\nAlternative Weighting Schemes\n\n\n\nD\nLedoit-Wolf Shrinkage and Minimum-Variance Portfolios"
   },
   {
     "objectID": "slides.html",
