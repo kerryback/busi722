@@ -2,9 +2,8 @@
 title: Slides
 ---
 
-### Week
 
-| # | Topic | |
+| ### Week |  | |
 |--:|-------|:-:|
 | 1 | [Software, Rice Database, Technical Indicators](slides/session01.pdf) | [{{< fa file-pdf >}}](slides/session01.pdf) |
 | 2 | [Claude Skills, Fundamental Indicators](slides/session02.pdf) | [{{< fa file-pdf >}}](slides/session02.pdf) |
