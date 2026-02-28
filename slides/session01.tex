@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,t]{beamer}
 \usetheme{metropolis}
 
 \usepackage{graphicx}
@@ -119,7 +119,10 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \item Choose the monthly plan and complete payment
 \end{enumerate}
 
-2. \href{https://www.youtube.com/watch?v=hpMrTabldEY}{YouTube Video}
+\textbf{2. Watch the setup video:}
+\begin{itemize}
+\item \href{https://www.youtube.com/watch?v=hpMrTabldEY}{Setup walkthrough} --- covers Node.js, Claude Code, and VS Code installation
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Mac -- Install Claude Code}
@@ -130,14 +133,14 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \item Or download installer from \href{https://nodejs.org}{nodejs.org}
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \textbf{Step 2: Install Claude Code}
 \begin{itemize}
 \item Run: \texttt{npm install -g @anthropic-ai/claude-code}
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \textbf{Step 3: Verify Installation}
 \begin{itemize}
@@ -145,7 +148,7 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Windows -- Install Claude Code}
+\begin{frame}{Windows -- Install Claude Code (1/2)}
 
 \textbf{Step 1: Install Node.js}
 \begin{itemize}
@@ -160,8 +163,9 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \item Download from \href{https://git-scm.com/download/win}{git-scm.com/download/win}
 \item During installation, select ``Git Bash'' (default option)
 \end{itemize}
+\end{frame}
 
-\vspace{0.3cm}
+\begin{frame}{Windows -- Install Claude Code (2/2)}
 
 \textbf{Step 3: Install Claude Code}
 \begin{itemize}
@@ -189,10 +193,12 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \begin{itemize}
 \item Tell Claude Code: ``Create a virtual environment using Python 3.13 in my current directory.''
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Install Packages}
+Tell Claude Code to install the following packages in the virtual environment:
 
 \vspace{0.3cm}
-
-\textbf{Install packages in the virtual environment:}
 \begin{itemize}
 \item \texttt{numpy pandas scipy statsmodels scikit-learn}
 \item \texttt{openpyxl matplotlib seaborn ipykernel}
@@ -208,6 +214,7 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \end{frame}
 
 \begin{frame}{Install and Open VS Code}
+Download and configure VS Code for the course:
 \begin{itemize}
 \item Install VS Code from \href{https://code.visualstudio.com}{code.visualstudio.com}, then File $\rightarrow$ Open Folder $\rightarrow$ your course folder
 \item Install extensions: Python, Jupyter, Claude Code, Data Wrangler, Rainbow CSV
@@ -216,6 +223,7 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \end{frame}
 
 \begin{frame}{Launch Claude Code in VS Code}
+Open the Claude Code panel in VS Code:
 \begin{itemize}
 \item If you see the orange Claude icon in the top toolbar, click it.
 \item If not, create a new file (File $\rightarrow$ New Text File) and you should see it.
@@ -225,7 +233,7 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 Test: Ask Claude Code: What is the sum of the first 1,000 integers?
 \end{frame}
 
-\begin{frame}{Stock Market Database}
+\begin{frame}[fragile]{Stock Market Database}
 \begin{itemize}
 \item Database Guide: \url{https://portal-guide.rice-business.org}
 \item Visit \href{https://data-portal.rice-business.org}{data-portal.rice-business.org} to get an access token
@@ -237,14 +245,13 @@ Test: Ask Claude Code: What is the sum of the first 1,000 integers?
 \textbf{Create .env File:}
 \begin{itemize}
 \item Tell Claude Code to create a \texttt{.env} file
-\item Add: \texttt{RICE\_ACCESS\_TOKEN=your\_token\_here}
+\item Add: \verb|RICE_ACCESS_TOKEN=your_token_here|
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Database Tables}
 Three tables are relevant for price-based analysis:
 
-\vspace{0.3cm}
 \begin{itemize}
 \item \textbf{SEP} (prices): \texttt{ticker}, \texttt{date}, \texttt{close} (split-adjusted), \texttt{closeadj} (adjusted for splits, dividends, and spinoffs), \texttt{volume}
 \item \textbf{DAILY} (valuation metrics): \texttt{ticker}, \texttt{date}, \texttt{marketcap} (USD millions), \texttt{pb}, \texttt{pe}, \texttt{ps}
@@ -266,7 +273,7 @@ Ask Claude Code to query the database directly.
 \item ``Query the TICKERS table for sector and industry for all tickers.''
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 Claude writes Python code that sends HTTP requests to the API, using your access token from the \texttt{.env} file.
 \end{frame}
 
@@ -299,14 +306,13 @@ Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
 \begin{frame}{Moving Averages}
 Moving averages smooth out price noise and reveal trends.
 
-\vspace{0.3cm}
 \begin{itemize}
 \item \textbf{Short MA} (3-month): $\text{MA}_3 = \frac{1}{3}\sum_{j=0}^{2} \texttt{close}_{t-j}$. Tracks recent price action.
 \item \textbf{Long MA} (12-month): $\text{MA}_{12} = \frac{1}{12}\sum_{j=0}^{11} \texttt{close}_{t-j}$. Captures the longer-term trend.
 \item \textbf{Signals}: MA Ratio ($\texttt{close} / \text{MA}_{12}$, uptrend if $>1$) and Golden Cross ($\text{MA}_3 > \text{MA}_{12}$).
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 Compute moving averages from \texttt{close} (split-adjusted), grouped by ticker.
 \end{frame}
 
@@ -329,7 +335,6 @@ df["size_q"] = df.groupby("month")["marketcap"].transform(
 \end{verbatim}
 \end{shadedbox}
 
-\vspace{0.3cm}
 \begin{itemize}
 \item \texttt{groupby("month")} ensures sorting is cross-sectional (within each month).
 \item \texttt{pd.qcut} assigns equal-count groups; \texttt{labels=False} gives integers starting at 0.
@@ -339,7 +344,6 @@ df["size_q"] = df.groupby("month")["marketcap"].transform(
 \begin{frame}[fragile]{Computing Equal-Weighted Portfolio Returns}
 Compute the mean return of each group each month, then average across months:
 
-\vspace{0.3cm}
 \begin{shadedbox}
 \small
 \begin{verbatim}
@@ -354,10 +358,8 @@ print(decile_avg)
 \end{verbatim}
 \end{shadedbox}
 
-\vspace{0.3cm}
 \begin{itemize}
-\item The first \texttt{groupby} computes the equal-weighted portfolio return each month.
-\item The second \texttt{groupby} averages across months to get the expected return of each portfolio.
+\item The first \texttt{groupby} computes the equal-weighted portfolio return each month; the second averages across months.
 \item A monotone pattern (D1 low, D10 high) indicates the signal has predictive power.
 \end{itemize}
 \end{frame}

@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,t]{beamer}
 \usetheme{metropolis}
 
 \usepackage{graphicx}
@@ -24,16 +24,13 @@
 \end{frame}
 
 \begin{frame}{The Rice Data Portal}
-\begin{itemize}
-\item We will use the \href{https://data-portal.rice-business.org}{Rice Data Portal} for stock market data.
-\item The portal provides daily prices, valuation metrics, and fundamental data from SEC filings.
-\item Four main tables:
+The \href{https://data-portal.rice-business.org}{Rice Data Portal} provides daily prices, valuation metrics, and fundamental data from SEC filings. Four main tables:
+
 \begin{itemize}
 \item \textbf{SEP} -- daily stock prices (open, high, low, close, volume)
 \item \textbf{DAILY} -- daily valuation metrics (marketcap, pb, pe, ps)
 \item \textbf{SF1} -- fundamentals from 10-K/10-Q filings
 \item \textbf{TICKERS} -- company metadata (sector, industry)
-\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -112,11 +109,22 @@ Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
 \end{frame}
 
 \begin{frame}{Variables from the Returns Step}
-\begin{itemize}
-\item \texttt{ticker}, \texttt{month} (identifiers); \texttt{return} (monthly, decimal); \texttt{momentum} (12-month skipping recent); \texttt{lagged\_return} (prior month)
-\item \texttt{close} (split-adjusted price); \texttt{marketcap} (in thousands, \alert{shifted by 1 month}); \texttt{size} (Nano- through Mega-Cap)
-\item \texttt{sector}, \texttt{industry} -- classifications from TICKERS table
-\end{itemize}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Variable} & \textbf{Description} \\
+\midrule
+\texttt{ticker}, \texttt{month} & Identifiers \\
+\texttt{return} & Monthly return (decimal) \\
+\texttt{momentum} & 12-month return skipping the most recent month \\
+\texttt{lagged\_return} & Prior month's return \\
+\texttt{close} & Split-adjusted price \\
+\texttt{marketcap} & Market cap in thousands (\alert{shifted by 1 month}) \\
+\texttt{size} & Nano- through Mega-Cap \\
+\texttt{sector}, \texttt{industry} & Classifications from TICKERS table \\
+\bottomrule
+\end{tabular}
+\end{center}
 \end{frame}
 
 %%% PART 3: FETCH FUNDAMENTALS %%%
@@ -128,13 +136,13 @@ Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
 
 \begin{frame}{Precomputed vs.\ Calculated Variables}
 \alert{Rule:} Before calculating any ratio, check if it already exists in the database.
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \textbf{Precomputed in DAILY:} \texttt{marketcap}, \texttt{pb}, \texttt{pe}, \texttt{ps}, \texttt{ev}, \texttt{evebit}, \texttt{evebitda}
 \vspace{0.2cm}
 
 \textbf{Precomputed in SF1:} \texttt{roe}, \texttt{roa}, \texttt{grossmargin}, \texttt{netmargin}, \texttt{de} (leverage), \texttt{assetturnover}, \texttt{currentratio}
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \textbf{Must calculate:}
 \begin{itemize}
@@ -144,7 +152,7 @@ Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
 \end{frame}
 
 \begin{frame}{Fetching Fundamental Data}
-\alert{Prompt:} ``Get annual fundamentals from SF1: equity, assets, gross profit, and the precomputed ratios roe, grossmargin, assetturnover, and de.  Calculate asset growth and gross-profit-to-assets.  Save as \texttt{fundamentals.parquet}.''
+\alert{Prompt:} ``Get annual fundamentals from SF1: equity, assets, gp, and ratios roe, grossmargin, assetturnover, de.  Calculate asset growth and gp/assets.  Save as \texttt{fundamentals.parquet}.''
 \vspace{0.3cm}
 
 Claude uses the \texttt{fetch-fundamentals} skill, which:
@@ -219,6 +227,9 @@ We want each row to represent: \alert{what we knew at the start of the month} pa
 \vspace{0.3cm}
 
 \textbf{Look-Ahead Bias:} Using information that was \textbf{not yet available} at the time of the investment decision. Backtests that suffer from this overstate performance --- sometimes dramatically.
+
+\vspace{0.3cm}
+Example: using January's closing price to decide a January trade --- that price was not known until January 31.
 \end{frame}
 
 \begin{frame}{How the Skills Handle It}
@@ -232,14 +243,16 @@ We want each row to represent: \alert{what we knew at the start of the month} pa
 \begin{frame}{Summary of Shifts}
 \begin{center}
 \begin{tabular}{lll}
+\toprule
 \textbf{Variable} & \textbf{Source} & \textbf{Shifted By} \\
-\hline
+\midrule
 marketcap, pb, pe, ps & DAILY & 1 month after fetching \\
 close & SEP & 1 month after merging \\
 roe, de, grossmargin, \ldots & SF1 & filing date $+$ 1 month after merge \\
 momentum & SEP & built-in (uses $t{-}13$ to $t{-}2$) \\
 lagged\_return & SEP & built-in (uses $t{-}1$) \\
 return & SEP & not shifted (target variable) \\
+\bottomrule
 \end{tabular}
 \end{center}
 \vspace{0.3cm}
@@ -260,11 +273,12 @@ The \texttt{merge-data} skill applies two filters automatically:
 \item \textbf{Missing data:} drop rows with any \texttt{NaN} values
 \end{itemize}
 
-\vspace{0.3cm}
 \begin{center}
 \begin{tabular}{lr}
+\toprule
 Before filters: & 886,460 rows \quad 9,375 tickers \\
 After filters: & 589,006 rows \quad 6,825 tickers \\
+\bottomrule
 \end{tabular}
 \end{center}
 \end{frame}
@@ -272,8 +286,8 @@ After filters: & 589,006 rows \quad 6,825 tickers \\
 \begin{frame}{Penny Stocks}
 \begin{itemize}
 \item Must filter out low-price stocks.  Infeasible for equally weighted portfolios and distort portfolio returns.
-\item Use CQA Competition filter: \$5.60?
-\item Example: Tell Claude to read the data and drop all rows with close $\le$ price threshold.  Sort into quintiles each month on momentum and lagret and compute average returns.
+\item Common threshold: \$5.00 (our default filter).
+\item Example: Drop rows below a price threshold, sort into quintiles on momentum and lagged return, and compute average returns.
 \end{itemize}
 \end{frame}
 

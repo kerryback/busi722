@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,t]{beamer}
 \usetheme{metropolis}
 
 \usepackage{graphicx}
@@ -82,11 +82,11 @@ Alternatively, just rank all features the same way and let the model learn the s
 
 \begin{frame}{Predicting Relative Returns}
 We care more about \alert{which stocks will outperform} than about predicting exact return magnitudes.
-\vspace{0.3cm}
+\vspace{0.15cm}
 
 \alert{If every stock's return rises by 2\% because the market rallies, that tells us nothing about which stocks to buy.  What matters is the cross-sectional ranking of returns.}
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 This suggests we should think carefully about what target variable we give the model.
 \end{frame}
 
@@ -106,13 +106,15 @@ y_{i,t} = \frac{\text{rank of } r_{i,t} \text{ among all stocks in month } t}{n_
 \begin{frame}{Comparison of Targets}
 \begin{center}
 \begin{tabular}{lcc}
+\toprule
 & \textbf{Raw Returns} & \textbf{Ranked Returns} \\
-\hline
+\midrule
 Scale & varies by month & always $[0,1]$ \\
 Outliers & can be extreme & bounded \\
 Market effect & included & removed \\
 Interpretation & absolute return & relative ranking \\
 Loss function & MSE on returns & MSE on ranks \\
+\bottomrule
 \end{tabular}
 \end{center}
 
@@ -159,14 +161,19 @@ f(\mathbf{x}) = \beta_0 + \beta_1 x_1 + \cdots + \beta_k x_k
 \item Each coefficient $\beta_j$ measures the marginal effect of feature $j$.
 \item Assumes the effect of each feature is \alert{additive and linear} --- no interactions, no diminishing effects.
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Regularization}
+Add a penalty to prevent overfitting: $\min \sum(y_i - f(\mathbf{x}_i))^2 + \text{penalty}$
+
+\begin{itemize}
+\item \textbf{Ridge} ($L_2$): penalty $= \lambda\sum\beta_j^2$.  Shrinks coefficients toward zero, keeps all features.
+\item \textbf{Lasso} ($L_1$): penalty $= \lambda\sum|\beta_j|$.  Drives some coefficients to exactly zero (feature selection).
+\item \textbf{Elastic net}: combines $L_1$ and $L_2$ penalties.  Balances shrinkage and sparsity.
+\end{itemize}
 
 \vspace{0.3cm}
-\textbf{Regularization:}
-\begin{itemize}
-\item \textbf{Ridge} ($L_2$): shrinks coefficients toward zero, keeps all features.
-\item \textbf{Lasso} ($L_1$): drives some coefficients to exactly zero (feature selection).
-\item \textbf{Elastic net}: combines $L_1$ and $L_2$ penalties.
-\end{itemize}
+The hyperparameter $\lambda$ controls the strength of regularization.  Larger $\lambda$ = simpler model.
 \end{frame}
 
 \begin{frame}{Limitations of Linearity}
@@ -187,14 +194,14 @@ f(\mathbf{x}) = \beta_0 + \beta_1 x_1 + \cdots + \beta_k x_k
 \begin{frame}{Decision Trees}
 A decision tree partitions the feature space into rectangular regions using a sequence of binary splits.
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 \begin{itemize}
 \item At each node, pick the feature and threshold that best reduces prediction error.
 \item Naturally captures \alert{nonlinearities} and \alert{interactions}.
 \item A single tree is interpretable but tends to overfit.
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 \textbf{Solution:} combine many trees into an \alert{ensemble}.
 \end{frame}
 
@@ -302,17 +309,19 @@ f(\mathbf{x}) = \mathbf{w}_2' \,\sigma\!\bigl(\mathbf{W}_1 \mathbf{x} + \mathbf{
 \begin{frame}{Neural Networks vs.\ Other Models}
 \begin{center}
 \begin{tabular}{lcccc}
+\toprule
 & \textbf{Linear} & \textbf{Trees} & \textbf{RFF} & \textbf{Neural Net} \\
-\hline
+\midrule
 Nonlinearity & no & yes & yes & yes \\
 Interactions & no & yes & yes & yes \\
 Interpretable & yes & moderate & no & no \\
 Tuning effort & low & moderate & low & high \\
 Training speed & fast & fast & fast & slow \\
+\bottomrule
 \end{tabular}
 \end{center}
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 No single model dominates.  In practice, \alert{ensembles} that combine predictions from multiple model types often perform best.
 \end{frame}
 

@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,t]{beamer}
 \usetheme{metropolis}
 
 \usepackage{graphicx}
@@ -27,7 +27,7 @@
 In a standard ML course, you randomly split data into training and test sets.
 \vspace{0.3cm}
 
-\alert{If we randomly assign months to train and test, the training set will contain future data relative to some test observations.  The model sees the future before predicting it.}
+\alert{If we randomly assign months, the training set will contain future data --- the model sees the future before predicting it.}
 
 \vspace{0.3cm}
 \begin{itemize}
@@ -54,7 +54,7 @@ $\underbrace{\text{2011} \quad \cdots \quad \text{2019}}_{\text{Training}}$ & $\
 \item Evaluate: do the predictions correctly rank stocks?
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 \textbf{Limitation:} a single split gives only one evaluation.  The result depends heavily on where you cut.
 \end{frame}
 
@@ -126,6 +126,7 @@ The collection of one-step-ahead predictions across all months forms the \alert{
 \alert{Prompt:} ``Using an expanding window starting with 5 years of training data, retrain a LightGBM model each month and predict return ranks one month ahead.  Collect all out-of-sample predictions.''
 
 \vspace{0.3cm}
+\begin{shadedbox}
 \small
 \begin{verbatim}
   months = sorted(df['month'].unique())
@@ -137,6 +138,7 @@ The collection of one-step-ahead predictions across all months forms the \alert{
       pred  = model.predict(test[features])
       predictions.append(...)
 \end{verbatim}
+\end{shadedbox}
 \end{frame}
 
 %%% PART 3: SPEARMAN RANK CORRELATION %%%
@@ -160,14 +162,14 @@ We predict return \alert{ranks}, not dollar returns.  So the question is: do our
 \begin{frame}{Spearman Rank Correlation}
 The \alert{Spearman correlation} measures the agreement between two rankings.
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 \begin{itemize}
 \item Rank the predicted values 1 through $n$.
 \item Rank the actual returns 1 through $n$.
 \item Compute the Pearson correlation of the two rank vectors.
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 \[
 \rho_S = \text{corr}\bigl(\text{rank}(\hat y), \;\text{rank}(y)\bigr)
 \]
@@ -224,7 +226,7 @@ At each step of the moving window, \alert{before} training the final model:
 \begin{frame}{Time-Series Cross-Validation}
 Standard $K$-fold CV assigns folds randomly.  For time series, folds must respect the time order.
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 \textbf{Example with 5 folds} (training window = 2011--2019):
 
 \begin{center}
@@ -260,13 +262,7 @@ This gives a single number summarizing how well a given hyperparameter setting r
 
 \begin{frame}{The Complete Loop}
 \begin{enumerate}
-\item For each prediction month $t$:
-\begin{enumerate}
-\item Define the training window (months 1 through $t{-}1$).
-\item Run time-series CV within the training window, selecting hyperparameters by Spearman.
-\item Train the model on the full training window with the best hyperparameters.
-\item Predict month $t$.
-\end{enumerate}
+\item For each prediction month $t$: define the training window, run time-series CV to select hyperparameters, retrain on the full window, and predict month $t$.
 \item Collect all one-step-ahead predictions.
 \end{enumerate}
 

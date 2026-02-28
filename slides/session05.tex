@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,t]{beamer}
 \usetheme{metropolis}
 
 \usepackage{graphicx}
@@ -75,12 +75,11 @@ Whether we go long the top decile or long-short top versus bottom, the weights a
 \item Robust to outliers in predictions --- extreme predictions within a group get the same weight.
 \end{itemize}
 
-\vspace{0.3cm}
 \textbf{Disadvantages:}
 \begin{itemize}
 \item \alert{Throws away information:} a stock barely in the top decile gets the same weight as the top-ranked stock.
 \item Sensitive to the choice of breakpoints (quintiles? deciles?).
-\item Discontinuous: a tiny change in predicted rank can move a stock from one group to another, causing unnecessary turnover.
+\item Discontinuous: small rank changes can move a stock between groups, causing unnecessary turnover.
 \end{itemize}
 \end{frame}
 
@@ -149,8 +148,9 @@ w_i \;\propto\; e^{\lambda u_i} - c
 \item $\lambda \to 0$: converges to equal weights.
 \item $\lambda \to \infty$: concentrates all weight in the top-ranked stock.
 \end{itemize}
+\end{frame}
 
-\vspace{0.3cm}
+\begin{frame}{Exponential Tilts and Softmax}
 The exponential tilt is related to the \alert{softmax} function used in neural networks.  With a temperature parameter $T = 1/\lambda$, the softmax assigns:
 \[
 w_i = \frac{e^{u_i / T}}{\sum_j e^{u_j / T}}
@@ -161,14 +161,16 @@ This produces long-only weights that sum to one.
 \begin{frame}{Comparing Weight Functions}
 \begin{center}
 \begin{tabular}{lll}
+\toprule
 \textbf{Function} & \textbf{Shape} & \textbf{Character} \\
-\hline
+\midrule
 Step (sort-based) & flat within groups & simple, discontinuous \\
 Linear & straight line & smooth, moderate \\
 Power ($p > 1$) & convex & concentrates at the top \\
 Power ($p < 1$) & concave & more diversified \\
 Exponential & convex & aggressively concentrates \\
 Softmax & convex, long-only & all weights positive \\
+\bottomrule
 \end{tabular}
 \end{center}
 
@@ -191,7 +193,6 @@ Most investors cannot short stocks.  Even those who can face:
 \item Regulatory constraints (many funds are long-only by mandate).
 \end{itemize}
 
-\vspace{0.3cm}
 \textbf{Long-only weight functions:}
 \begin{itemize}
 \item Softmax: $w_i = e^{\lambda u_i} / \sum_j e^{\lambda u_j}$
@@ -291,9 +292,9 @@ The \alert{information ratio} measures alpha relative to the volatility of the r
 \item $\sigma(\varepsilon)$ = standard deviation of the regression residuals (``tracking error'' relative to the CAPM benchmark).
 \item The IR measures how \alert{consistently} the portfolio delivers alpha.
 \end{itemize}
+\end{frame}
 
-\vspace{0.3cm}
-\textbf{Interpretation:}
+\begin{frame}{Sharpe vs.\ Information Ratio}
 \begin{itemize}
 \item The Sharpe ratio measures total risk-adjusted return.
 \item The information ratio measures \alert{skill} --- alpha per unit of idiosyncratic risk.
@@ -304,11 +305,13 @@ The \alert{information ratio} measures alpha relative to the volatility of the r
 \begin{frame}{Comparing the Three Metrics}
 \begin{center}
 \begin{tabular}{lll}
+\toprule
 \textbf{Metric} & \textbf{Numerator} & \textbf{Denominator} \\
-\hline
+\midrule
 Sharpe ratio & excess return $\bar r_p - r_f$ & total volatility $\sigma_p$ \\
 CAPM alpha & $\hat\alpha$ & (reported with $t$-stat) \\
 Information ratio & $\hat\alpha$ & residual volatility $\sigma(\varepsilon)$ \\
+\bottomrule
 \end{tabular}
 \end{center}
 

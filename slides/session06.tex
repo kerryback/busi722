@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,t]{beamer}
 \usetheme{metropolis}
 
 \usepackage{graphicx}
@@ -117,7 +117,7 @@ r_{p,t}^{\text{net}} = r_{p,t}^{\text{gross}} - \text{transaction costs}_t - \te
 
 \begin{frame}{Rebalancing Frequency}
 How often should we retrain the model and rebalance the portfolio?
-\vspace{0.3cm}
+\vspace{0.15cm}
 
 \begin{center}
 \begin{tabular}{lll}
@@ -152,13 +152,8 @@ where $w_{i,t-1}^{+}$ is the weight of stock $i$ at the end of the previous mont
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Value Weighting to Reduce Small-Cap Exposure}
-Equal-weighted portfolios tilt heavily toward small stocks, which are:
-\begin{itemize}
-\item harder and more expensive to trade,
-\item where many ML signals are strongest (possibly spuriously),
-\item not investable at scale.
-\end{itemize}
+\begin{frame}{Small-Cap Exposure}
+Equal-weighted portfolios tilt heavily toward small stocks, which are harder to trade, where ML signals may be spuriously strong, and not investable at scale.
 
 \vspace{0.3cm}
 \textbf{Solutions:}
@@ -173,7 +168,7 @@ Equal-weighted portfolios tilt heavily toward small stocks, which are:
 
 \begin{frame}[c]
 \centering
-\Huge Alternative Portfolio Construction Methods
+\Huge Portfolio Construction Methods
 \end{frame}
 
 \begin{frame}{Mean-Variance Optimization}
@@ -182,15 +177,11 @@ Equal-weighted portfolios tilt heavily toward small stocks, which are:
 \mathbf{w}'\boldsymbol{\mu} - \frac{\gamma}{2}\,\mathbf{w}'\boldsymbol{\Sigma}\mathbf{w}
 \]
 The \alert{tangency portfolio} maximizes the Sharpe ratio:
-\[
-\mathbf{w}^* \;\propto\; \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}
-\]
+$\mathbf{w}^* \propto \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}$
 
-\vspace{0.3cm}
 \textbf{Pros:}
 \begin{itemize}
-\item Theoretically optimal given correct inputs.
-\item Balances return and risk.
+\item Theoretically optimal given correct inputs.  Balances return and risk.
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
@@ -206,18 +197,15 @@ Set $\boldsymbol{\mu} = \mathbf{0}$ and solve only for the lowest-risk portfolio
 \mathbf{w}^* = \arg\min_{\mathbf{w}} \;\mathbf{w}'\boldsymbol{\Sigma}\mathbf{w} \quad \text{s.t.} \quad \mathbf{w}'\mathbf{1} = 1
 \]
 
-\vspace{0.3cm}
 \textbf{Pros:}
 \begin{itemize}
 \item Requires \alert{only the covariance matrix} --- no return forecasts needed.
 \item Covariances are more stable and easier to estimate than expected returns.
-\item Historically competitive Sharpe ratios despite ignoring returns.
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
 \item Concentrates in low-volatility stocks (can be extreme without constraints).
 \item Still sensitive to estimation error in $\boldsymbol{\Sigma}$ --- use shrinkage estimators (Ledoit-Wolf).
-\item Ignores return predictions entirely.
 \end{itemize}
 \end{frame}
 
@@ -226,35 +214,32 @@ Equalize each asset's \alert{contribution to total portfolio risk}:
 \[
 w_i \times (\boldsymbol{\Sigma}\mathbf{w})_i = \frac{1}{n}\,\mathbf{w}'\boldsymbol{\Sigma}\mathbf{w} \quad \text{for all } i
 \]
-
 A simple approximation: $w_i \propto 1/\sigma_i$ (inverse-volatility weighting).
 
-\vspace{0.3cm}
 \textbf{Pros:}
 \begin{itemize}
 \item More diversified than minimum variance --- no single asset dominates risk.
-\item No return forecasts needed.
 \item Robust to estimation error; widely used in practice (e.g., Bridgewater's All Weather).
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
 \item Ignores correlations in the simple version (inverse-volatility).
-\item Does not optimize for return.
 \item Often requires leverage to achieve competitive expected returns.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Comparing Portfolio Construction Methods}
-\small
 \begin{center}
 \begin{tabular}{lccc}
+\toprule
 & \textbf{Tangency} & \textbf{Min-Variance} & \textbf{Risk Parity} \\
-\hline
+\midrule
 Uses return forecasts & yes & no & no \\
 Uses covariance & yes & yes & yes (or vol only) \\
 Diversification & low & low & high \\
-Estimation sensitivity & very high & moderate & low \\
+Est.\ sensitivity & very high & moderate & low \\
 Out-of-sample Sharpe & often poor & competitive & competitive \\
+\bottomrule
 \end{tabular}
 \end{center}
 
@@ -284,7 +269,7 @@ All risk-based methods require a covariance matrix $\boldsymbol{\Sigma}$.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Ledoit-Wolf Shrinkage: The Idea}
+\begin{frame}{Ledoit-Wolf Shrinkage}
 \textbf{Insight:} the sample covariance is \alert{unbiased but high-variance}.  A structured target is \alert{biased but low-variance}.  Blending them reduces mean-squared error.
 
 \[
@@ -297,13 +282,7 @@ All risk-based methods require a covariance matrix $\boldsymbol{\Sigma}$.
 \item $\delta \in [0,1]$ = \textbf{shrinkage intensity} --- how much to shrink toward the target
 \end{itemize}
 
-\vspace{0.3cm}
-This is the \alert{bias-variance tradeoff} applied to covariance estimation:
-\begin{itemize}
-\item $\delta = 0$: pure sample covariance (low bias, high variance)
-\item $\delta = 1$: pure target (high bias, low variance)
-\item $\delta^*$: optimal blend that minimizes estimation error
-\end{itemize}
+The \alert{bias-variance tradeoff}: $\delta = 0$ gives the noisy sample covariance; $\delta = 1$ gives the structured target; $\delta^*$ is the optimal blend minimizing estimation error.
 \end{frame}
 
 \begin{frame}{Choosing the Shrinkage Target}
