@@ -27,16 +27,14 @@
 From Session 4, we have one-step-ahead predicted return ranks for every stock in every month.
 
 \vspace{0.3cm}
-\begin{shadedbox}[title=The Question]
-How do we translate these predictions into portfolio weights?
-\end{shadedbox}
+How do we translate these predictions into \alert{portfolio weights}?
 
 \vspace{0.3cm}
 We need a function $w_i = g(\text{rank}_i)$ that maps each stock's predicted rank to a portfolio weight.
-\begin{baritemize}
+\begin{itemize}
 \item The function should be \alert{monotone}: higher predicted rank $\Rightarrow$ larger weight.
 \item There are many valid choices, from simple to sophisticated.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Sort-Based Portfolios}
@@ -67,9 +65,7 @@ Whether we go long the top decile or long-short top versus bottom, the weights a
 \end{itemize}
 
 \vspace{0.3cm}
-\begin{shadedbox}[title=Key Observation]
-Sorting and equal-weighting within groups is just \textbf{one particular} monotone function mapping predictions to weights.  There are many others.
-\end{shadedbox}
+\alert{Sorting and equal-weighting within groups is just one particular monotone function mapping predictions to weights.  There are many others.}
 \end{frame}
 
 \begin{frame}{Pros and Cons of Sorting}
@@ -103,11 +99,11 @@ u_i = \frac{\text{rank}_i}{n}
 Then set portfolio weights as a monotone function of $u_i$.
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item This uses the \alert{entire cross section} of predictions, not just the extremes.
 \item No arbitrary breakpoints.
 \item Different function shapes express different views about how aggressively to concentrate in top-ranked stocks.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Linear Weights}
@@ -117,12 +113,11 @@ w_i \;\propto\; u_i - \bar u
 \]
 where $\bar u = 0.5$ is the median rank.
 
-\begin{baritemize}
-\item Stocks above the median get positive weights; below get negative.
-\item Dollar-neutral by construction (weights sum to zero).
+\begin{itemize}
+\item Stocks above the median get positive weights; below get negative.  Dollar-neutral by construction.
 \item Every stock's weight is proportional to its \alert{distance from the median rank}.
 \item Equal spacing: the difference in weight between any two adjacent-ranked stocks is the same.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Power Functions}
@@ -133,11 +128,11 @@ w_i \;\propto\; u_i^{\,p} - c
 where $c$ is chosen so that weights sum to zero.
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item $p = 1$: linear weights (equal spacing).
 \item $p > 1$ (convex): \alert{concentrates} weight in the top-ranked stocks.  Higher $p$ = more aggressive.
 \item $0 < p < 1$ (concave): \alert{spreads} weight more evenly.  Less concentration at the top.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 The parameter $p$ controls the trade-off between \alert{conviction} (concentrating in the best predictions) and \alert{diversification} (spreading weight across many stocks).
@@ -149,12 +144,11 @@ Apply an exponential transformation:
 w_i \;\propto\; e^{\lambda u_i} - c
 \]
 
-\begin{baritemize}
-\item $\lambda > 0$: tilts toward top-ranked stocks.
-\item Larger $\lambda$: more aggressive concentration.
+\begin{itemize}
+\item $\lambda > 0$: tilts toward top-ranked stocks; larger $\lambda$ means more aggressive concentration.
 \item $\lambda \to 0$: converges to equal weights.
 \item $\lambda \to \infty$: concentrates all weight in the top-ranked stock.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 The exponential tilt is related to the \alert{softmax} function used in neural networks.  With a temperature parameter $T = 1/\lambda$, the softmax assigns:
@@ -191,11 +185,11 @@ All of these are \alert{monotone}: a higher predicted rank always means a larger
 
 \begin{frame}{Why Long-Only?}
 Most investors cannot short stocks.  Even those who can face:
-\begin{baritemize}
+\begin{itemize}
 \item Short-selling costs (borrowing fees, margin requirements).
 \item Short squeezes and recall risk.
 \item Regulatory constraints (many funds are long-only by mandate).
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \textbf{Long-only weight functions:}
@@ -214,12 +208,11 @@ w_i \;\propto\; \text{mcap}_i \times g(u_i)
 where $g$ is a monotone increasing function (e.g., $g(u) = u^p$ or $g(u) = e^{\lambda u}$).
 
 \vspace{0.3cm}
-\begin{baritemize}
-\item Stays close to the investable market-cap benchmark.
-\item Large stocks retain significant weight even with low ranks.
+\begin{itemize}
+\item Stays close to the investable market-cap benchmark; large stocks retain significant weight even with low ranks.
 \item More realistic for large portfolios --- avoids overweighting micro-caps.
 \item The tilt function $g$ controls how much the portfolio deviates from the benchmark.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 %%% PART 4: EVALUATING PORTFOLIO RETURNS %%%
@@ -235,11 +228,11 @@ Once we choose a weight function, we compute the portfolio return each month:
 r_{p,t} = \sum_{i=1}^{n_t} w_{i,t}\, r_{i,t}
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item $w_{i,t}$ = weight of stock $i$ in month $t$ (from the weight function applied to predicted ranks).
 \item $r_{i,t}$ = realized return of stock $i$ in month $t$.
 \item This gives us a time series of monthly portfolio returns: $r_{p,1}, r_{p,2}, \ldots, r_{p,T}$.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Sharpe Ratio}
@@ -248,12 +241,11 @@ The \alert{Sharpe ratio} measures risk-adjusted excess return:
 \text{Sharpe} = \frac{\bar r_p - r_f}{\sigma_p}
 \]
 
-\begin{baritemize}
-\item $\bar r_p$ = mean monthly portfolio return.
-\item $r_f$ = risk-free rate.
+\begin{itemize}
+\item $\bar r_p$ = mean monthly portfolio return; $r_f$ = risk-free rate.
 \item $\sigma_p$ = standard deviation of monthly portfolio returns.
 \item Annualize by multiplying by $\sqrt{12}$.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 A higher Sharpe ratio means more return per unit of risk.  For a long-short portfolio, $r_f$ is often set to zero (the portfolio is self-financing).
@@ -265,11 +257,11 @@ Regress the portfolio's excess return on the market's excess return:
 r_{p,t} - r_{f,t} = \alpha + \beta (r_{m,t} - r_{f,t}) + \varepsilon_t
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item $\alpha$ = the portfolio's \alert{average return not explained by market exposure}.
 \item $\beta$ = the portfolio's sensitivity to the market.
 \item $\varepsilon_t$ = residual (idiosyncratic) return.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 A positive $\alpha$ means the portfolio earns more than its market beta would predict.  This is what active management aims to deliver.
@@ -281,11 +273,11 @@ The regression also gives us a standard error for $\alpha$, and hence a $t$-stat
 t = \frac{\hat\alpha}{\text{SE}(\hat\alpha)}
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item $|t| > 2$ is a rough rule for significance at the 5\% level.
 \item With monthly data over 10 years (120 observations), we need economically large alphas to achieve significance.
 \item \alert{Always report the $t$-statistic}, not just the alpha estimate.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{CAPM Information Ratio}
@@ -294,11 +286,11 @@ The \alert{information ratio} measures alpha relative to the volatility of the r
 \text{IR} = \frac{\hat\alpha}{\sigma(\varepsilon)}
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item $\hat\alpha$ = estimated CAPM alpha.
 \item $\sigma(\varepsilon)$ = standard deviation of the regression residuals (``tracking error'' relative to the CAPM benchmark).
 \item The IR measures how \alert{consistently} the portfolio delivers alpha.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \textbf{Interpretation:}
@@ -321,22 +313,19 @@ Information ratio & $\hat\alpha$ & residual volatility $\sigma(\varepsilon)$ \\
 \end{center}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item The Sharpe ratio evaluates the portfolio as a \alert{standalone investment}.
 \item Alpha and the IR evaluate it as an \alert{addition to the market portfolio}.
-\item A portfolio can have a high Sharpe ratio but zero alpha (if it just takes on market risk).
-\item A portfolio can have a high IR but a low Sharpe ratio (if alpha is consistent but small).
-\end{baritemize}
+\item A portfolio can have a high Sharpe ratio but zero alpha (if it just loads on market risk), or a high IR but low Sharpe ratio (if alpha is consistent but small).
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Putting It Together}
-\begin{barenumerate}
-\item Generate one-step-ahead predicted ranks (Session 4).
-\item Choose a weight function: sort-based, linear, power, exponential, softmax, or score-tilted.
+\begin{enumerate}
+\item Generate one-step-ahead predicted ranks and choose a weight function (sort-based, linear, power, exponential, softmax, or score-tilted).
 \item Compute monthly portfolio returns.
-\item Evaluate: Sharpe ratio, CAPM alpha (with $t$-stat), and information ratio.
-\item In Session 6: extend evaluation to Fama-French factors and other considerations.
-\end{barenumerate}
+\item Evaluate: Sharpe ratio, CAPM alpha (with $t$-stat), and information ratio.  Session 6 extends to Fama-French factors and other considerations.
+\end{enumerate}
 \end{frame}
 
 \end{document}

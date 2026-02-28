@@ -24,12 +24,11 @@
 \end{frame}
 
 \begin{frame}{Categories of Transaction Costs}
-\begin{baritemize}
-\item \textbf{Commissions:} fees paid to the broker per trade.  Near zero at most brokerages today, but not negligible for institutional-sized orders.
-\item \textbf{Bid-ask spread:} the cost of immediacy.  You buy at the ask and sell at the bid.  Half the spread is a rough per-trade cost estimate.
-\item \textbf{Market impact:} large orders move the price against you.  The more you trade, the worse the price you get.  This is typically the dominant cost for institutional strategies.
+\begin{itemize}
+\item \textbf{Commissions and bid-ask spread:} broker fees are near zero today, but the bid-ask spread (half-spread per trade) remains a meaningful cost, especially for illiquid stocks.
+\item \textbf{Market impact:} large orders move the price against you.  This is typically the dominant cost for institutional strategies.
 \item \textbf{Opportunity cost:} trades you cancel or delay because the market moved before you could execute.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Market Impact}
@@ -38,11 +37,11 @@ Market impact grows with trade size relative to the stock's liquidity:
 \text{impact} \;\approx\; c \times \sqrt{\frac{\text{shares traded}}{\text{average daily volume}}}
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item The square-root law is a widely used approximation.
 \item Impact is larger for small, illiquid stocks.
 \item This creates a \alert{capacity constraint}: strategies that trade heavily in small stocks face rapidly increasing costs as the fund grows.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Estimating Transaction Costs}
@@ -51,11 +50,11 @@ A simple model for backtesting:
 \text{cost}_t = \sum_{i=1}^{n} c_i \times |w_{i,t} - w_{i,t-1}|
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item $|w_{i,t} - w_{i,t-1}|$ = the absolute change in weight (turnover) for stock $i$.
 \item $c_i$ = estimated one-way cost for stock $i$ (e.g., half the bid-ask spread plus estimated market impact).
 \item Common simplification: use a flat cost per unit of turnover (e.g., 5--20 basis points one-way).
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 %%% SHORT-SELLING COSTS %%%
@@ -68,21 +67,19 @@ A simple model for backtesting:
 \begin{frame}{What Does Shorting Cost?}
 To short a stock, you borrow shares and sell them.  This incurs:
 
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{Borrow fee:} an annualized fee paid to the lender (typically 0.3--1\% for easy-to-borrow stocks, but can be 10--50\%+ for hard-to-borrow names).
-\item \textbf{Margin requirements:} you must post collateral, tying up capital.
-\item \textbf{Recall risk:} the lender can recall the shares at any time, forcing you to close the position.
+\item \textbf{Margin and recall risk:} you must post collateral, and the lender can recall shares at any time, forcing you to close the position.
 \item \textbf{Short-sale constraints:} some stocks are simply unavailable to borrow.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Implications for Long-Short Strategies}
-\begin{baritemize}
-\item ML models often find that the \alert{short side is more profitable} than the long side --- but also more expensive to trade.
-\item Short-selling costs disproportionately affect small, illiquid, and distressed stocks --- exactly where many ML signals are strongest.
+\begin{itemize}
+\item ML models often find the \alert{short side is more profitable} than the long side --- but short-selling costs disproportionately affect small, illiquid stocks where signals are strongest.
 \item A strategy that looks great in a frictionless backtest may be mediocre or unprofitable after accounting for borrow fees.
 \item \alert{Always evaluate long-only and long-short separately} to see where the value is coming from.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 %%% NET-OF-COST EVALUATION %%%
@@ -98,10 +95,10 @@ The net portfolio return in month $t$:
 r_{p,t}^{\text{net}} = r_{p,t}^{\text{gross}} - \text{transaction costs}_t - \text{borrow costs}_t
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item Recompute Sharpe ratios, CAPM alphas, and information ratios using $r_{p,t}^{\text{net}}$.
 \item This is the \alert{real test} of a strategy.  Many academic strategies fail it.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \textbf{Avramov, Cheng, and Metzker} (\textit{Management Science}, 2023):
@@ -133,12 +130,11 @@ Annually & low turnover & very stale signal \\
 \end{center}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item The optimal frequency depends on the \alert{decay rate of the signal} versus the \alert{cost of trading}.
-\item Momentum decays quickly --- monthly rebalancing is typical.
-\item Value signals are slow-moving --- quarterly may suffice.
+\item Momentum decays quickly (monthly rebalancing is typical); value signals are slow-moving (quarterly may suffice).
 \item A hybrid approach: retrain monthly but only trade when the change in target weight exceeds a threshold (\alert{buffer rules}).
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Turnover}
@@ -149,11 +145,11 @@ Annually & low turnover & very stale signal \\
 where $w_{i,t-1}^{+}$ is the weight of stock $i$ at the end of the previous month (after returns).
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item A turnover of 1.0 means the entire portfolio is replaced.
 \item A long-short decile portfolio rebalanced monthly can have turnover $> 1.0$.
 \item Smooth weight functions (linear, power) typically generate \alert{lower turnover} than sort-based step functions, because small changes in predicted rank produce small changes in weight.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Value Weighting to Reduce Small-Cap Exposure}
@@ -166,11 +162,11 @@ Equal-weighted portfolios tilt heavily toward small stocks, which are:
 
 \vspace{0.3cm}
 \textbf{Solutions:}
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{Value-weight within groups:} sort into deciles by predicted rank, then value-weight (by market cap) within each decile.
 \item \textbf{Score-tilted market-cap weights} (from Session 5): $w_i \propto \text{mcap}_i \times g(u_i)$.  Stays close to the market-cap benchmark.
 \item \textbf{Market-cap filters:} exclude micro-caps or nano-caps entirely.  Evaluate only on stocks you could actually trade.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 %%% PORTFOLIO CONSTRUCTION ALTERNATIVES %%%
@@ -263,11 +259,11 @@ Out-of-sample Sharpe & often poor & competitive & competitive \\
 \end{center}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{If you trust your return forecasts:} tangency portfolio, but regularize heavily (shrinkage, constraints).
 \item \textbf{If you don't trust return forecasts:} minimum variance or risk parity.
 \item \textbf{Hybrid:} use predicted ranks for stock selection (which stocks to hold), and risk-based methods for position sizing (how much of each).
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 %%% PREDICTING RISK %%%
@@ -281,12 +277,11 @@ Out-of-sample Sharpe & often poor & competitive & competitive \\
 All risk-based methods require a covariance matrix $\boldsymbol{\Sigma}$.
 
 \vspace{0.3cm}
-\begin{baritemize}
-\item With $n$ stocks, $\boldsymbol{\Sigma}$ has $n(n+1)/2$ unique entries.  For 500 stocks, that is \alert{125,250 parameters} to estimate.
-\item With $T$ months of data, the \textbf{sample covariance} $\mathbf{S} = \frac{1}{T-1}\sum_{t=1}^{T}(\mathbf{r}_t - \bar{\mathbf{r}})(\mathbf{r}_t - \bar{\mathbf{r}})'$ has far more parameters than observations.
-\item Result: the sample covariance \alert{overfits}.  Its eigenvalues are too spread out --- the largest are too large, the smallest are too small (some may be zero or negative).
+\begin{itemize}
+\item With $n$ stocks, $\boldsymbol{\Sigma}$ has $n(n+1)/2$ unique entries.  For 500 stocks, that is \alert{125,250 parameters} to estimate --- far more than the number of monthly observations.
+\item The sample covariance \alert{overfits}: its eigenvalues are too spread out, and some may be zero or negative.
 \item Portfolios optimized with a noisy $\boldsymbol{\Sigma}$ take extreme, unstable positions.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Ledoit-Wolf Shrinkage: The Idea}
@@ -296,11 +291,11 @@ All risk-based methods require a covariance matrix $\boldsymbol{\Sigma}$.
 \boldsymbol{\Sigma}_{\text{shrunk}} = \delta \,\mathbf{F} + (1 - \delta)\,\mathbf{S}
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item $\mathbf{S}$ = sample covariance matrix (complex, noisy)
 \item $\mathbf{F}$ = \textbf{shrinkage target} --- a simple, structured matrix
 \item $\delta \in [0,1]$ = \textbf{shrinkage intensity} --- how much to shrink toward the target
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 This is the \alert{bias-variance tradeoff} applied to covariance estimation:
@@ -315,23 +310,22 @@ This is the \alert{bias-variance tradeoff} applied to covariance estimation:
 Common choices for the target $\mathbf{F}$:
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{Scaled identity:} $\mathbf{F} = \bar{\sigma}^2 \,\mathbf{I}$, where $\bar{\sigma}^2$ is the average diagonal of $\mathbf{S}$.  Assumes all stocks have the same variance and zero correlation.  Simple but aggressive.
 \item \textbf{Single-factor model:} $\mathbf{F} = \hat{\beta}\hat{\beta}'\sigma_m^2 + \mathbf{D}$, where $\hat{\beta}$ are market betas.  Preserves the market factor structure. This is the default in \texttt{sklearn.covariance.LedoitWolf}.
 \item \textbf{Constant-correlation:} all pairwise correlations equal the average sample correlation.  Preserves individual variances.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 Ledoit and Wolf (2004) derive a \alert{closed-form formula} for the optimal $\delta^*$ that minimizes the expected squared Frobenius norm of the estimation error.
 \end{frame}
 
 \begin{frame}{Effect of Shrinkage}
-\begin{baritemize}
-\item \textbf{Eigenvalues compress:} the extreme eigenvalues of $\mathbf{S}$ are pulled toward the mean.  The largest shrink, the smallest grow.  The matrix becomes better-conditioned.
-\item \textbf{Extreme correlations moderate:} spuriously high or low correlations are pulled toward a more reasonable structure.
+\begin{itemize}
+\item \textbf{Eigenvalues compress:} extreme eigenvalues of $\mathbf{S}$ are pulled toward the mean, and spurious correlations moderate.  The matrix becomes better-conditioned.
 \item \textbf{Portfolio weights stabilize:} minimum-variance portfolios computed with $\boldsymbol{\Sigma}_{\text{shrunk}}$ have less extreme, more diversified weights.
 \item \textbf{Out-of-sample risk improves:} the shrunk covariance produces portfolios with \alert{lower realized volatility} than the sample covariance.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Ledoit-Wolf in Python}
@@ -352,18 +346,18 @@ delta = lw.shrinkage_          # optimal shrinkage intensity
 \end{shadedbox}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item The \texttt{shrinkage\_} attribute reports the optimal $\delta^*$ --- typically 0.5--0.9 for monthly stock returns, meaning heavy shrinkage is optimal.
 \item Use \texttt{cov\_shrunk} anywhere you would use a sample covariance: minimum-variance portfolio, risk parity, mean-variance optimization.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Other Approaches to Covariance Estimation}
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{Factor models} (Barra-style): $\boldsymbol{\Sigma} = \mathbf{B}\boldsymbol{\Lambda}\mathbf{B}' + \mathbf{D}$.  Reduces dimensionality by modeling common factors.  Industry standard for large-scale risk models.
 \item \textbf{GARCH / DCC:} capture time-varying volatility and correlations.  Useful when risk regimes change.
 \item \textbf{Exponential weighting:} weight recent observations more heavily.  Simple, effective, and captures regime changes.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \textbf{Practical advice:} Ledoit-Wolf shrinkage is the easiest win.  It requires no modeling decisions beyond choosing a target, and the improvement over the sample covariance is reliable.  Start here, then consider factor models if you need more structure.
@@ -384,19 +378,19 @@ A \alert{drawdown} is the decline from a portfolio's peak value to a subsequent 
 where $V_{\max,t} = \max_{s \le t} V_s$ is the running maximum of portfolio value.
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item Always negative (or zero at a new high).
 \item The \textbf{maximum drawdown} is the largest peak-to-trough decline over the sample.
 \item Drawdown \alert{duration} measures how long it takes to recover to the previous peak.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Why Drawdowns Matter}
-\begin{baritemize}
+\begin{itemize}
 \item The Sharpe ratio treats upside and downside volatility equally.  Investors don't.
 \item A strategy with a high Sharpe ratio but a 60\% maximum drawdown is psychologically and practically devastating --- investors redeem, managers get fired.
 \item Drawdowns capture \alert{path-dependent risk} that summary statistics miss.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \textbf{Reporting:}
@@ -407,12 +401,11 @@ where $V_{\max,t} = \max_{s \le t} V_s$ is the running maximum of portfolio valu
 \end{frame}
 
 \begin{frame}{Drawdowns and Strategy Evaluation}
-\begin{baritemize}
+\begin{itemize}
 \item Compare drawdowns across different weight functions, rebalancing frequencies, and cost assumptions.
 \item A strategy that looks great on Sharpe ratio but has deeper drawdowns than a simpler approach may not be worth the complexity.
-\item Long-short strategies can have severe drawdowns during short squeezes (e.g., January 2021).
-\item Value-weighted portfolios typically have \alert{shallower drawdowns} than equal-weighted portfolios (less small-cap exposure).
-\end{baritemize}
+\item Long-short strategies can have severe drawdowns during short squeezes; value-weighted portfolios typically have \alert{shallower drawdowns} (less small-cap exposure).
+\end{itemize}
 
 \vspace{0.3cm}
 \textbf{Key takeaway:} always look at the full return path, not just summary statistics.  The underwater chart is one of the most important diagnostic plots for any quantitative strategy.

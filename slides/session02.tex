@@ -24,7 +24,7 @@
 \end{frame}
 
 \begin{frame}{The Rice Data Portal}
-\begin{baritemize}
+\begin{itemize}
 \item We will use the \href{https://data-portal.rice-business.org}{Rice Data Portal} for stock market data.
 \item The portal provides daily prices, valuation metrics, and fundamental data from SEC filings.
 \item Four main tables:
@@ -34,7 +34,7 @@
 \item \textbf{SF1} -- fundamentals from 10-K/10-Q filings
 \item \textbf{TICKERS} -- company metadata (sector, industry)
 \end{itemize}
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Storing Your Access Token}
@@ -45,9 +45,7 @@ Visit \href{https://data-portal.rice-business.org}{data-portal.rice-business.org
 \vspace{0.3cm}
 
 Claude creates a \texttt{.env} file:
-\begin{shadedbox}
 \texttt{RICE\_ACCESS\_TOKEN=abc123...}
-\end{shadedbox}
 
 \begin{itemize}
 \item The \texttt{.env} file keeps your token out of your code.
@@ -68,13 +66,11 @@ Claude creates a \texttt{.env} file:
 \vspace{0.3cm}
 
 Claude uses the \texttt{fetch-returns} skill, which:
-\begin{barenumerate}
-\item Queries \textbf{SEP} for end-of-month prices (year by year to avoid timeouts)
-\item Queries \textbf{DAILY} for end-of-month market cap
-\item Queries \textbf{TICKERS} for sector and industry
+\begin{enumerate}
+\item Queries \textbf{SEP} for end-of-month prices, \textbf{DAILY} for market cap, and \textbf{TICKERS} for sector/industry
 \item Calculates return, momentum, and lagged return
 \item Assigns size categories (Nano- through Mega-Cap)
-\end{barenumerate}
+\end{enumerate}
 
 \vspace{0.3cm}
 Includes \alert{delisted stocks} by default to avoid survivorship bias.
@@ -108,25 +104,19 @@ Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
 \text{momentum}_t \;=\; \frac{\text{closeadj}_{t-2}}{\text{closeadj}_{t-13}} - 1
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item Skips the most recent month ($t{-}1$): short-term reversal contaminates the signal.
-\item Uses split- and dividend-adjusted prices (\texttt{closeadj}).
-\item Requires 13 months of price history, so the first 12 months are \texttt{NaN}.
+\item Uses split- and dividend-adjusted prices (\texttt{closeadj}); requires 13 months of history.
 \item All calculations are \alert{grouped by ticker} --- never mixing prices across stocks.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Variables from the Returns Step}
-\begin{baritemize}
-\item \texttt{ticker}, \texttt{month} -- identifiers
-\item \texttt{return} -- monthly return (decimal: 0.05 = 5\%)
-\item \texttt{momentum} -- 12-month return skipping the most recent month
-\item \texttt{lagged\_return} -- prior month's return
-\item \texttt{close} -- split-adjusted closing price (end of month)
-\item \texttt{marketcap} -- market cap in thousands (\alert{shifted by 1 month})
-\item \texttt{size} -- Nano/Micro/Small/Mid/Large/Mega-Cap
-\item \texttt{sector}, \texttt{industry} -- classifications
-\end{baritemize}
+\begin{itemize}
+\item \texttt{ticker}, \texttt{month} (identifiers); \texttt{return} (monthly, decimal); \texttt{momentum} (12-month skipping recent); \texttt{lagged\_return} (prior month)
+\item \texttt{close} (split-adjusted price); \texttt{marketcap} (in thousands, \alert{shifted by 1 month}); \texttt{size} (Nano- through Mega-Cap)
+\item \texttt{sector}, \texttt{industry} -- classifications from TICKERS table
+\end{itemize}
 \end{frame}
 
 %%% PART 3: FETCH FUNDAMENTALS %%%
@@ -158,22 +148,18 @@ Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
 \vspace{0.3cm}
 
 Claude uses the \texttt{fetch-fundamentals} skill, which:
-\begin{barenumerate}
-\item Checks which variables are precomputed (fetches, doesn't calculate)
-\item Queries SF1 for annual data (\texttt{dimension='ARY'})
+\begin{enumerate}
+\item Checks which variables are precomputed, then queries SF1 for annual data (\texttt{dimension='ARY'})
 \item Calculates growth rates \alert{before} merging (critical!)
-\item Queries DAILY for valuation ratios (pb, pe) if requested
-\item Shifts DAILY variables by 1 month
-\end{barenumerate}
+\item Queries DAILY for valuation ratios if requested and shifts them by 1 month
+\end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile]{Why Calculate Growth Rates Before Merging?}
 After merging, fundamentals are \alert{forward-filled}: each filing's values repeat every month until the next filing.
 \vspace{0.3cm}
 
-\begin{shadedbox}[title=The Problem]
-If you calculate \texttt{pct\_change()} after forward-fill, consecutive months with the same value produce \textbf{zero growth} --- which is wrong.
-\end{shadedbox}
+\textbf{The Problem:} If you calculate \texttt{pct\_change()} after forward-fill, consecutive months with the same value produce \textbf{zero growth} --- which is wrong.
 
 \vspace{0.3cm}
 \textbf{Solution:} Calculate growth from the raw SF1 data (one row per filing), where consecutive rows are consecutive filings.
@@ -196,14 +182,11 @@ If you calculate \texttt{pct\_change()} after forward-fill, consecutive months w
 \vspace{0.3cm}
 
 Claude uses the \texttt{merge-data} skill, which:
-\begin{barenumerate}
-\item Aligns fundamentals to the first month \alert{after} the SEC filing date
-\item Merges on (ticker, month)
-\item Forward-fills fundamentals within each ticker
-\item Shifts all SF1 variables by 1 month (look-ahead bias)
-\item Shifts \texttt{close} to represent the prior month's price
+\begin{enumerate}
+\item Aligns fundamentals to the first month \alert{after} the SEC filing date, then merges on (ticker, month)
+\item Forward-fills fundamentals within each ticker, then shifts SF1 variables and \texttt{close} by 1 month
 \item Applies data quality filters
-\end{barenumerate}
+\end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile]{Merged Data: What You Get}
@@ -235,19 +218,15 @@ Note: \texttt{roe} and \texttt{grossmargin} are constant across months --- they 
 We want each row to represent: \alert{what we knew at the start of the month} paired with \alert{what happened during the month}.
 \vspace{0.3cm}
 
-\begin{shadedbox}[title=Look-Ahead Bias]
-Using information that was \textbf{not yet available} at the time of the investment decision. Backtests that suffer from this overstate performance --- sometimes dramatically.
-\end{shadedbox}
+\textbf{Look-Ahead Bias:} Using information that was \textbf{not yet available} at the time of the investment decision. Backtests that suffer from this overstate performance --- sometimes dramatically.
 \end{frame}
 
 \begin{frame}{How the Skills Handle It}
-\begin{baritemize}
-\item \textbf{Market cap and DAILY ratios} (pb, pe, ps): shifted by 1 month after fetching.  The value for January is from end of December.
-\item \textbf{Close price}: shifted by 1 month after merging.  Represents prior month's closing price.
+\begin{itemize}
+\item \textbf{Market cap, DAILY ratios, and close price}: all shifted by 1 month so January's values come from end of December.
 \item \textbf{SF1 fundamentals} (roe, de, etc.): aligned to the first month \emph{after} the SEC filing date, then forward-filled, then shifted by 1 month.
-\item \textbf{Momentum}: uses prices through month $t{-}2$, so it is known at the start of month $t$.
-\item \textbf{Lagged return}: prior month's return, known at the start of the current month.
-\end{baritemize}
+\item \textbf{Momentum and lagged return}: built with a lag by construction (momentum uses $t{-}13$ to $t{-}2$; lagged return uses $t{-}1$).
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Summary of Shifts}
@@ -276,10 +255,10 @@ return & SEP & not shifted (target variable) \\
 
 \begin{frame}{Data Quality Filters}
 The \texttt{merge-data} skill applies two filters automatically:
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{Price filter:} drop rows with \texttt{close} $< \$5.00$
 \item \textbf{Missing data:} drop rows with any \texttt{NaN} values
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \begin{center}

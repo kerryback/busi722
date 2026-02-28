@@ -27,16 +27,14 @@
 In a standard ML course, you randomly split data into training and test sets.
 \vspace{0.3cm}
 
-\begin{shadedbox}[title=The Problem with Financial Data]
-If we randomly assign months to train and test, the training set will contain \textbf{future} data relative to some test observations.  The model sees the future before predicting it.
-\end{shadedbox}
+\alert{If we randomly assign months to train and test, the training set will contain future data relative to some test observations.  The model sees the future before predicting it.}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item Financial data has a natural \alert{time ordering} that must be respected.
 \item The model should never train on data that comes after the prediction date.
 \item This is the same look-ahead bias we avoided when constructing features.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Time-Series Split}
@@ -50,11 +48,11 @@ $\underbrace{\text{2011} \quad \cdots \quad \text{2019}}_{\text{Training}}$ & $\
 \end{center}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item Train the model on all stock-months through 2019.
 \item Generate predictions for 2020--2025.
 \item Evaluate: do the predictions correctly rank stocks?
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \textbf{Limitation:} a single split gives only one evaluation.  The result depends heavily on where you cut.
@@ -64,12 +62,11 @@ $\underbrace{\text{2011} \quad \cdots \quad \text{2019}}_{\text{Training}}$ & $\
 \alert{Prompt:} ``Read the merged data.  Standardize features cross-sectionally each month. Use months through 2019 as training and 2020 onward as test.  Fit a LightGBM model and predict return ranks in the test set.''
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item This is a reasonable starting point but has drawbacks.
-\item The model is trained once and never updated.
-\item By 2025, the model is using weights learned from data ending in 2019 --- six years stale.
-\item Markets change.  Relationships between features and returns evolve.  The model should be \alert{retrained} as new data arrives.
-\end{baritemize}
+\item The model is trained once and never updated --- by 2025, the weights are six years stale.
+\item Markets change and relationships evolve, so the model should be \alert{retrained} as new data arrives.
+\end{itemize}
 \end{frame}
 
 %%% PART 2: MOVING WINDOWS %%%
@@ -83,23 +80,21 @@ $\underbrace{\text{2011} \quad \cdots \quad \text{2019}}_{\text{Training}}$ & $\
 Instead of training once, \alert{retrain the model each month} (or each quarter) using data up to that point.  Predict only the next period.
 
 \vspace{0.3cm}
-\begin{barenumerate}
-\item Train on months 1 through $t-1$.
-\item Predict month $t$.
-\item Record the predictions.
+\begin{enumerate}
+\item Train on months 1 through $t-1$; predict month $t$ and record the predictions.
 \item Move forward: train on months 1 through $t$, predict month $t+1$.
 \item Repeat until the end of the sample.
-\end{barenumerate}
+\end{enumerate}
 
 \vspace{0.3cm}
 This produces a time series of \alert{out-of-sample predictions}, each made without any future information.
 \end{frame}
 
 \begin{frame}{Expanding vs.\ Rolling Windows}
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{Expanding window:} the training set always starts at the beginning and grows over time.  More data $=$ more stable estimates.
 \item \textbf{Rolling window:} the training set is a fixed-length window (e.g., 5 years) that slides forward.  Adapts faster to changing markets.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \begin{center}
@@ -119,8 +114,7 @@ Predict 2022-01 & Train 2011--2021 & Train 2017--2021 \\
 \vspace{0.3cm}
 \begin{itemize}
 \item We are not forecasting 6 or 12 months ahead.
-\item Each month, we rank stocks based on the model's prediction for that month's return.
-\item We then observe the actual returns and record the results.
+\item Each month, we rank stocks based on the model's prediction, then observe actual returns and record results.
 \item This simulates what we would do in real time: retrain, predict, trade, repeat.
 \end{itemize}
 
@@ -156,22 +150,22 @@ The collection of one-step-ahead predictions across all months forms the \alert{
 We predict return \alert{ranks}, not dollar returns.  So the question is: do our predicted ranks agree with the actual ranks?
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item We don't need the predicted values to be accurate in magnitude.
 \item We need the \alert{ordering} to be right: stocks we predict to be at the top should actually outperform.
 \item This calls for a \alert{rank-based} metric.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Spearman Rank Correlation}
 The \alert{Spearman correlation} measures the agreement between two rankings.
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item Rank the predicted values 1 through $n$.
 \item Rank the actual returns 1 through $n$.
 \item Compute the Pearson correlation of the two rank vectors.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 \[
@@ -186,12 +180,11 @@ The \alert{Spearman correlation} measures the agreement between two rankings.
 \end{frame}
 
 \begin{frame}{Why Spearman?}
-\begin{baritemize}
+\begin{itemize}
 \item Directly measures what we care about: can the model \alert{rank stocks correctly}?
 \item Consistent with using ranked returns as the target.
-\item Insensitive to outliers --- a stock that doubles or crashes doesn't distort the metric.
-\item Does not require forming portfolios or choosing portfolio weights.
-\end{baritemize}
+\item Insensitive to outliers and does not require forming portfolios or choosing portfolio weights.
+\end{itemize}
 
 \vspace{0.3cm}
 We will use Spearman as the \alert{cross-validation metric} for selecting hyperparameters: the hyperparameter setting that produces the highest Spearman on validation data is the one we choose.
@@ -210,8 +203,7 @@ Every model has \alert{hyperparameters} that must be set before training:
 \begin{itemize}
 \item \textbf{LightGBM:} number of trees, learning rate, max depth, min samples per leaf
 \item \textbf{Ridge:} regularization strength $\lambda$
-\item \textbf{Neural net:} number of layers, hidden units, learning rate, dropout rate
-\item \textbf{Random Fourier features:} number of features $D$, bandwidth $\gamma$
+\item \textbf{Neural net / RFF:} layers, hidden units, dropout, number of features $D$, bandwidth $\gamma$
 \end{itemize}
 
 \vspace{0.3cm}
@@ -222,17 +214,11 @@ How do we choose them without using future data?
 At each step of the moving window, \alert{before} training the final model:
 
 \vspace{0.3cm}
-\begin{barenumerate}
-\item Split the training window into $K$ time-ordered folds.
-\item For each candidate hyperparameter setting:
 \begin{enumerate}
-\item For each fold $k$: train on folds before $k$, predict fold $k$.
-\item Compute the Spearman correlation on each fold's predictions.
-\item Average across folds.
+\item Split the training window into $K$ time-ordered folds.
+\item For each candidate hyperparameter setting, train on folds before $k$, predict fold $k$, and average Spearman across folds.
+\item Select the best hyperparameters and retrain on the full training window.
 \end{enumerate}
-\item Select the hyperparameters with the highest average Spearman.
-\item Retrain on the full training window with those hyperparameters.
-\end{barenumerate}
 \end{frame}
 
 \begin{frame}{Time-Series Cross-Validation}
@@ -262,18 +248,18 @@ Each validation fold comes \alert{after} its training fold --- no look-ahead bia
 In each validation fold, we have predictions and actual returns for all stocks in that fold's months.
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item Compute the Spearman correlation between predicted and actual return ranks \alert{within each month} of the fold.
 \item Average the monthly Spearman correlations within the fold.
 \item Then average across all $K$ folds.
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 This gives a single number summarizing how well a given hyperparameter setting ranks stocks on held-out future data --- exactly what we need.
 \end{frame}
 
 \begin{frame}{The Complete Loop}
-\begin{barenumerate}
+\begin{enumerate}
 \item For each prediction month $t$:
 \begin{enumerate}
 \item Define the training window (months 1 through $t{-}1$).
@@ -282,7 +268,7 @@ This gives a single number summarizing how well a given hyperparameter setting r
 \item Predict month $t$.
 \end{enumerate}
 \item Collect all one-step-ahead predictions.
-\end{barenumerate}
+\end{enumerate}
 
 \vspace{0.3cm}
 We now have out-of-sample predicted ranks for every stock in every month of the test period.  In subsequent sessions, we will use these predictions to form and evaluate portfolios.
@@ -293,12 +279,11 @@ This loop is expensive: at each step, we run $K$-fold CV (training the model $K$
 
 \vspace{0.3cm}
 \textbf{Practical shortcuts:}
-\begin{baritemize}
+\begin{itemize}
 \item Retrain quarterly instead of monthly (predict 3 months with the same model).
-\item Use a coarse hyperparameter grid.
-\item Fix hyperparameters after an initial CV and only retrain the model weights in subsequent months.
+\item Use a coarse hyperparameter grid, or fix hyperparameters after an initial CV and only retrain weights going forward.
 \item Use fast models (LightGBM, ridge) for the full loop; reserve slow models (neural nets) for fewer retraining dates.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \end{document}

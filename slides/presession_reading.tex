@@ -18,8 +18,7 @@
 \begin{frame}{The Goal}
 \begin{itemize}
 \item Use data to generate \alert{quantitative signals} that predict which stocks will outperform.
-\item Combine multiple signals using machine learning.
-\item Build portfolios, backtest, and evaluate performance.
+\item Combine signals using machine learning, build portfolios, backtest, and evaluate performance.
 \item This course: use AI (Claude Code) to do all of the above.
 \end{itemize}
 \end{frame}
@@ -34,9 +33,8 @@
 \begin{frame}{Momentum}
 \begin{itemize}
 \item Jegadeesh \& Titman (1993): buy stocks with high past 3--12 month returns, sell stocks with low past returns.
-\item Skip the most recent month (short-term reversal contaminates the signal).
 \item One of the most robust anomalies in finance---documented across countries, asset classes, and time periods.
-\item Typical implementation: sort on cumulative return from $t{-}12$ to $t{-}2$.
+\item Typical implementation: sort on cumulative return from $t{-}12$ to $t{-}2$ (skip the most recent month to avoid short-term reversal).
 \end{itemize}
 \end{frame}
 
@@ -44,24 +42,21 @@
 \begin{itemize}
 \item Moskowitz, Ooi \& Pedersen (2012): go long assets with positive past 12-month returns, short those with negative past returns.
 \item Differs from cross-sectional momentum: each asset is compared to \alert{its own past}, not to other assets.
-\item Works across equities, bonds, commodities, and currencies.
-\item Related to trend-following strategies used by managed futures funds.
+\item Works across equities, bonds, commodities, and currencies---related to trend-following strategies used by managed futures funds.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Moving Averages}
 \begin{itemize}
 \item SMA (simple moving average) and EMA (exponential moving average) smooth price series over a window.
-\item \textbf{200-day rule} (Faber 2007): buy when price is above its 200-day MA, sell when below.
-\item Brock, Lakonishok \& LeBaron (1992) found strong support for MA trading rules in the DJIA.
+\item \textbf{200-day rule} (Faber 2007): buy when price is above its 200-day MA, sell when below. Brock, Lakonishok \& LeBaron (1992) found strong support for MA rules in the DJIA.
 \item Zhu \& Zhou (2009) provided theoretical justification: MAs optimally combine momentum signals at different horizons.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Trend Factor}
 \begin{itemize}
-\item Han, Zhou \& Zhu (2016): construct a single factor from moving averages at multiple horizons.
-\item Combines short-, medium-, and long-term trend information into one signal.
+\item Han, Zhou \& Zhu (2016): combine short-, medium-, and long-term moving averages into a single trend signal.
 \item Earns large risk-adjusted returns that are not explained by standard factors.
 \item Performs well during crises when standard momentum crashes.
 \end{itemize}
@@ -82,8 +77,7 @@
 
 \begin{frame}{52-Week High}
 \begin{itemize}
-\item George \& Hwang (2004): nearness to 52-week high predicts future returns.
-\item Signal: current price / 52-week high price.
+\item George \& Hwang (2004): nearness to 52-week high (current price / 52-week high) predicts future returns.
 \item Outperforms standard momentum as a predictor and profits do not reverse.
 \item Behavioral explanation: \alert{anchoring bias}---investors use the 52-week high as a reference point and underreact when price approaches it.
 \end{itemize}
@@ -93,17 +87,15 @@
 \begin{itemize}
 \item \textbf{RSI} (Relative Strength Index): overbought above 70, oversold below 30. Mean-reversion signal.
 \item \textbf{MACD} (Moving Average Convergence Divergence): difference between short and long EMAs; signal line crossovers indicate trend changes.
-\item \textbf{Bollinger Bands:} price within a volatility envelope ($\pm 2$ standard deviations around 20-day MA). Profitability largely disappeared post-publication.
 \item Widely used by practitioners, but limited top-journal academic support for out-of-sample profitability.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Volatility}
 \begin{itemize}
-\item \textbf{Low-volatility anomaly:} stocks with low historical volatility earn higher \alert{risk-adjusted} returns than high-volatility stocks.
-\item Contradicts the basic risk--return tradeoff predicted by CAPM.
-\item Explanations: leverage constraints, lottery preferences, benchmarking by institutional investors.
+\item \textbf{Low-volatility anomaly:} stocks with low historical volatility earn higher \alert{risk-adjusted} returns than high-volatility stocks---contradicting the basic CAPM risk--return tradeoff.
 \item Ang, Hodrick, Xing \& Zhang (2006) documented the effect for idiosyncratic volatility.
+\item Explanations: leverage constraints, lottery preferences, benchmarking by institutional investors.
 \end{itemize}
 \end{frame}
 
@@ -117,25 +109,22 @@
 \begin{frame}{Value}
 \begin{itemize}
 \item \textbf{Book-to-market:} Fama \& French (1992) documented that high B/M stocks (``value'') outperform low B/M stocks (``growth'').
-\item \textbf{Earnings yield:} earnings / price. Basu (1977) showed high E/P stocks earn higher returns.
-\item \textbf{Cash flow yield:} cash flow / price. Lakonishok, Shleifer \& Vishny (1994).
+\item Other value ratios---earnings yield (Basu 1977) and cash flow yield (Lakonishok, Shleifer \& Vishny 1994)---tell a similar story.
 \item Common theme: stocks with high ratios of fundamental value to market price tend to outperform.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Profitability}
 \begin{itemize}
-\item Novy-Marx (2013): gross profit / assets is a strong predictor of returns.
+\item Novy-Marx (2013): gross profit / assets is a strong predictor of returns. ROE and operating margins also predict.
 \item More profitable firms earn higher returns, especially when combined with value.
-\item ROE, operating margins, and other profitability measures also predict.
 \item Fama \& French (2015) added profitability and investment factors to their three-factor model.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Growth \& Investment}
 \begin{itemize}
-\item \textbf{Asset growth:} Cooper, Gulen \& Schill (2008) showed firms that grow assets aggressively tend to \alert{underperform}.
-\item \textbf{Investment / assets:} similar finding---high capital expenditure predicts lower returns.
+\item \textbf{Asset growth:} Cooper, Gulen \& Schill (2008) showed firms that grow assets aggressively tend to \alert{underperform}. High capital expenditure similarly predicts lower returns.
 \item This is the \alert{investment anomaly}: empire-building firms destroy shareholder value.
 \item Consistent with overinvestment by managers or diminishing returns to capital.
 \end{itemize}
@@ -144,8 +133,7 @@
 \begin{frame}{Quality \& Accruals}
 \begin{itemize}
 \item \textbf{Accruals anomaly} (Sloan 1996): firms with high accruals (earnings far above cash flow) underperform. Cash-based earnings are more persistent.
-\item \textbf{Quality Minus Junk} (Asness, Frazzini \& Pedersen 2019): composite of profitability, growth, safety, and payout.
-\item Other quality signals: earnings stability, low leverage, high payout ratios.
+\item \textbf{Quality Minus Junk} (Asness, Frazzini \& Pedersen 2019): composite of profitability, growth, safety, and payout. Related signals include earnings stability, low leverage, and high payout ratios.
 \item Quality stocks earn higher returns despite being ``safer''---another puzzle for standard asset pricing.
 \end{itemize}
 \end{frame}
@@ -159,17 +147,15 @@
 
 \begin{frame}{Short Interest}
 \begin{itemize}
-\item Heavily shorted stocks tend to underperform (Desai et al.\ 2002, Rapach, Ringgenberg \& Zhou 2016).
+\item Heavily shorted stocks tend to underperform (Desai et al.\ 2002, Rapach, Ringgenberg \& Zhou 2016). Aggregate short interest also forecasts market-level returns.
 \item Short interest reflects \alert{informed pessimistic opinions}: short sellers face costs (borrowing fees, margin, unlimited loss potential), so they act only on strong convictions.
-\item Aggregate short interest also forecasts market-level returns.
 \item Constraints on short selling limit the speed of price adjustment to negative information.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Insider Trades}
 \begin{itemize}
-\item Insider purchases predict positive future returns (Lakonishok \& Lee 2001, Jeng, Metrick \& Zeckhauser 2003).
-\item Insider sales are less informative---insiders sell for many reasons (diversification, liquidity needs).
+\item Insider purchases predict positive future returns (Lakonishok \& Lee 2001, Jeng, Metrick \& Zeckhauser 2003). Sales are less informative---insiders sell for many reasons.
 \item Insiders have an \alert{informational advantage} about their own firms' prospects.
 \item SEC filings (Form 4) make insider trades public, typically within two business days.
 \end{itemize}
@@ -177,8 +163,7 @@
 
 \begin{frame}{Earnings Announcements}
 \begin{itemize}
-\item \textbf{Post-earnings announcement drift (PEAD):} one of the oldest documented anomalies (Ball \& Brown 1968, Bernard \& Thomas 1989).
-\item Prices drift in the direction of the earnings surprise for weeks or months after the announcement.
+\item \textbf{Post-earnings announcement drift (PEAD):} one of the oldest documented anomalies (Ball \& Brown 1968, Bernard \& Thomas 1989). Prices drift in the direction of the surprise for weeks or months.
 \item \textbf{Standardized unexpected earnings (SUE):} (actual $-$ expected) / standard deviation. Higher SUE predicts higher future returns.
 \item Explanation: investors underreact to earnings news and update beliefs too slowly.
 \end{itemize}
@@ -186,8 +171,7 @@
 
 \begin{frame}{Analyst Revisions}
 \begin{itemize}
-\item Changes in analyst earnings estimates and price targets predict returns.
-\item Upward revisions are followed by positive returns; downward revisions by negative returns.
+\item Changes in analyst earnings estimates and price targets predict returns: upward revisions are followed by positive returns, downward by negative.
 \item Information from analyst revisions is incorporated into prices slowly, similar to PEAD.
 \item Analysts aggregate information from multiple sources, making revisions a useful summary signal.
 \end{itemize}

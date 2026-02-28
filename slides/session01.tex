@@ -29,12 +29,11 @@ The Capital Asset Pricing Model says that the expected excess return of any asse
 \mathbb{E}[r_i] - r_f \;=\; \beta_i \bigl(\mathbb{E}[r_m] - r_f\bigr)
 \]
 
-\begin{baritemize}
-\item $r_i$ = return on asset $i$
-\item $r_f$ = risk-free rate
-\item $r_m$ = return on the market portfolio
+\begin{itemize}
+\item $r_i$ = return on asset $i$, \; $r_f$ = risk-free rate, \; $r_m$ = market return
 \item $\beta_i = \dfrac{\text{Cov}(r_i, r_m)}{\text{Var}(r_m)}$
-\end{baritemize}
+\item Higher beta $\Rightarrow$ higher expected return
+\end{itemize}
 \end{frame}
 
 \begin{frame}{CAPM $\Leftrightarrow$ Zero Alphas}
@@ -43,11 +42,11 @@ Run a time-series regression for each asset $i$:
 r_{it} - r_{ft} \;=\; \alpha_i + \beta_i(r_{mt} - r_{ft}) + \varepsilon_{it}
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item The CAPM is equivalent to saying $\alpha_i = 0$ for every asset.
 \item If $\alpha_i > 0$: the asset earns more than the CAPM predicts --- it is ``underpriced.''
 \item If $\alpha_i < 0$: the asset earns less than the CAPM predicts --- it is ``overpriced.''
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 Testing the CAPM $=$ testing whether alphas are jointly zero.
@@ -56,12 +55,11 @@ Testing the CAPM $=$ testing whether alphas are jointly zero.
 \begin{frame}{The Size Effect}
 \alert{Small stocks have historically earned higher average returns than large stocks}, even after adjusting for beta.
 
-\begin{baritemize}
+\begin{itemize}
 \item Sort stocks into portfolios by market capitalization
-\item Small-stock portfolios earn positive CAPM alphas
-\item Large-stock portfolios earn negative CAPM alphas
+\item Small-stock portfolios earn positive CAPM alphas; large-stock portfolios earn negative alphas
 \item This is evidence against the CAPM
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 Size is measured by market capitalization $=$ price $\times$ shares outstanding.
@@ -70,12 +68,11 @@ Size is measured by market capitalization $=$ price $\times$ shares outstanding.
 \begin{frame}{The Value Effect}
 \alert{Value stocks (high book-to-market) have historically outperformed growth stocks (low book-to-market)}, even after adjusting for beta.
 
-\begin{baritemize}
+\begin{itemize}
 \item Book-to-market $=$ book equity / market equity
-\item High B/M (``value'') stocks: positive CAPM alphas
-\item Low B/M (``growth'') stocks: negative CAPM alphas
+\item High B/M (``value'') stocks earn positive CAPM alphas; low B/M (``growth'') stocks earn negative alphas
 \item This is further evidence against the CAPM
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Fama-French Three-Factor Model (1993)}
@@ -84,25 +81,25 @@ Fama and French proposed replacing the CAPM with a three-factor model:
 \mathbb{E}[r_i] - r_f \;=\; \beta_i^{\text{MKT}} \cdot \text{MKT} \;+\; \beta_i^{\text{SMB}} \cdot \text{SMB} \;+\; \beta_i^{\text{HML}} \cdot \text{HML}
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{MKT} $= r_m - r_f$: market excess return
 \item \textbf{SMB} (Small Minus Big): return on small stocks minus return on large stocks
 \item \textbf{HML} (High Minus Low): return on high B/M stocks minus return on low B/M stocks
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Interpreting the Three-Factor Model}
 
 The three-factor model says that expected returns are explained by exposures to three sources of risk.
 
-\begin{baritemize}
+\begin{itemize}
 \item The model ``works'' if alphas are zero when we regress excess returns on the three factors:
 \[
 r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{SMB}} \text{SMB}_t + \beta_i^{\text{HML}} \text{HML}_t + \varepsilon_{it}
 \]
 \item The size and value effects that produced nonzero CAPM alphas are captured by SMB and HML.
 \item But \ldots{} other anomalies (momentum, profitability, investment) still produce nonzero alphas.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 %%% PART 1: SETUP %%%
@@ -116,14 +113,11 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 
 \textbf{1. Sign up for Claude Pro:}
 
-\begin{barenumerate}
-\item Visit \href{https://claude.ai}{claude.ai}
-\item Click ``Sign Up'' or ``Get Started''
-\item Create account using email or Google/Apple sign-in
+\begin{enumerate}
+\item Visit \href{https://claude.ai}{claude.ai} and create an account (email or Google/Apple sign-in)
 \item After signing in, click ``Upgrade to Pro'' in the sidebar
-\item Choose the monthly payment plan
-\item Complete payment information
-\end{barenumerate}
+\item Choose the monthly plan and complete payment
+\end{enumerate}
 
 2. \href{https://www.youtube.com/watch?v=hpMrTabldEY}{YouTube Video}
 \end{frame}
@@ -214,13 +208,11 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \end{frame}
 
 \begin{frame}{Install and Open VS Code}
-\begin{baritemize}
-\item Install VS Code: \href{https://code.visualstudio.com}{code.visualstudio.com}
-\item Launch VS Code
-\item File $\rightarrow$ Open Folder $\rightarrow$ navigate to your course folder
+\begin{itemize}
+\item Install VS Code from \href{https://code.visualstudio.com}{code.visualstudio.com}, then File $\rightarrow$ Open Folder $\rightarrow$ your course folder
 \item Install extensions: Python, Jupyter, Claude Code, Data Wrangler, Rainbow CSV
 \item View $\rightarrow$ Command Palette $\rightarrow$ ``Python: Select Interpreter'' $\rightarrow$ choose venv
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Launch Claude Code in VS Code}
@@ -253,11 +245,11 @@ Test: Ask Claude Code: What is the sum of the first 1,000 integers?
 Three tables are relevant for price-based analysis:
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{SEP} (prices): \texttt{ticker}, \texttt{date}, \texttt{close} (split-adjusted), \texttt{closeadj} (adjusted for splits, dividends, and spinoffs), \texttt{volume}
 \item \textbf{DAILY} (valuation metrics): \texttt{ticker}, \texttt{date}, \texttt{marketcap} (USD millions), \texttt{pb}, \texttt{pe}, \texttt{ps}
 \item \textbf{TICKERS} (company info): \texttt{ticker}, \texttt{sector}, \texttt{industry}, \texttt{scalemarketcap}
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 Full documentation at \url{https://portal-guide.rice-business.org}
@@ -268,11 +260,11 @@ Ask Claude Code to query the database directly.
 
 \vspace{0.3cm}
 \textbf{Example prompts:}
-\begin{baritemize}
+\begin{itemize}
 \item ``Query the SEP table for end-of-month close and closeadj for all stocks from 2018 through 2024.''
 \item ``Query the DAILY table for end-of-month marketcap for all stocks from 2018 through 2024.''
 \item ``Query the TICKERS table for sector and industry for all tickers.''
-\end{baritemize}
+\end{itemize}
 
 \vspace{0.3cm}
 Claude writes Python code that sends HTTP requests to the API, using your access token from the \texttt{.env} file.
@@ -284,11 +276,11 @@ Monthly returns are computed from \texttt{closeadj} (the fully adjusted price):
 r_t = \frac{\texttt{closeadj}_t}{\texttt{closeadj}_{t-1}} - 1
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item Use \texttt{closeadj}, not \texttt{close}: it accounts for dividends and spinoffs, so the return includes total return.
 \item \texttt{close} (split-adjusted only) is useful for computing moving averages and chart prices.
 \item Group by ticker when computing returns --- never mix prices across stocks.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Computing Momentum}
@@ -297,23 +289,22 @@ Momentum is the cumulative return from month $t{-}13$ to month $t{-}2$:
 \text{momentum}_t = \frac{\texttt{closeadj}_{t-2}}{\texttt{closeadj}_{t-13}} - 1
 \]
 
-\begin{baritemize}
+\begin{itemize}
 \item Skips the most recent month ($t{-}1$): short-term reversal contaminates the signal.
 \item Requires 13 months of price history, so the first 12 months are \texttt{NaN}.
 \item \textbf{Lagged return} (the prior month's return) is a separate signal that captures short-term reversal.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Moving Averages}
 Moving averages smooth out price noise and reveal trends.
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item \textbf{Short MA} (3-month): $\text{MA}_3 = \frac{1}{3}\sum_{j=0}^{2} \texttt{close}_{t-j}$. Tracks recent price action.
 \item \textbf{Long MA} (12-month): $\text{MA}_{12} = \frac{1}{12}\sum_{j=0}^{11} \texttt{close}_{t-j}$. Captures the longer-term trend.
-\item \textbf{MA Ratio}: $\texttt{close} / \text{MA}_{12}$. A stock trading above its long MA (ratio $> 1$) is in an uptrend.
-\item \textbf{Golden Cross}: $\text{MA}_3 > \text{MA}_{12}$. A classic trend-following signal.
-\end{baritemize}
+\item \textbf{Signals}: MA Ratio ($\texttt{close} / \text{MA}_{12}$, uptrend if $>1$) and Golden Cross ($\text{MA}_3 > \text{MA}_{12}$).
+\end{itemize}
 
 \vspace{0.3cm}
 Compute moving averages from \texttt{close} (split-adjusted), grouped by ticker.
@@ -339,10 +330,10 @@ df["size_q"] = df.groupby("month")["marketcap"].transform(
 \end{shadedbox}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item \texttt{groupby("month")} ensures sorting is cross-sectional (within each month).
 \item \texttt{pd.qcut} assigns equal-count groups; \texttt{labels=False} gives integers starting at 0.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Computing Equal-Weighted Portfolio Returns}
@@ -364,11 +355,11 @@ print(decile_avg)
 \end{shadedbox}
 
 \vspace{0.3cm}
-\begin{baritemize}
+\begin{itemize}
 \item The first \texttt{groupby} computes the equal-weighted portfolio return each month.
 \item The second \texttt{groupby} averages across months to get the expected return of each portfolio.
 \item A monotone pattern (D1 low, D10 high) indicates the signal has predictive power.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Data Formats}
@@ -377,11 +368,11 @@ Claude should automatically save data as parquet files.  This is a compact, fast
 
 \vspace{0.3cm}
 To view the data, ask Claude to:
-\begin{baritemize}
+\begin{itemize}
 \item \alert{``Convert the file to Excel.''} Then open as usual.
 \item \alert{``Convert the file to csv.''} Then double-click in VS Code File Explorer.
 \item \alert{``Read the data in a Jupyter notebook.''} Then work with the data in Python.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \end{document}

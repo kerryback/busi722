@@ -24,28 +24,24 @@
 
 \begin{frame}{Three Methods}
 We have multiple characteristics (momentum, bm, gpa, roe, \ldots).  How do we combine them to form portfolios?
-\begin{barenumerate}
+\begin{enumerate}
 \item \textbf{Intersecting sorts:} sort stocks into groups on each characteristic simultaneously and compare group returns.
 \item \textbf{Composite ranks:} rank each stock 0 to 1 on each characteristic (1 $=$ best), then average across characteristics.  Sort on the composite.
 \item \textbf{Fama-MacBeth prediction:} compute FM regression coefficients over a training period, average them, and apply the average coefficients to current characteristics to get a predicted value.  Sort on the prediction.
-\end{barenumerate}
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Exercise: Intersecting Sorts}
 \begin{itemize}
 \item Use a simple train-test split: data through 2019 for training, 2020 onward for testing.
-\item Tell Claude to sort test-period stocks into quintiles on momentum and quintiles on book-to-market each month (25 groups).
-\item Compute the average return of each group each month.
-\item Which corner of the 5$\times$5 table does best?  Which does worst?
-\item Limitation: with more than 2--3 characteristics, groups become too sparse for reliable results.
+\item Tell Claude to sort test-period stocks into quintiles on momentum and quintiles on book-to-market each month (25 groups). Compute the average return of each group each month.
+\item Which corner of the 5$\times$5 table does best?  Which does worst?  Limitation: with more than 2--3 characteristics, groups become too sparse for reliable results.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Exercise: Composite Ranks}
 \begin{itemize}
-\item Using the same train-test split:
-\item Tell Claude to rank each stock from 0 to 1 each month on momentum (ascending), bm (ascending), gpa (ascending), and roe (ascending).
-\item Average the four ranks to get a composite score for each stock.
+\item Using the same train-test split, tell Claude to rank each stock from 0 to 1 each month on momentum, bm, gpa, and roe (ascending). Average the four ranks to get a composite score.
 \item Sort test-period stocks into deciles on the composite each month and compute average decile returns.
 \item Compare the top-bottom spread to what you got from intersecting sorts and single-characteristic sorts.
 \end{itemize}
@@ -53,19 +49,15 @@ We have multiple characteristics (momentum, bm, gpa, roe, \ldots).  How do we co
 
 \begin{frame}{Exercise: Fama-MacBeth Prediction}
 \begin{itemize}
-\item Using the same train-test split:
-\item Tell Claude to run cross-sectional regressions of returns on momentum, bm, gpa, and roe each month during the training period.
-\item Average the regression coefficients across training months.
+\item Using the same train-test split, tell Claude to run cross-sectional regressions of returns on momentum, bm, gpa, and roe each training month and average the coefficients.
 \item Apply the average coefficients to test-period characteristics to get a predicted value for each stock each month.
-\item Sort test-period stocks into deciles on the predicted value and compute average decile returns.
-\item Compare to composite ranks and intersecting sorts.
+\item Sort test-period stocks into deciles on the predicted value and compute average decile returns. Compare to composite ranks and intersecting sorts.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Discussion}
 \begin{itemize}
-\item Which method produced the best spread?  The best Sharpe ratio?
-\item Composite ranks and FM prediction both scale easily to many characteristics.  Intersecting sorts do not.
+\item Which method produced the best spread?  The best Sharpe ratio?  Composite ranks and FM prediction both scale easily to many characteristics; intersecting sorts do not.
 \item FM prediction is a \alert{linear} function of characteristics.  It accounts for correlations among characteristics but cannot capture nonlinear interactions.
 \item Can we do better with a nonlinear model?  This motivates \alert{machine learning}.
 \end{itemize}
@@ -80,10 +72,8 @@ We have multiple characteristics (momentum, bm, gpa, roe, \ldots).  How do we co
 
 \begin{frame}{Why Not $R^2$?}
 \begin{itemize}
-\item The conventional $R^2$ measures how well we predict the \alert{level} of returns.
-\item But to make money, we only need to know which stocks will do \alert{relatively} well and which will do poorly --- not exactly how well or how poorly.
-\item Forecasting returns is extremely hard.  Monthly out-of-sample $R^2$ values of 0.5--1\% are considered excellent in the literature.
-\item Yet even very low $R^2$ values can generate substantial portfolio profits, because we are sorting stocks, not forecasting dollar amounts.
+\item The conventional $R^2$ measures how well we predict the \alert{level} of returns, but to make money we only need to know which stocks will do \alert{relatively} well and which will do poorly.
+\item Forecasting returns is extremely hard---monthly out-of-sample $R^2$ values of 0.5--1\% are considered excellent---yet even very low $R^2$ values can generate substantial portfolio profits.
 \item The right evaluation metric is \alert{portfolio performance}, not $R^2$.
 \end{itemize}
 \end{frame}
@@ -92,9 +82,8 @@ We have multiple characteristics (momentum, bm, gpa, roe, \ldots).  How do we co
 What should we predict?
 \begin{itemize}
 \item \textbf{Raw returns:} simplest, but dominated by a common market component that is very hard to forecast.
-\item \textbf{Returns minus the market return:} removes the hard-to-predict common risk.  Focuses the model on cross-sectional differences.
-\item \textbf{Ranks of returns:} we only need to get the ordering right.  Rank and compute z-scores each month to form the target.
-\item \textbf{Quantiles:} classify stocks as high/low, or into quintiles or deciles.  Turns the problem into classification.
+\item \textbf{Returns minus the market return:} removes the hard-to-predict common risk and focuses the model on cross-sectional differences.
+\item \textbf{Ranks or quantiles of returns:} we only need to get the ordering right. Rank and z-score each month, or classify into quintiles/deciles to turn the problem into classification.
 \end{itemize}
 
 \vspace{0.3cm}
@@ -105,17 +94,14 @@ In each case, we don't need to forecast returns precisely --- we just need to \a
 \begin{frame}{Why Not Cross-Validation?}
 \begin{itemize}
 \item With cross-sectional data, we randomly split into train and test sets, or use $k$-fold cross-validation.
-\item With time series, \alert{random splits use future data to predict the past}.
-\item Stock returns exhibit regime changes, trending volatility, and evolving factor premia.
-\item A model trained on 2020 data and tested on 2015 data would have an unfair advantage.
+\item With time series, \alert{random splits use future data to predict the past}. Stock returns exhibit regime changes, trending volatility, and evolving factor premia, so a model trained on 2020 data and tested on 2015 data would have an unfair advantage.
 \item We must \alert{always train on the past and test on the future}.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Simple Train-Test Split}
 \begin{itemize}
-\item Train on data through date $T$.  Test on data after $T$.
-\item Example: train through 2019, test 2020--2025.
+\item Train on data through date $T$, test on data after $T$. Example: train through 2019, test 2020--2025.
 \item All test-period predictions are genuinely \alert{out of sample}.
 \item This is the simplest valid backtesting setup --- good for experimenting with targets and portfolio formation before adding complexity.
 \end{itemize}
@@ -123,21 +109,20 @@ In each case, we don't need to forecast returns precisely --- we just need to \a
 \vspace{0.3cm}
 
 Tell Claude to:
-\begin{baritemize}
+\begin{itemize}
 \item Read the data and split into train (through 2019) and test (2020 onward).
 \item Fit a model on the training data to predict next month's return from the features.
 \item Use the fitted model to predict in the test period.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Exercise: Comparing Targets}
 Using the same features and simple train-test split, tell Claude to fit separate models predicting each of the following targets:
-\begin{barenumerate}
+\begin{enumerate}
 \item Raw returns
 \item Returns minus the market return
-\item Ranks of returns (z-scored each month)
-\item Quantile classification (e.g., top/bottom quintile)
-\end{barenumerate}
+\item Ranks of returns (z-scored each month) or quantile classification (e.g., top/bottom quintile)
+\end{enumerate}
 
 \vspace{0.3cm}
 
@@ -146,11 +131,11 @@ For each, sort test-period stocks into deciles based on predictions and compute 
 
 \begin{frame}{Exercise: Comparing Portfolio Formation}
 Using the best target from the previous exercise, compare different ways of forming portfolios from predictions:
-\begin{barenumerate}
+\begin{enumerate}
 \item Sort into deciles, go \textbf{long top decile} (long only).
 \item Sort into deciles, go \textbf{long top, short bottom} (long-short).
 \item Use predictions directly as \textbf{portfolio weights} (long-short, rescaled).
-\end{barenumerate}
+\end{enumerate}
 
 \vspace{0.3cm}
 
@@ -167,11 +152,11 @@ For each, compute the mean monthly return, standard deviation, and Sharpe ratio 
 \vspace{0.3cm}
 
 \textbf{Walk-forward (rolling window) validation:}
-\begin{barenumerate}
+\begin{enumerate}
 \item Train on months 1 through $T$.  Predict month $T+1$.
 \item Train on months 1 through $T+1$.  Predict month $T+2$.
 \item Continue, always training on all available past data.
-\end{barenumerate}
+\end{enumerate}
 
 \vspace{0.3cm}
 
@@ -180,41 +165,37 @@ Each prediction is genuinely \alert{out of sample}, and the model is \alert{cont
 
 \begin{frame}{The Backtesting Loop}
 Each period, repeat the following steps:
-\begin{barenumerate}
-\item \textbf{Validate:} choose model and hyperparameters using past data only.
-\item \textbf{Train:} fit the model on the training window.
+\begin{enumerate}
+\item \textbf{Train:} choose model and hyperparameters using past data only, then fit on the training window.
 \item \textbf{Predict:} generate predictions for next period's returns.
 \item \textbf{Form portfolio:} sort or weight stocks based on predictions.
-\end{barenumerate}
+\end{enumerate}
 
 \vspace{0.3cm}
 
 Then advance one period:
-\begin{baritemize}
+\begin{itemize}
 \item Calculate the portfolio return over the period.
 \item Add the new data to the training set.
 \item Return to step 1 and repeat.
-\end{baritemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Evaluating the Backtest}
 \begin{itemize}
-\item Sort stocks into deciles each month based on predicted values.
-\item Compute the average return of each decile each month.
-\item We now have return series for 10 portfolios, all constructed out of sample.
-\item Evaluate: mean return, standard deviation, Sharpe ratio, cumulative performance.
+\item Sort stocks into deciles each month based on predicted values and compute the average return of each decile each month.
+\item Evaluate the 10 out-of-sample portfolio return series: mean return, standard deviation, Sharpe ratio, cumulative performance.
 \item The spread between the top and bottom deciles measures the \alert{predictive power} of the model.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Training Pipeline}
-\textbf{Four Main Steps:}
-\begin{barenumerate}
-\item Create percentile-ranked features
-\item Train LightGBM with 12-month rolling windows
+\textbf{Three Main Steps:}
+\begin{enumerate}
+\item Create percentile-ranked features and train LightGBM with 12-month rolling windows
 \item Form decile portfolios and analyze
 \item Predict current month and save model
-\end{barenumerate}
+\end{enumerate}
 
 \vspace{0.3cm}
 
@@ -241,35 +222,27 @@ Then advance one period:
 \end{frame}
 
 \begin{frame}{Portfolio Analysis Notebook}
-\begin{barenumerate}
-\item Mean returns bar chart -- average monthly return by decile
-\item Sharpe ratios bar chart -- annualized Sharpe ratio by decile
-\item Cumulative returns -- linear and log scale
-\item Summary statistics -- mean, volatility, Sharpe, min, max
+\begin{enumerate}
+\item Mean returns and Sharpe ratios bar charts by decile
+\item Cumulative returns (linear and log scale) and summary statistics (mean, volatility, Sharpe, min, max)
 \item Long-short portfolio -- D10 $-$ D1 spread performance
-\end{barenumerate}
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Model Feature Analysis}
-\begin{barenumerate}
+\begin{enumerate}
 \item Feature importances pie chart -- from LightGBM split gain
-\item Linear regression -- predictions on percentile-ranked features
-\item Coefficient bar chart -- positive (green) vs.\ negative (red)
-\item Comparison table -- feature importance ranks vs.\ coefficient ranks
-\end{barenumerate}
-
-\vspace{0.3cm}
-
-\textbf{Interpretation:} Large rank differences reveal non-linear feature effects.
+\item Linear regression of predictions on percentile-ranked features with coefficient bar chart
+\item Comparison table -- feature importance ranks vs.\ coefficient ranks (large differences reveal non-linear effects)
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Exercise: Run and Analyze a Backtest}
-\begin{barenumerate}
+\begin{enumerate}
 \item Tell Claude to run the LightGBM rolling-window pipeline on the dataset.
 \item Create a Jupyter notebook that plots mean returns by decile, cumulative returns for top and bottom deciles, and the long-short spread.
-\item Which deciles perform best and worst?  Is the spread monotonic across deciles?
-\item Examine feature importances.  Which variables contribute most to predictions?  Are there surprises?
-\end{barenumerate}
+\item Which deciles perform best and worst?  Is the spread monotonic?  Examine feature importances for surprises.
+\end{enumerate}
 \end{frame}
 
 \end{document}
