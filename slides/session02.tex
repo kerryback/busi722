@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \input{busi722-style}
 
-\title{Claude Skills, Fundamental Indicators}
+\title{Querying with Claude Code, Fundamental Indicators}
 \subtitle{BUSI 722: Data-Driven Finance II}
 \author{Kerry Back}
 \institute{}
@@ -16,35 +16,11 @@
 
 \maketitle
 
-%%% PART 1: SETUP & DATABASE ACCESS %%%
-
-\begin{frame}{Installing the Data Skills}
-Download \href{https://busi722.kerryback.com/files/rice-data-skills.zip}{rice-data-skills.zip} and extract it to your \texttt{\textasciitilde/.claude/skills/} folder.
-\vspace{0.3cm}
-
-This installs four skills that Claude uses to fetch and merge data:
-\begin{itemize}
-\item \textbf{rice-data-query} -- database connection, schema, SQL patterns
-\item \textbf{fetch-returns} -- monthly prices, returns, momentum, size
-\item \textbf{fetch-fundamentals} -- financial ratios, growth rates
-\item \textbf{merge-data} -- join returns with fundamentals, avoid look-ahead bias
-\end{itemize}
-\end{frame}
+%%% PART 1: QUERYING WITH CLAUDE CODE %%%
 
 \begin{frame}[c]
 \centering
-\Huge Database Access
-\end{frame}
-
-\begin{frame}{The Rice Data Portal}
-The \href{https://data-portal.rice-business.org}{Rice Data Portal} provides daily prices, valuation metrics, and fundamental data from SEC filings. Four main tables:
-
-\begin{itemize}
-\item \textbf{SEP} -- daily stock prices (open, high, low, close, volume)
-\item \textbf{DAILY} -- daily valuation metrics (marketcap, pb, pe, ps)
-\item \textbf{SF1} -- fundamentals from 10-K/10-Q filings
-\item \textbf{TICKERS} -- company metadata (sector, industry)
-\end{itemize}
+\Huge Querying with Claude Code
 \end{frame}
 
 \begin{frame}{Storing Your Access Token}
@@ -61,6 +37,64 @@ Claude creates a \texttt{.env} file:
 \item The \texttt{.env} file keeps your token out of your code.
 \item Python's \texttt{dotenv} library loads it automatically.
 \item Add \texttt{.env} to \texttt{.gitignore} to avoid sharing your token.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Database Tables}
+The \href{https://data-portal.rice-business.org}{Rice Data Portal} provides daily prices, valuation metrics, and fundamental data from SEC filings. Four main tables:
+
+\begin{itemize}
+\item \textbf{SEP} -- daily stock prices (open, high, low, close, volume)
+\item \textbf{DAILY} -- daily valuation metrics (marketcap, pb, pe, ps)
+\item \textbf{SF1} -- fundamentals from 10-K/10-Q filings
+\item \textbf{TICKERS} -- company metadata (sector, industry)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Querying the Database}
+Ask Claude Code to query the database directly.
+
+\vspace{0.3cm}
+\textbf{Example prompts:}
+\begin{itemize}
+\item ``Query the SEP table for end-of-month close and closeadj for all stocks from 2018 through 2024.''
+\item ``Query the DAILY table for end-of-month marketcap for all stocks from 2018 through 2024.''
+\item ``Query the TICKERS table for sector and industry for all tickers.''
+\end{itemize}
+
+\vspace{0.15cm}
+Claude writes Python code that sends HTTP requests to the API, using your access token from the \texttt{.env} file.
+\end{frame}
+
+\begin{frame}{Data Formats}
+Claude should automatically save data as parquet files.  This is a compact, fast format.
+
+\vspace{0.3cm}
+To view the data, ask Claude to:
+\begin{itemize}
+\item \alert{``Convert the file to Excel.''} Then open as usual.
+\item \alert{``Convert the file to csv.''} Then double-click in VS Code File Explorer.
+\item \alert{``Read the data in a Jupyter notebook.''} Then work with the data in Python.
+\end{itemize}
+\end{frame}
+
+%%% PART 1.5: DATA SKILLS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Data Skills
+\end{frame}
+
+\begin{frame}{Installing the Data Skills}
+Download \href{https://busi722.kerryback.com/files/rice-data-skills.zip}{rice-data-skills.zip} and extract it to your \texttt{\textasciitilde/.claude/skills/} folder.
+\vspace{0.3cm}
+
+This installs four skills that Claude uses to fetch and merge data:
+\begin{itemize}
+\item \textbf{rice-data-query} -- database connection, schema, SQL patterns
+\item \textbf{fetch-returns} -- monthly prices, returns, momentum, size
+\item \textbf{fetch-fundamentals} -- financial ratios, growth rates
+\item \textbf{merge-data} -- join returns with fundamentals, avoid look-ahead bias
 \end{itemize}
 \end{frame}
 

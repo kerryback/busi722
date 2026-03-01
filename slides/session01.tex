@@ -149,20 +149,15 @@ Open the Claude Code panel in VS Code:
 Test: Ask Claude Code: What is the sum of the first 1,000 integers?
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Database}
+\begin{frame}{Stock Market Database}
 \begin{itemize}
 \item Database Guide: \url{https://portal-guide.rice-business.org}
-\item Visit \href{https://data-portal.rice-business.org}{data-portal.rice-business.org} to get an access token
-\item The data portal is an AI agent that uses ChatGPT to generate SQL and query the database
+\item Web UI: \href{https://data-portal.rice-business.org}{data-portal.rice-business.org}
+\item The data portal is an AI agent that uses ChatGPT to generate SQL and return results in your browser
 \end{itemize}
 
 \vspace{0.3cm}
-
-\textbf{Create .env File:}
-\begin{itemize}
-\item Tell Claude Code to create a \texttt{.env} file
-\item Add: \verb|RICE_ACCESS_TOKEN=your_token_here|
-\end{itemize}
+When you visit, you will be given an \alert{access token}.  Save it --- you will need it later for querying the database from Claude Code.
 \end{frame}
 
 \begin{frame}{Database Tables}
@@ -178,19 +173,19 @@ Three tables are relevant for price-based analysis:
 Full documentation at \url{https://portal-guide.rice-business.org}
 \end{frame}
 
-\begin{frame}{Querying the Data Portal}
-Ask Claude Code to query the database directly.
+\begin{frame}{Using the Web Portal}
+Type natural language queries into the data portal.  It generates SQL and returns results in your browser.
 
 \vspace{0.3cm}
-\textbf{Example prompts:}
+\textbf{Example queries:}
 \begin{itemize}
-\item ``Query the SEP table for end-of-month close and closeadj for all stocks from 2018 through 2024.''
-\item ``Query the DAILY table for end-of-month marketcap for all stocks from 2018 through 2024.''
-\item ``Query the TICKERS table for sector and industry for all tickers.''
+\item ``Show me the closing prices for AAPL in 2024.''
+\item ``What are the largest stocks by market cap this month?''
+\item ``List all sectors and the number of stocks in each.''
 \end{itemize}
 
-\vspace{0.15cm}
-Claude writes Python code that sends HTTP requests to the API, using your access token from the \texttt{.env} file.
+\vspace{0.3cm}
+The web portal is a good way to explore the data before writing code.
 \end{frame}
 
 \begin{frame}{Computing Returns}
@@ -277,19 +272,6 @@ print(decile_avg)
 \begin{itemize}
 \item The first \texttt{groupby} computes the equal-weighted portfolio return each month; the second averages across months.
 \item A monotone pattern (D1 low, D10 high) indicates the signal has predictive power.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Data Formats}
-
-Claude should automatically save data as parquet files.  This is a compact, fast format.
-
-\vspace{0.3cm}
-To view the data, ask Claude to:
-\begin{itemize}
-\item \alert{``Convert the file to Excel.''} Then open as usual.
-\item \alert{``Convert the file to csv.''} Then double-click in VS Code File Explorer.
-\item \alert{``Read the data in a Jupyter notebook.''} Then work with the data in Python.
 \end{itemize}
 \end{frame}
 
