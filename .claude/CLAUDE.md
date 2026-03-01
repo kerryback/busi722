@@ -15,13 +15,6 @@ Course website for quantitative investing, Fall 2025 at Rice Business. Focus: st
 - `solutions/` contains solution files
 - `docs/` is the rendered site
 
-## Skills
-This repo has custom Claude skills in `.claude/skills/`:
-- **rice-data-query** — query the Rice Business stock market database
-- **fetch-returns** — fetch return data
-- **fetch-fundamentals** — fetch fundamental data
-- **merge-data** — merge returns and fundamentals
-
 ## Conventions
 - Uses Rice Business stock market data via MotherDuck
 - Covers technical and fundamental indicators, ML models, rolling windows

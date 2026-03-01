@@ -12,6 +12,8 @@ project:
     - .nojekyll
     - slides/*.pdf
     - exercises/*.pdf
+    - files/*.zip
+    - files/*.md
 
 website:
   title: ""

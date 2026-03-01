@@ -20,7 +20,7 @@
 
 \begin{frame}[c]
 \centering
-\Huge Review: CAPM \& Fama-French Factors
+\Huge CAPM \& Fama-French Factors
 \end{frame}
 
 \begin{frame}{The CAPM}
@@ -109,101 +109,17 @@ r_{it} - r_{ft} = \alpha_i + \beta_i^{\text{MKT}} \text{MKT}_t + \beta_i^{\text{
 \Huge Setup: Claude Pro \& Claude Code
 \end{frame}
 
-\begin{frame}{Initial Steps}
+\begin{frame}{Setup Instructions}
+Follow the setup guide for your platform:
 
-\textbf{1. Sign up for Claude Pro:}
-
-\begin{enumerate}
-\item Visit \href{https://claude.ai}{claude.ai} and create an account (email or Google/Apple sign-in)
-\item After signing in, click ``Upgrade to Pro'' in the sidebar
-\item Choose the monthly plan and complete payment
-\end{enumerate}
-
-\textbf{2. Watch the setup video:}
 \begin{itemize}
-\item \href{https://www.youtube.com/watch?v=hpMrTabldEY}{Setup walkthrough} --- covers Node.js, Claude Code, and VS Code installation
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Mac -- Install Claude Code}
-
-\textbf{Step 1: Install Node.js}
-\begin{itemize}
-\item Using Homebrew: \texttt{brew install node}
-\item Or download installer from \href{https://nodejs.org}{nodejs.org}
-\end{itemize}
-
-\vspace{0.2cm}
-
-\textbf{Step 2: Install Claude Code}
-\begin{itemize}
-\item Run: \texttt{npm install -g @anthropic-ai/claude-code}
-\end{itemize}
-
-\vspace{0.2cm}
-
-\textbf{Step 3: Verify Installation}
-\begin{itemize}
-\item Run: \texttt{claude doctor}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Windows -- Install Claude Code (1/2)}
-
-\textbf{Step 1: Install Node.js}
-\begin{itemize}
-\item Download and install from \href{https://nodejs.org}{nodejs.org}
-\item Choose the LTS (Long Term Support) version
+\item \textbf{Mac:} \href{https://busi722.kerryback.com/files/setup-mac.md}{setup-mac.md}
+\item \textbf{Windows:} \href{https://busi722.kerryback.com/files/setup-windows.md}{setup-windows.md}
+\item \textbf{Video walkthrough:} \href{https://www.youtube.com/watch?v=hpMrTabldEY}{YouTube}
 \end{itemize}
 
 \vspace{0.3cm}
-
-\textbf{Step 2: Install Git for Windows}
-\begin{itemize}
-\item Download from \href{https://git-scm.com/download/win}{git-scm.com/download/win}
-\item During installation, select ``Git Bash'' (default option)
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Windows -- Install Claude Code (2/2)}
-
-\textbf{Step 3: Install Claude Code}
-\begin{itemize}
-\item In PowerShell, run: \texttt{npm install -g @anthropic-ai/claude-code}
-\end{itemize}
-
-\vspace{0.3cm}
-
-\textbf{Step 4: Verify Installation}
-\begin{itemize}
-\item In PowerShell, run: \texttt{claude doctor}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Install Python \& Create Virtual Environment}
-\textbf{Install Python:}
-\begin{itemize}
-\item Tell Claude Code: ``Install Python 3.13 and add it to the path.''
-\item Tell Claude Code: ``Upgrade pip''
-\end{itemize}
-
-\vspace{0.3cm}
-
-\textbf{Create Virtual Environment:}
-\begin{itemize}
-\item Tell Claude Code: ``Create a virtual environment using Python 3.13 in my current directory.''
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Install Packages}
-Tell Claude Code to install the following packages in the virtual environment:
-
-\vspace{0.3cm}
-\begin{itemize}
-\item \texttt{numpy pandas scipy statsmodels scikit-learn}
-\item \texttt{openpyxl matplotlib seaborn ipykernel}
-\item \texttt{pandas-datareader streamlit requests python-dotenv}
-\end{itemize}
+The guides cover Claude Pro, Claude Code, VS Code, Python, and the Rice Data Portal.  Claude Code has both a \alert{native installer} (recommended, auto-updates) and an \alert{npm installer} (deprecated but functional).
 \end{frame}
 
 %%% PART 2: VS CODE %%%
