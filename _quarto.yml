@@ -6,6 +6,7 @@ project:
     - index-pdf.qmd
     - slides.qmd
     - assignments.qmd
+    - live-sessions.qmd
 
   resources:
     - CNAME
@@ -28,6 +29,8 @@ website:
         text: Slides
       - href: assignments.qmd
         text: Assignments
+      - href: live_sessions.qmd
+        text: Zoom Recordings
 
 format:
   html:

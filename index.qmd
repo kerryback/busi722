@@ -40,7 +40,7 @@ We will work in Python with the help of Anthropic's Claude Code.  We need the Pr
 
 #### Assignments and Grading
 
-Grades will be based on six assignments, equally weighted.  The assignments are due on Thursdays by 11:59 pm.  The first assignment is due March 17, and the last assignment is due April 23.  We will skip March 24 due to spring break.  The assignments are posted on Canvas.
+Grades will be based on six assignments, equally weighted.  The assignments are due on Thursdays by 11:59 pm.  The first assignment is due March 12, and the last assignment is due April 23.  We will skip March 19 due to spring break.  The assignments are posted on Canvas.
 
 
 #### Honor Code
