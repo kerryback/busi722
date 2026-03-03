@@ -6,7 +6,7 @@ project:
     - index-pdf.qmd
     - slides.qmd
     - assignments.qmd
-    - live-sessions.qmd
+    - live_sessions.qmd
 
   resources:
     - CNAME
