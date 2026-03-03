@@ -9,11 +9,7 @@ format:
     colorlinks: true
 ---
 
-Use Claude Code to query the Rice Data Portal directly. The relevant tables are:
-
-- **SEP** (prices): `ticker`, `date`, `close` (split-adjusted), `closeadj` (adjusted for splits, dividends, and spinoffs), `volume`
-- **DAILY** (daily metrics): `ticker`, `date`, `marketcap` (in USD millions)
-- **TICKERS** (static info): `ticker`, `sector`, `industry`, `scalemarketcap`
+Use Claude Code or the web UI at [data-portal.rice-business.org](https://data-portal.rice-business.org) to query the Rice Database. 
 
 ### Submission
 
@@ -23,10 +19,8 @@ Submit a **zip file** containing your **Jupyter notebook** (`.ipynb`) with all c
 
 Using Claude Code and the Rice Data Portal, build a monthly dataset for **all stocks** from January 2021 through January 2026.
 
-1. From the **SEP** table, fetch end-of-month prices (`close` and `closeadj`). Compute monthly **returns** from `closeadj`: $r_t = \text{closeadj}_t / \text{closeadj}_{t-1} - 1$.
-2. From the **DAILY** table, fetch end-of-month `marketcap`.
-3. From the **TICKERS** table, fetch `sector` and `industry`.
-4. Compute **momentum** for each stock: the cumulative return from month $t-13$ to month $t-2$ (skipping the most recent month to avoid short-term reversal).
-5. Compute **lagged return**: the prior month's return.
-6. Apply a penny-stock filter: drop rows where `close` < \$5. Drop rows with missing `return`, `momentum`, or `marketcap`.
-7. Report the number of rows, the number of unique tickers, and the date range. How many tickers have data in every month of the sample? Display summary statistics (mean, median, std, min, max) for `return`, `momentum`, and `marketcap`.
+1. Fetch end-of-month prices (`close` and `closeadj`), end-of-month `marketcap`, `sector`, and `industry`. 2. 2. Compute monthly **returns** from `closeadj`: $r_t = \text{closeadj}_t / \text{closeadj}_{t-1} - 1$.
+3. Compute **momentum** for each stock: the cumulative return from month $t-13$ to month $t-2$ (skipping the most recent month to avoid short-term reversal).
+4. Compute **lagged return**: the prior month's return.
+5. Apply a penny-stock filter: drop rows where `close` < \$5. Drop rows with missing `return`, `momentum`, or `marketcap`.
+6. Report the number of rows, the number of unique tickers, and the date range. How many tickers have data in every month of the sample? Display summary statistics (mean, median, std, min, max) for `return`, `momentum`, and `marketcap`.
