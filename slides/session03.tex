@@ -60,19 +60,6 @@ Instead of z-scores, rank stocks 1 through $n$ each month, then scale to $[0, 1]
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Which Features Are ``Good''?}
-When using ranks, we want a \alert{high rank to always mean good}.
-\vspace{0.3cm}
-
-\begin{itemize}
-\item \textbf{Higher is better:} momentum, roe, grossmargin $\Rightarrow$ rank low to high.
-\item \textbf{Lower is better:} asset growth (conservatism effect) $\Rightarrow$ rank high to low.
-\end{itemize}
-
-\vspace{0.3cm}
-Alternatively, just rank all features the same way and let the model learn the sign. This is simpler and works well with flexible models (trees, neural nets).
-\end{frame}
-
 %%% PART 2: STANDARDIZING THE TARGET %%%
 
 \begin{frame}[c]
@@ -84,7 +71,7 @@ Alternatively, just rank all features the same way and let the model learn the s
 We care more about \alert{which stocks will outperform} than about predicting exact return magnitudes.
 \vspace{0.15cm}
 
-\alert{If every stock's return rises by 2\% because the market rallies, that tells us nothing about which stocks to buy.  What matters is the cross-sectional ranking of returns.}
+\alert{Stocks move up and down together to a large extent, and the common (market) movement is hard to predict.  We don't need to predict it if we are just predicting which stocks will do relatively well and which will do relatively poorly.}
 
 \vspace{0.15cm}
 This suggests we should think carefully about what target variable we give the model.

@@ -16,7 +16,27 @@
 
 \maketitle
 
-%%% PART 1: QUERYING WITH CLAUDE CODE %%%
+%%% PART 1: DATA SKILLS %%%
+
+\begin{frame}[c]
+\centering
+\Huge Data Skills
+\end{frame}
+
+\begin{frame}{Installing the Data Skills}
+Download \href{https://busi722.kerryback.com/files/rice-data-skills.zip}{rice-data-skills.zip} and extract it to your \texttt{\textasciitilde/.claude/skills/} folder.
+\vspace{0.3cm}
+
+This installs four skills that Claude uses to fetch and merge data:
+\begin{itemize}
+\item \textbf{rice-data-query} -- database connection, schema, SQL patterns
+\item \textbf{fetch-returns} -- monthly prices, returns, momentum, size
+\item \textbf{fetch-fundamentals} -- financial ratios, growth rates
+\item \textbf{merge-data} -- join returns with fundamentals, avoid look-ahead bias
+\end{itemize}
+\end{frame}
+
+%%% PART 2: QUERYING WITH CLAUDE CODE %%%
 
 \begin{frame}[c]
 \centering
@@ -78,27 +98,7 @@ To view the data, ask Claude to:
 \end{itemize}
 \end{frame}
 
-%%% PART 1.5: DATA SKILLS %%%
-
-\begin{frame}[c]
-\centering
-\Huge Data Skills
-\end{frame}
-
-\begin{frame}{Installing the Data Skills}
-Download \href{https://busi722.kerryback.com/files/rice-data-skills.zip}{rice-data-skills.zip} and extract it to your \texttt{\textasciitilde/.claude/skills/} folder.
-\vspace{0.3cm}
-
-This installs four skills that Claude uses to fetch and merge data:
-\begin{itemize}
-\item \textbf{rice-data-query} -- database connection, schema, SQL patterns
-\item \textbf{fetch-returns} -- monthly prices, returns, momentum, size
-\item \textbf{fetch-fundamentals} -- financial ratios, growth rates
-\item \textbf{merge-data} -- join returns with fundamentals, avoid look-ahead bias
-\end{itemize}
-\end{frame}
-
-%%% PART 2: FETCH RETURNS %%%
+%%% PART 3: FETCH RETURNS %%%
 
 \begin{frame}[c]
 \centering
@@ -282,7 +282,7 @@ Example: using January's closing price to decide a January trade --- that price 
 \begin{frame}{How the Skills Handle It}
 \begin{itemize}
 \item \textbf{Market cap, DAILY ratios, and close price}: all shifted by 1 month so January's values come from end of December.
-\item \textbf{SF1 fundamentals} (roe, de, etc.): aligned to the first month \emph{after} the SEC filing date, then forward-filled, then shifted by 1 month.
+\item \textbf{SF1 fundamentals} (roe, de, etc.): aligned to the first full month \emph{after} the SEC filing date, then forward-filled.  No additional shift needed.
 \item \textbf{Momentum and lagged return}: built with a lag by construction (momentum uses $t{-}13$ to $t{-}2$; lagged return uses $t{-}1$).
 \end{itemize}
 \end{frame}
@@ -295,7 +295,7 @@ Example: using January's closing price to decide a January trade --- that price 
 \midrule
 marketcap, pb, pe, ps & DAILY & 1 month after fetching \\
 close & SEP & 1 month after merging \\
-roe, de, grossmargin, \ldots & SF1 & filing date $+$ 1 month after merge \\
+roe, de, grossmargin, \ldots & SF1 & filing-date alignment only \\
 momentum & SEP & built-in (uses $t{-}13$ to $t{-}2$) \\
 lagged\_return & SEP & built-in (uses $t{-}1$) \\
 return & SEP & not shifted (target variable) \\
