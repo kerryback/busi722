@@ -233,6 +233,36 @@ Instead of averaging independent trees, build trees \alert{sequentially}, each c
 In practice, LightGBM often outperforms random forests on tabular financial data.
 \end{frame}
 
+\begin{frame}{Histogram-Based Splitting}
+Standard gradient boosting evaluates every unique value of every feature to find the best split --- slow for large datasets.
+
+\vspace{0.3cm}
+\textbf{LightGBM's approach:}
+\begin{itemize}
+\item Bin each continuous feature into $K$ discrete buckets (e.g., $K = 255$) once before training begins.
+\item At each node, scan only $K$ bin boundaries instead of thousands of unique values.
+\item Speeds up split-finding dramatically with negligible loss in accuracy.
+\end{itemize}
+
+\vspace{0.3cm}
+The histogram also enables \alert{efficient memory use}: store integer bin indices rather than raw floats, and accumulate gradient sums per bin instead of per observation.
+\end{frame}
+
+\begin{frame}{Leaf-Wise Growth}
+Most gradient boosting implementations (e.g., scikit-learn) grow trees \alert{level-wise}: split every node at a given depth before going deeper.
+
+\vspace{0.3cm}
+\textbf{LightGBM grows leaf-wise instead:}
+\begin{itemize}
+\item At each step, find the single leaf among \emph{all current leaves} that yields the largest reduction in loss, and split only that leaf.
+\item This produces \alert{asymmetric trees} that concentrate depth where the data is most complex.
+\item For the same number of splits, leaf-wise growth typically achieves lower training loss than level-wise growth.
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Trade-off:} leaf-wise trees can overfit on small datasets; the \texttt{num\_leaves} hyperparameter (rather than depth) is the primary complexity control.
+\end{frame}
+
 %%% RANDOM FOURIER FEATURES %%%
 
 \begin{frame}{Random Fourier Features}
