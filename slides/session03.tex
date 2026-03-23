@@ -278,11 +278,66 @@ A way to add nonlinearity to a linear model without the complexity of trees or n
 where $\mathbf{w}_j \sim N(0, \gamma^2 I)$ and $b_j \sim \text{Uniform}(0, 2\pi)$ are drawn \alert{randomly and fixed}.
 \end{frame}
 
+\begin{frame}{Kernels and the RBF Kernel}
+A \alert{kernel} $k(\mathbf{x}, \mathbf{z})$ is a similarity measure between two feature vectors.
+
+\vspace{0.2cm}
+\textbf{Kernel regression} predicts by taking a weighted average of training targets, where the weights are similarities to $\mathbf{x}$:
+\[
+f(\mathbf{x}) = \sum_{i=1}^n \alpha_i \, k(\mathbf{x}, \mathbf{x}_i)
+\]
+
+The \alert{RBF (radial basis function) kernel} --- also called the Gaussian kernel --- is:
+\[
+k(\mathbf{x}, \mathbf{z}) = \exp\!\bigl(-\gamma^2 \|\mathbf{x} - \mathbf{z}\|^2\bigr)
+\]
+\begin{itemize}
+\item Near 1 when $\mathbf{x}$ and $\mathbf{z}$ are close; near 0 when they are far apart.
+\item $\gamma$ controls how quickly similarity decays --- large $\gamma$ means only very nearby points influence the prediction.
+\item Very flexible, but computing all $n^2$ pairwise similarities is too slow for large datasets.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RFF as an RBF Kernel Approximation}
+A key mathematical result (Bochner's theorem) implies that for the RBF kernel with $\mathbf{w} \sim N(0, \gamma^2 I)$:
+\[
+k(\mathbf{x}, \mathbf{z}) = E_{\mathbf{w}}\bigl[\cos(\mathbf{w}'(\mathbf{x} - \mathbf{z}))\bigr]
+\]
+
+Expanding using the cosine difference formula:
+\[
+k(\mathbf{x}, \mathbf{z}) = E_{\mathbf{w}}\bigl[\cos(\mathbf{w}'\mathbf{x})\cos(\mathbf{w}'\mathbf{z}) + \sin(\mathbf{w}'\mathbf{x})\sin(\mathbf{w}'\mathbf{z})\bigr]
+\]
+
+Approximate with $D/2$ random draws $\mathbf{w}_1, \ldots, \mathbf{w}_{D/2}$:
+\[
+k(\mathbf{x},\mathbf{z}) \approx \phi(\mathbf{x})'\phi(\mathbf{z}), \qquad
+\phi(\mathbf{x}) = \frac{1}{\sqrt{D/2}}\begin{pmatrix}\cos(\mathbf{w}_1'\mathbf{x})\\\sin(\mathbf{w}_1'\mathbf{x})\\\vdots\\\cos(\mathbf{w}_{D/2}'\mathbf{x})\\\sin(\mathbf{w}_{D/2}'\mathbf{x})\end{pmatrix}
+\]
+
+Fitting a linear model on $\phi(\mathbf{x})$ then \alert{approximates kernel regression} without the $n^2$ cost.
+\end{frame}
+
+\begin{frame}{Phase-Shift Equivalence}
+The formulation on the earlier slide used only cosines with a random phase shift $b_j \sim \text{Uniform}(0, 2\pi)$.  This is equivalent, via the identity:
+\[
+\cos(\mathbf{w}'\mathbf{x} + b)\cos(\mathbf{w}'\mathbf{z} + b) = \tfrac{1}{2}\cos\!\bigl(\mathbf{w}'(\mathbf{x}-\mathbf{z})\bigr) + \tfrac{1}{2}\cos\!\bigl(\mathbf{w}'(\mathbf{x}+\mathbf{z}) + 2b\bigr)
+\]
+Averaging over $b \sim \text{Uniform}(0,2\pi)$, the second term vanishes, leaving:
+\[
+E_b\bigl[\cos(\mathbf{w}'\mathbf{x}+b)\cos(\mathbf{w}'\mathbf{z}+b)\bigr] = \tfrac{1}{2}\cos\!\bigl(\mathbf{w}'(\mathbf{x}-\mathbf{z})\bigr)
+\]
+This is \emph{half} of what sine+cosine pairs give, hence the $\sqrt{2}$ in the $\sqrt{2/D}$ prefactor.
+
+\vspace{0.3cm}
+\textbf{Intuition:} $\cos(\mathbf{w}'\mathbf{x} + b)$ with random $b$ is a random mixture of $\cos(\mathbf{w}'\mathbf{x})$ and $\sin(\mathbf{w}'\mathbf{x})$ --- one random-phase cosine does the work of one sine-cosine pair, up to the factor of 2.
+\end{frame}
+
 \begin{frame}{Why Random Fourier Features Work}
 \begin{itemize}
 \item The cosine transformation creates \alert{nonlinear combinations} of the original features, capturing interactions and curved relationships.
 \item The random weights $\mathbf{w}_j$ are not learned --- only the final linear coefficients are estimated.
-\item Approximates a \alert{kernel} method (RBF kernel) that scales to large datasets; bandwidth $\gamma$ controls the ``wiggliness'' of the fit.
+\item The bandwidth $\gamma$ controls how ``wiggly'' the fitted function is: large $\gamma$ allows rapid local variation, small $\gamma$ produces smoother global fits.
 \end{itemize}
 
 \vspace{0.3cm}
