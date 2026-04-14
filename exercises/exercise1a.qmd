@@ -9,7 +9,7 @@ format:
     colorlinks: true
 ---
 
-Use Claude Code or the web UI at [data-portal.rice-business.org](https://data-portal.rice-business.org) to query the Rice Database. 
+Use Claude Code or the web UI at [data-portal.rice-business.org](https://data-portal.rice-business.org) to query the Rice Database.
 
 ### Submission
 
