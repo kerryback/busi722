@@ -1,24 +1,17 @@
 [
   {
-    "objectID": "live_sessions.html",
-    "href": "live_sessions.html",
+    "objectID": "solutions.html",
+    "href": "solutions.html",
     "title": "",
     "section": "",
-    "text": "Mar 2\nMar 9\nMar 23\nMar 30\nApr 6\nApr 13\nApr 20"
+    "text": "Exercise 1A Exercise 1B Exercise 1C Exercise 1D Exercise 2A Exercise 2B Exercise 2C Exercise 2D Exercise 3A Exercise 3B Exercise 3C Exercise 3D Exercise 4A Exercise 4B Exercise 4C Exercise 4D Exercise 5A Exercise 5B Exercise 5C Exercise 5D Exercise 6A Exercise 6B Exercise 6C Exercise 6D"
   },
   {
-    "objectID": "live_sessions.html#live-session-recordings-data-driven-finance-ii-spring-2026",
-    "href": "live_sessions.html#live-session-recordings-data-driven-finance-ii-spring-2026",
+    "objectID": "solutions.html#solutions-data-driven-finance-ii-fall-2025",
+    "href": "solutions.html#solutions-data-driven-finance-ii-fall-2025",
     "title": "",
     "section": "",
-    "text": "Mar 2\nMar 9\nMar 23\nMar 30\nApr 6\nApr 13\nApr 20"
-  },
-  {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Week\n\n\n\n\n\n\n1\nSoftware, Rice Database, Technical Indicators\n\n\n\n2\nClaude Skills, Fundamental Indicators\n\n\n\n3\nMachine Learning for Return Prediction\n\n\n\n4\nRolling Windows for Train/Test\n\n\n\n5\nForming and Evaluating Portfolios\n\n\n\n6\nTrading Costs, Risk Forecasts"
+    "text": "Exercise 1A Exercise 1B Exercise 1C Exercise 1D Exercise 2A Exercise 2B Exercise 2C Exercise 2D Exercise 3A Exercise 3B Exercise 3C Exercise 3D Exercise 4A Exercise 4B Exercise 4C Exercise 4D Exercise 5A Exercise 5B Exercise 5C Exercise 5D Exercise 6A Exercise 6B Exercise 6C Exercise 6D"
   },
   {
     "objectID": "assignments.html",
@@ -68,5 +61,26 @@
     "title": "Assignments",
     "section": "Week 6: Costs, Risk, and Drawdowns",
     "text": "Week 6: Costs, Risk, and Drawdowns\n\n\n\n\nExercise\n\n\n\n\n\nA\nTurnover and Transaction Cost Analysis\n\n\n\nB\nDrawdown Analysis\n\n\n\nC\nAlternative Weighting Schemes\n\n\n\nD\nLedoit-Wolf Shrinkage and Minimum-Variance Portfolios"
+  },
+  {
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Week\n\n\n\n\n\n\n1\nSoftware, Rice Database, Technical Indicators\n\n\n\n2\nClaude Skills, Fundamental Indicators\n\n\n\n3\nMachine Learning for Return Prediction\n\n\n\n4\nRolling Windows for Train/Test\n\n\n\n5\nForming and Evaluating Portfolios\n\n\n\n6\nTrading Costs, Risk Forecasts"
+  },
+  {
+    "objectID": "live_sessions.html",
+    "href": "live_sessions.html",
+    "title": "",
+    "section": "",
+    "text": "Mar 2\nMar 9\nMar 23\nMar 30\nApr 6\nApr 13\nApr 20"
+  },
+  {
+    "objectID": "live_sessions.html#live-session-recordings-data-driven-finance-ii-spring-2026",
+    "href": "live_sessions.html#live-session-recordings-data-driven-finance-ii-spring-2026",
+    "title": "",
+    "section": "",
+    "text": "Mar 2\nMar 9\nMar 23\nMar 30\nApr 6\nApr 13\nApr 20"
   }
 ]

@@ -1,0 +1,26 @@
+## Solutions<br>Data Driven Finance II<br>Fall 2025<br><br>![](RiceBusiness-transparent-logo-sm.png){height="60"}<br>
+
+[Exercise 1A](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution1A.ipynb){target="_blank"}<br>
+[Exercise 1B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution1B.ipynb){target="_blank"}<br>
+[Exercise 1C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution1C.ipynb){target="_blank"}<br>
+[Exercise 1D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution1D.ipynb){target="_blank"}<br>
+[Exercise 2A](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution2A.ipynb){target="_blank"}<br>
+[Exercise 2B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution2B.ipynb){target="_blank"}<br>
+[Exercise 2C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution2C.ipynb){target="_blank"}<br>
+[Exercise 2D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution2D.ipynb){target="_blank"}<br>
+[Exercise 3A](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution3A.ipynb){target="_blank"}<br>
+[Exercise 3B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution3B.ipynb){target="_blank"}<br>
+[Exercise 3C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution3C.ipynb){target="_blank"}<br>
+[Exercise 3D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution3D.ipynb){target="_blank"}<br>
+[Exercise 4A](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution4A.ipynb){target="_blank"}<br>
+[Exercise 4B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution4B.ipynb){target="_blank"}<br>
+[Exercise 4C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution4C.ipynb){target="_blank"}<br>
+[Exercise 4D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution4D.ipynb){target="_blank"}<br>
+[Exercise 5A](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution5A.ipynb){target="_blank"}<br>
+[Exercise 5B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution5B.ipynb){target="_blank"}<br>
+[Exercise 5C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution5C.ipynb){target="_blank"}<br>
+[Exercise 5D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution5D.ipynb){target="_blank"}<br>
+[Exercise 6A](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6A.ipynb){target="_blank"}<br>
+[Exercise 6B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6B.ipynb){target="_blank"}<br>
+[Exercise 6C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6C.ipynb){target="_blank"}<br>
+[Exercise 6D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6D.ipynb){target="_blank"}<br>

@@ -7,6 +7,7 @@ project:
     - slides.qmd
     - assignments.qmd
     - live_sessions.qmd
+    - solutions.qmd
 
   resources:
     - CNAME
@@ -15,6 +16,7 @@ project:
     - exercises/*.pdf
     - files/*.zip
     - files/*.md
+    - solutions/*.ipynb
 
 website:
   title: ""
@@ -31,6 +33,8 @@ website:
         text: Assignments
       - href: live_sessions.qmd
         text: Zoom Recordings
+      - href: solutions.qmd
+        text: Solutions
 
 format:
   html:

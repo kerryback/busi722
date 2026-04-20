@@ -10,6 +10,7 @@ nul
 *.vrb
 __pycache__/
 solutions/
+!docs/solutions/
 busi722_exercises.zip
 
 /.quarto/
