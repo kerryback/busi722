@@ -11,6 +11,7 @@ nul
 __pycache__/
 solutions/
 !docs/solutions/
+docs/solutions/Solution6*.ipynb
 busi722_exercises.zip
 
 /.quarto/

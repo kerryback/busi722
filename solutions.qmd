@@ -20,7 +20,3 @@
 [Exercise 5B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution5B.ipynb){target="_blank"}<br>
 [Exercise 5C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution5C.ipynb){target="_blank"}<br>
 [Exercise 5D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution5D.ipynb){target="_blank"}<br>
-[Exercise 6A](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6A.ipynb){target="_blank"}<br>
-[Exercise 6B](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6B.ipynb){target="_blank"}<br>
-[Exercise 6C](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6C.ipynb){target="_blank"}<br>
-[Exercise 6D](https://colab.research.google.com/github/kerryback/busi722/blob/main/docs/solutions/Solution6D.ipynb){target="_blank"}<br>
